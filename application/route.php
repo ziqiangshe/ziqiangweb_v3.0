@@ -9,13 +9,12 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
+use think\Route;
 
-];
+/**
+ * 活动相关路由
+ */
+//添加活动
+Route::post('panel/activity', 'panel/activity/add');
+//查询活动
+Route::get('panel/activity', 'panel/activity/get');
