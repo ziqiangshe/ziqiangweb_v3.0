@@ -51,6 +51,10 @@ class Character extends Base
         return apireturn($rel['code'],$rel['msg'],$rel['data']);
 
     }
+
+    /**
+     * 获取自强人物列表
+     */
     public function getmessage()
     {
         $user = new UserModel();
@@ -70,6 +74,11 @@ class Character extends Base
         echo json_encode($response);
     }
 
+    /**
+     * 查看自强人物寄语内容
+     * @param Request $request
+     * @return mixed
+     */
     public function manage_lookword(Request $request)
     {
         $characterid = $request->get('id');
@@ -79,6 +88,10 @@ class Character extends Base
         return $this->fetch();
     }
 
+    /**
+     * 上架自强人物
+     * @return \think\response\Json
+     */
     public function on()
     {
         $id = Request::instance()->get('id');
@@ -93,6 +106,11 @@ class Character extends Base
         return apireturn($rel['code'],$rel['msg'],$rel['data']);
     }
 
+
+    /**
+     * 下架自强人物
+     * @return \think\response\Json
+     */
     public function down()
     {
         $id = Request::instance()->get('id');
