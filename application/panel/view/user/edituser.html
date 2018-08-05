@@ -90,7 +90,7 @@
                     return true;
                 }
                 else if(data.errcode==-1){
-                    alert("提交失败！");
+                    alert("提交失败！\n失败原因："+data.errmsg);
                     return false;
                 }
             },
