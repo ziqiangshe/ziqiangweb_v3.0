@@ -32,7 +32,6 @@ class Login extends Controller
         $password = $request->post('password');
         $salt = config('salt');
         $salted = crypt($password, $salt);
-//        return apireturn(0, "", $salted);
         $user = new UserModel();
         $rel = $user->userlogin($username, $salted);
         if (!empty($rel['data'])) {
