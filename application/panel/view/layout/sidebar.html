@@ -18,12 +18,12 @@
                 </a>
                 <ul class="nav nav-second-level">
                     {foreach $value.child as $key=>$val}
-                    <li><a href="../public/panel/{$val['c']}/{$val['a']}">{$val.title}</a></li>
+                    <li><a href="../{$val['c']}/{$val['a']}">{$val.title}</a></li>
                     {/foreach}
                 </ul>
             </li>
             {else /}
-            <li><a href="../public/panel/{$value['c']}/{$value['a']}">
+            <li><a href="../{$value['c']}/{$value['a']}">
                 <!--<i class="fa fa-{$value['icon']} fa-fw"></i>-->
                 {$value.title}</a>
             </li>

@@ -36,7 +36,7 @@ class Base extends Controller
                 array(
                     'c' => 'blog',
                     'a' => 'index',
-                    'title' => '博客池'
+                    'title' => '博客列表'
                 ),
             )
         ),
@@ -53,8 +53,28 @@ class Base extends Controller
                 ),
                 array(
                     'c' => 'activity',
+                    'a' => 'teacher',
+                    'title' => '义务家教'
+                ),
+                array(
+                    'c' => 'activity',
                     'a' => 'newspaper',
                     'title' => '义务卖报'
+                ),
+                array(
+                    'c' => 'activity',
+                    'a' => 'webContest',
+                    'title' => '网页大赛'
+                ),
+                array(
+                    'c' => 'activity',
+                    'a' => 'speechContest',
+                    'title' => '演讲比赛'
+                ),
+                array(
+                    'c' => 'activity',
+                    'a' => 'repair',
+                    'title' => '义务维修'
                 ),
             )
         ),
