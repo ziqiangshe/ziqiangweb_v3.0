@@ -194,21 +194,12 @@ class user extends Base
     {
         $info = $request->get();
         $data = array(
-//            'realname' => $info['realname'],
-//            'sex' => $info['sex'],
-//            'introduce' => $info['introduce'],
             'class' => $info['class'],
             'qq' => $info['qq'],
             'tel' => $info['tel'],
             'email' => $info['email'],
         );
-
         $panel_user = Session::get('panel_user');
-        // 无意义的验证
-//        $myid = $panel_user['id'];
-//        if ($myid != $info['id']) {
-//            return apireturn(-1, '权限不足，操作失败', '');
-//        }
         $user = new UserModel();
         $rel = $user->updateuser($panel_user['id'], $data);
         return apireturn($rel['code'], $rel['msg'], $rel['data']);

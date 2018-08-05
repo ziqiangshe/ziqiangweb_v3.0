@@ -145,4 +145,115 @@ class UserModel extends Model
             return ['code'=>-1,'msg'=> $e->getMessage(),'data'=>''];
         }
     }
+
+
+    /****************************自强人物*********************************/
+
+    /**
+     * 获取自强人物
+     * @return array
+     */
+    public function getcharacter()
+    {
+        $where = ['status' => 0];
+        try{
+            $info = $this->all($where);
+
+            if($info === false){
+                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$info];
+            } else {
+                return ['code'=>0,'msg'=>'Success','data'=>$info];
+            }
+        } catch (PDOException $e){
+            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
+        }
+    }
+
+    /**
+     * 获取个人寄语
+     * @param $id
+     * @return array
+     */
+    public function mymessage($id)
+    {
+        $where = ['id' => $id];
+        try{
+            $info = $this->where($where)->find();
+            $data = array([
+                'realname' => $info['realname'],
+                'introduce' => $info['introduce'],
+            ]);
+            if($info === false){
+                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$data];
+            } else {
+                return ['code'=>0,'msg'=>'Success','data'=>$data];
+            }
+        } catch (PDOException $e){
+            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
+        }
+    }
+
+    /**
+     * 编辑个人寄语
+     * @param $id
+     * @param $word
+     * @return array
+     */
+    public function editmyword($id, $word)
+    {
+        try{
+            $info = $this->where(['id'=>$id])->find();
+            if($info === false){
+                return ['code'=>-1,'msg'=>'编辑失败','data'=>''];
+            } else {
+                $info['introduce'] = $word;
+                $info->save();
+                return ['code'=>-1,'msg'=>'Success','data'=>$info];
+            }
+        } catch (PDOException $e){
+            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
+        }
+    }
+
+    /**
+     * 上架自强人物[前置需要权限验证]
+     * @param $id
+     * @return array
+     */
+    public function oncharacter($id)
+    {
+        $where = ['id' => $id];
+        try{
+            $info = $this->where($where)->update(array('status'=>0));
+
+            if($info === false){
+                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$info];
+            } else {
+                return ['code'=>0,'msg'=>'Success','data'=>$info];
+            }
+        } catch (PDOException $e){
+            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
+        }
+    }
+
+    /**
+     * 下架自强人物[前置需要权限验证]
+     * @param $id
+     * @return array
+     */
+    public function downcharacter($id)
+    {
+        $where = ['id' => $id];
+        try{
+            $info = $this->where($where)->update(array('status'=>1));
+
+            if($info === false){
+                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$info];
+            } else {
+                return ['code'=>0,'msg'=>'Success','data'=>$info];
+            }
+        } catch (PDOException $e){
+            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
+        }
+    }
 }
