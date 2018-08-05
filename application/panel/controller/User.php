@@ -192,12 +192,13 @@ class user extends Base
      */
     public function updatemine(Request $request)
     {
-        $info = $request->get();
+        $info = $request->post();
         $data = array(
             'class' => $info['class'],
             'qq' => $info['qq'],
             'tel' => $info['tel'],
             'email' => $info['email'],
+            'introduce' => $info['introduce'],
         );
         $panel_user = Session::get('panel_user');
         $user = new UserModel();

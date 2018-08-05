@@ -103,7 +103,14 @@
                                             <div class="introduce_wrapper">
                                                 <div class="circle"></div>
                                                 <label>个人介绍：</label>
-                                                {if $rel}{$rel.introduce}{/if}
+                                                <textarea name="introduce" id="introduce" class="form-control" rows="8" autofocus="autofocus">{if $rel}{$rel.introduce}{/if}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="introduce_wrapper">
+                                                <div class="circle"></div>
+                                                <label>我的寄语：</label>
+                                                <textarea name="myword" id="myword" class="form-control" rows="8" autofocus="autofocus"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -129,17 +136,18 @@
     $("button").click(function(){
         $.ajax({
             url:"__PANEL__/user/updatemine",
-            type:"GET",
+            type:"POST",
             dataType:"json",
             data:{
                 class:$("#class").val(),
                 qq:$("#qq").val(),
                 tel:$("#tel").val(),
                 email:$("#email").val(),
+                introduce:$("#introduce") .val(),
             },
             success:function(data){
                 if(data.errcode==0){
-                    window.location.href="__PANEL__/user/ziqiang";
+                    window.location.href="__PANEL__/user/mine";
                     alert("提交成功！");
                     return true;
                 }
