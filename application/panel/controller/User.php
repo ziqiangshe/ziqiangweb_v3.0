@@ -28,6 +28,11 @@ class user extends Base
         return $this->fetch('user/create');
     }
 
+    /**
+     * 查看某个自强人信息
+     * @param Request $request
+     * @return mixed
+     */
     public function lookuser(Request $request)
     {
         $userid = $request->get('id');
@@ -37,6 +42,11 @@ class user extends Base
         return $this->fetch('user/lookuser');
     }
 
+    /**
+     * 传入id，进入编辑自强人界面
+     * @param Request $request
+     * @return mixed
+     */
     public function edituser(Request $request)
     {
         $userid = $request->get('id');
@@ -48,6 +58,11 @@ class user extends Base
     }
 
 
+    /**
+     * 增加自强人成员
+     * @param Request $request
+     * @return \think\response\Json
+     */
     public function createuser(Request $request)
     {
         $username = $request->get('username');
@@ -56,7 +71,12 @@ class user extends Base
         $session = $request->get('session');
         $sex = $request->get('sex');
         $position = $request->get('position');
-        $position = $position.'成员';
+        if (strcmp($position, "社长") == 0 || strcmp($position, "副社") == 0) {
+            $position = $position.'大人';
+        } else {
+            $position = $position.'成员';
+        }
+
         $created = date("Y-m-d H:i:s",time());
         $salt = config('salt');
         $salted = crypt($password, $salt);
@@ -79,6 +99,10 @@ class user extends Base
         return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 
+    /**
+     * 获取所有自强人信息
+     * @param Request $request
+     */
     public function getalluser(Request $request)
     {
         $aoData = json_decode($request->post('aoData'));
@@ -123,6 +147,11 @@ class user extends Base
     }
 
 
+    /**
+     * 修改某个自强人的权限
+     * @param Request $request
+     * @return \think\response\Json
+     */
     public function updateuser(Request $request)
     {
         $info = $request->get();
@@ -140,8 +169,11 @@ class user extends Base
         return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 
-    /*******************************个人信息*********************************/
-
+    /****************************个人信息*********************************/
+    /**
+     * 个人信息页面
+     * @return mixed
+     */
     public function mine()
     {
         $panel_user = Session::get('panel_user');
@@ -165,146 +197,15 @@ class user extends Base
             'tel' => $info['tel'],
             'email' => $info['email'],
         );
+
         $panel_user = Session::get('panel_user');
-        $myid = $panel_user['id'];
-        if ($myid != $info['id']) {
-            return apireturn(-1, '权限不足，操作失败', '', 200);
-        }
+        // 无意义的验证
+//        $myid = $panel_user['id'];
+//        if ($myid != $info['id']) {
+//            return apireturn(-1, '权限不足，操作失败', '');
+//        }
         $user = new UserModel();
-        $rel = $user->updateuser($info['id'], $data);
-        return apireturn($rel['code'], $rel['msg'], $rel['data'], 200);
+        $rel = $user->updateuser($panel_user['id'], $data);
+        return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
-
-
-
-    /******************************************************************
-
-    public function index()
-    {
-        return $this->fetch('user/index');
-    }
-
-    public function add()
-    {
-        return $this->fetch('user/add');
-    }
-
-
-    public function update(Request $request)
-    {
-        $userid=$request->get('id');
-        $user=new UserModel();
-        $rel=$user->findtheuser($userid);
-        $this->assign('rel',$rel['data']);
-        return $this->fetch('user/update');
-    }
-
-
-    //???
-    public function test(Request $request)
-    {
-        $userid = $request->get('id');
-        $user = new UserModel();
-        $rel = $user->findtheuser($userid);
-        $this->assign('name',$rel['data']);
-        return $this->fetch('user/test');
-    }
-
-
-    
-    //添加用户
-    public function adduser(Request $request)
-    {
-        $id = $request->get('id');
-        $realname = $request->get('realname');
-        $sex = $request->get('sex');
-        $introduce = $request->get('introduce');
-        $class = $request->get('class');
-        $qq = $request->get('qq');
-        $tel = $request->get('tel');
-        $email = $request->get('email');
-        $position = $request->get('position');
-        $created = date("Y-m-d H:i:s",time());
-        $role = $request->get('role');
-        $data = array(
-            'userid' => $id,
-            'realname' => $realname,
-            'sex' => $sex,
-            'introduce' => $introduce,
-            'class' => $class,
-            'qq' => $qq,
-            'tel' => $tel,
-            'emial' => $email,
-            'position' => $position,
-            'created' => $created,
-            'role' => $role,
-        );
-        $user = new UserModel();
-        $rel = $user->adduser($data);
-        return apireturn($rel['code'],$rel['meg'],$rel['data'],200);
-    }
-
-    //更新用户信息
-    public function updateuser(Request $request)
-    {
-        $userid = $request->get('id');
-        $realname = $request->get('realname');
-        $sex = $request->get('sex');
-        $introduce = $request->get('introduce');
-        $class = $request->get('class');
-        $qq = $request->get('qq');
-        $tel = $request->get('tel');
-        $email = $request->get('email');
-        $position = $request->get('position');
-        $created = date("Y-m-d H:i:s",time());
-        $role = $request->get('role');
-        $user = new UserModel();
-        //权限控制，只有超级管理员可以管理自强人物信息
-        $supermanager=$user->where('realname','=','廖虎成')->value('rel');
-        if(!($supermanager==rel))
-        {
-            return apireturn(-1,'权限不足','rel',200);
-        }
-
-        $data = array(
-            'userid' => $userid,
-            'realname' => $realname,
-            'sex' => $sex,
-            'introduce' => $introduce,
-            'class' => $class,
-            'qq' => $qq,
-            'tel' => $tel,
-            'emial' => $email,
-            'position' => $position,
-            'created' => $created,
-            'role' => $role,
-        );
-
-        $rel = $user->updateuser($userid,$data);
-        return apireturn($rel['code'],$rel['msg'],$rel['data'],200);
-    }
-
-    //以学号为关键词获取某一位用户
-    public function findtheuser(Request $request)
-    {
-        $userid = $request->get('id');
-        $user = new UserModel();
-        $rel = $user->findtheuser($userid);
-        return apireturn($rel['code'],$rel['msg'],$rel['data']);
-    }*/
-
-
-
-
-    /**************自强人物管理******************/
-    public function getselfreliant()
-    {
-        //$role = Request::instance()->param('role');
-
-        $user = new UserModel;
-        $rel = $user->getcharacter();
-        return apireturn($rel['code'],$rel['msg'],$rel['data'],200);
-    }
-
-
 }

@@ -39,6 +39,7 @@
                     <div class="panel-body">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default" data-id="0">全部</button>
+                            <button type="button" class="btn btn-default" data-id="17">17届</button>
                             <button type="button" class="btn btn-default" data-id="16">16届</button>
                             <button type="button" class="btn btn-default" data-id="15">15届</button>
                             <button type="button" class="btn btn-default" data-id="14">14届</button>
@@ -127,7 +128,7 @@
                 "mData": "id",
                 "mRender": function(data, type, full) {
                     return "<a href='__PANEL__/user/lookuser?id=" + data + "' target='_self'>查看</a> | " +
-                            "<a href='__PANEL__/user/edituser?id=" + data + "' target='_self'>修改</a> | " +
+                            "<a href='__PANEL__/user/edituser?id=" + data + "' target='_self'>权限修改</a> | " +
                             "<a href='__PANEL__/user/deluser?id=" + data + "' target='_self'>删除</a>";
                 }
             }],
