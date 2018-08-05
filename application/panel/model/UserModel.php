@@ -193,27 +193,6 @@ class UserModel extends Model
         }
     }
 
-    /**
-     * 编辑个人寄语
-     * @param $id
-     * @param $word
-     * @return array
-     */
-    public function editmyword($id, $word)
-    {
-        try{
-            $info = $this->where(['id'=>$id])->find();
-            if($info === false){
-                return ['code'=>-1,'msg'=>'编辑失败','data'=>''];
-            } else {
-                $info['introduce'] = $word;
-                $info->save();
-                return ['code'=>-1,'msg'=>'Success','data'=>$info];
-            }
-        } catch (PDOException $e){
-            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
-        }
-    }
 
     /**
      * 上架自强人物[前置需要权限验证]

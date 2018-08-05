@@ -119,11 +119,6 @@ class Base extends Controller
             'child' => array(
                 array(
                     'c' => 'character',
-                    'a' => 'editword',
-                    'title' => '我的寄语'
-                ),
-                array(
-                    'c' => 'character',
                     'a' => 'manage',
                     'title' => '人物管理'
                 ),

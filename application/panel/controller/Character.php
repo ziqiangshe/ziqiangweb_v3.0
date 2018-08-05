@@ -22,35 +22,6 @@ class Character extends Base
         return $this->fetch();
     }
 
-    /**
-     * 个人寄语页面[已有内容显示]
-     * @return mixed
-     */
-    public function editword()
-    {
-        $panel_user = Session::get('panel_user');
-        $user = new UserModel();
-
-        $rel = $user->where(['id'=>$panel_user['id']])->find();
-        $this->assign('rel', $rel);
-        return $this->fetch();
-    }
-
-
-    /**
-     * 编辑提交个人寄语
-     * @return \think\response\Json
-     */
-    public function edit()
-    {
-        $word = Request::instance()->get('myword');
-
-        $panel_user = Session::get('panel_user');
-        $user = new UserModel();
-        $rel = $user->editmyword($panel_user['id'], $word);
-        return apireturn($rel['code'],$rel['msg'],$rel['data']);
-
-    }
 
     /**
      * 获取自强人物列表
