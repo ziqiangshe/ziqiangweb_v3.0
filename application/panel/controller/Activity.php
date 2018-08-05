@@ -53,6 +53,10 @@ class Activity extends Controller
         }
     }
 
+    /**
+     * 获取活动详情
+     * @return \json
+     */
     public function get()
     {
         try {
