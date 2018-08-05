@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>控制台 - 自强人物 - 编辑寄语</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="__CSS__/sb-admin-2.css" rel="stylesheet">
+    <link href="__CSS__/plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="__FONT__/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="wrapper">
+    <!--顶栏&菜单栏-->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        {include file='layout/toolbar'}
+        {include file='layout/sidebar'}
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">我的寄语</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading"> 我的寄语 </div>
+                    <div class="panel-body">
+<!--                         <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" data-id="0">全部</button>
+                            <button type="button" class="btn btn-default" data-id="16">16届</button>
+                            <button type="button" class="btn btn-default" data-id="15">15届</button>
+                            <button type="button" class="btn btn-default" data-id="14">14届</button>
+                            <button type="button" class="btn btn-default" data-id="13">13届</button>
+                            <button type="button" class="btn btn-default" data-id="12">12届</button>
+                        </div>
+                        <button type="button" class="btn btn-success" style="margin-bottom:5px;" onclick="location.href='__PANEL__/user/create'" >添加自强人</button> -->
+                        <div class="form_wrapper">
+                          <form class="form-horizontal" role="form">
+                            <div class="row">
+                                <div class="col-lg-12"><h4><span class="fa fa-pencil"></span>&nbsp;编写我的寄语:</h4></div>
+                          		<div class="col-lg-6 col-md-12 col-xs-12"><textarea name="myword" id="myword" class="form-control"  rows="8" autofocus="autofocus">{$rel.introduce}</textarea></div>
+                                <div class="col-lg-12 col-md-12 col-xs-12" style="height:20px;"></div>
+                            	<div class="col-lg-12 col-md-12 col-xs-12"><button type="button" class="btn btn-default">提交</button></div>
+                            </div>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__JS__/jquery-1.11.0.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="__JS__/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="__JS__/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="__JS__/sb-admin-2.js"></script>
+<script>
+    $("button").click(function(){
+    	$.ajax({
+        	url:"__PANEL__/character/edit",
+            type:"GET",
+            dataType:"json",
+            data:{
+        		myword:$("#myword").val(),
+        	},
+            success:function(data){
+        		if(data.errcode==0){
+                    window.location.href="__PANEL__/character/manage";
+                	alert("提交成功！");
+                }
+            	else if(data.errcode==-1){
+                	alert("提交失败！");
+                }
+        	},
+        });
+    });
+</script>
+</body>
+</html>
