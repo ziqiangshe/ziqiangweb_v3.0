@@ -185,6 +185,11 @@ class user extends Base
         return $this->fetch('user/mine');
     }
 
+    /**
+     * 更新个人信息
+     * @param Request $request
+     * @return \think\response\Json
+     */
     public function updatemine(Request $request)
     {
         $info = $request->get();
