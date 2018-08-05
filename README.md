@@ -63,6 +63,7 @@
 
 - Git提交规范：https://www.imooc.com/article/16780
 - Git不要直接在主分支修改，建立自己的分支，每隔一段时间合并一次
+- Git的用户名后面带上个人邮箱
 - Git有问题可以报issue在项目上
 
 ### API
