@@ -100,6 +100,24 @@ class user extends Base
     }
 
     /**
+     * 删除用户信息
+     * @param Request $request
+     * @return \think\response\Json
+     */
+    public function deluser(Request $request)
+    {
+        $userid = $request->get('id');
+        // 检查权限
+        $panel_user = Session::get('panel_user');
+        if ($panel_user['role'] < 1) {
+            return apireturn(-1, '权限不足，操作失败', '');
+        }
+        $user = new UserModel();
+        $rel = $user->deluser($userid);
+        return apireturn($rel['code'], $rel['msg'], $rel['data']);
+    }
+
+    /**
      * 获取所有自强人信息
      * @param Request $request
      */
