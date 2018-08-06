@@ -22,7 +22,8 @@ class Activity extends Controller
         // validate
         $validate = validate('AdminUser');
         if (!$validate->check($data)) {
-            return apiReturn(0, "提交的数据不合法", "");
+            return apireturn(0, "提交的数据不合法", "");
+
         }
 
         $data = array(
@@ -43,13 +44,13 @@ class Activity extends Controller
             }
 
         }catch (\Exception $e) {
-            return apiReturn(config('code.FAILURE'), '新增失败', "");
+            return apireturn(config('code.FAILURE'), '新增失败', "");
         }
 
         if ($res) {
-            return apiReturn(config('code.SUCCESS'), "新增成功", 'OK');
+            return apireturn(config('code.SUCCESS'), "新增成功", 'OK');
         }else {
-            return apiReturn(config('code.FAILURE'), '新增失败', "");
+            return apireturn(config('code.FAILURE'), '新增失败', "");
         }
     }
 
@@ -62,13 +63,13 @@ class Activity extends Controller
         try {
             $activities = model('Activity')->field('name, image, introduction')->select();
         } catch (\Exception $e) {
-            return apiReturn(config('code.FAILURE'), '查询失败', "");
+            return apireturn(config('code.FAILURE'), '查询失败', "");
         }
 
         if ($activities) {
-            return apiReturn(config('code.SUCCESS'), "查询成功", $activities);
+            return apireturn(config('code.SUCCESS'), "查询成功", $activities);
         } else {
-            return apiReturn(config('code.FAILURE'), '查询失败', "");
+            return apireturn(config('code.FAILURE'), '查询失败', "");
         }
     }
 }
