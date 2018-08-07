@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 2018-08-06 05:33:38
+-- Generation Time: 2018-08-06 14:06:51
 -- 服务器版本： 5.7.19
 -- PHP Version: 7.1.9
 
@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `sign` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `sex` varchar(10) NOT NULL,
+  `cardNo` varchar(10) NOT NULL COMMENT '卡号',
   `dept1` varchar(30) NOT NULL,
   `dept2` varchar(30) DEFAULT NULL,
   `class` varchar(30) NOT NULL,
