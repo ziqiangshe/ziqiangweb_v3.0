@@ -21,10 +21,10 @@ class Test extends Controller
     public function va(Request $request) {
         $data = $request->get();
 
-        $result = $this->validate($data,'Vtest');
-        if(true !== $result){
+        $vdata = $this->validate($data,'Vtest');
+        if(true !== $vdata){
             // 验证失败 输出错误信息
-            echo "FAIL";
+            dump($vdata);
         }
         echo "OK";
     }

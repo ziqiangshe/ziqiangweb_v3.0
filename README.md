@@ -76,6 +76,52 @@
 
 - PHP代码规范：https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-2-coding-style-guide-cn.md
 
+### 后端代码规范[重点]
+
+#### 获取请求数据
+
+- 使用TP框架中的助手函数获取请求接口传来的数据
+
+参考：https://www.kancloud.cn/manual/thinkphp5/118044
+
+get/post：
+
+```php
+input('get.username'); // 获取get类型中name为username的数据
+input('get.'); // 获取所有get请求发来的数据
+```
+
+```php
+input('post.username'); // 获取post类型中name为username的数据
+input('post.'); // 获取所有post请求发来的数据
+```
+
+
+
+#### 数据验证
+
+- 控制器中的数据验证
+
+参考：https://www.kancloud.cn/manual/thinkphp5/129354
+
+controller中代码：
+
+```php
+$result = $this->validate($data,'Vtest'); // 用/application/common/validate/Vtest验证器中的验证格式来验证
+```
+
+validate验证代码：
+
+```php
+
+```
+
+
+
+
+
+
+
 
 
 # 网页设计
