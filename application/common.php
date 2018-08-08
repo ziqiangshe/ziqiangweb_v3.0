@@ -18,13 +18,13 @@
  * @param int $httpCode
  * @return json
  */
-function apiReturn($status, $message, $data=[], $httpCode=200)
-{
-    $result = [
-        'status'  => $status,
-        'message' => $message,
-        'data'    => $data,
-    ];
-
-    return json($result, $httpCode);
-}
+//function apiReturn($status, $message, $data=[], $httpCode=200)
+//{
+//    $result = [
+//        'status'  => $status,
+//        'message' => $message,
+//        'data'    => $data,
+//    ];
+//
+//    return json($result, $httpCode);
+//}
