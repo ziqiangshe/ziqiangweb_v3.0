@@ -18,14 +18,32 @@ use think\Validate;
 class Test extends Controller
 {
 
-    public function va(Request $request) {
-        $data = $request->get();
+    public function va() {
+//        $data = input('get.');
 
-        $vdata = $this->validate($data,'Vtest');
-        if(true !== $vdata){
+//        $result = $this->validate($data,'Vtest');
+//        if(true !== $result){
+//            // 验证失败 输出错误信息
+//            dump($result);
+//        }
+        
+        $result = $this->validate(
+            [
+                'name'  => 'thinkphp',
+                'email' => 'thinkphpqq.com',
+            ],
+            [
+                'name'  => 'require|max:25',
+                'email'   => 'email',
+            ]);
+        if(true !== $result){
             // 验证失败 输出错误信息
-            dump($vdata);
+            dump($result);
         }
-        echo "OK";
+//        $username = $data['username'];
+//        $email = $data['email'];
+//        echo $username.$email;
+
+//        echo "OK";
     }
 }
