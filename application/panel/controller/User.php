@@ -79,9 +79,9 @@ class User extends Base
     {
         $input_data = input('post.');
         $result = $this->validate($input_data, 'User.create_user');
-        if(VALIDATE_PASS !== $result){
+        if($result !== VALIDATE_PASS){
             // 验证失败 输出错误信息
-            return apireturn(-1, $result, '');
+            return apireturn(CODE_ERROR, $result, '');
         }
         $username = $result['username'];
         $password = $result['password'];
@@ -112,7 +112,7 @@ class User extends Base
         // 检查权限
         $panel_user = Session::get('panel_user');
         if ($panel_user['role'] < 1) {
-            return apireturn(-1, '权限不足，操作失败', '');
+            return apireturn(CODE_ERROR, '权限不足，操作失败', '');
         }
         $user = new UserModel();
         $rel = $user->adduser($data);
@@ -130,7 +130,7 @@ class User extends Base
         // 检查权限
         $panel_user = Session::get('panel_user');
         if ($panel_user['role'] < 1) {
-            return apireturn(-1, '权限不足，操作失败', '');
+            return apireturn(CODE_ERROR, '权限不足，操作失败', '');
         }
         $user = new UserModel();
         $rel = $user->deluser($userid);
@@ -196,9 +196,9 @@ class User extends Base
 //        $info = $request->get();
         $input_data = input('get.');
         $result = $this->validate($input_data, 'User.change_role');
-        if(VALIDATE_PASS !== $result){
+        if($result !== VALIDATE_PASS){
             // 验证失败 输出错误信息
-            return apireturn(-1, $result, '');
+            return apireturn(CODE_ERROR, $result, '');
         }
         $data = array(
             'position' => $result['position'],
@@ -207,7 +207,7 @@ class User extends Base
         // 检查权限
         $panel_user = Session::get('panel_user');
         if ($panel_user['role'] < 2) {
-            return apireturn(-1, '权限不足，操作失败', '');
+            return apireturn(CODE_ERROR, '权限不足，操作失败', '');
         }
         $user = new UserModel();
         $rel = $user->updateuser($result['id'], $data);
@@ -222,10 +222,10 @@ class User extends Base
     public function mine()
     {
         $panel_user = Session::get('panel_user');
-        $userid = $panel_user['id'];
+        $user_id = $panel_user['id'];
         $user = new UserModel();
-        $rel = $user->gettheuser($userid);
-        $this->assign('id', $userid);
+        $rel = $user->gettheuser($user_id);
+        $this->assign('id', $user_id);
         $this->assign('rel', $rel['data']);
         return $this->fetch('user/mine');
     }
@@ -237,9 +237,12 @@ class User extends Base
      */
     public function updatemine()
     {
-//        $info = $request->post();
         $input_data = input('post.');
         $result = $this->validate($input_data, 'User.update_mine');
+        if($result !== VALIDATE_PASS){
+            // 验证失败 输出错误信息
+            return apireturn(CODE_ERROR, $result, '');
+        }
         $data = array(
             'class'     => $result['class'],
             'qq'        => $result['qq'],
