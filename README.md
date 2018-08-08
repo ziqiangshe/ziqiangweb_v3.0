@@ -115,6 +115,49 @@ if ($panel_user['role'] < 1) {
 
 
 
+### 函数命名&变量命名
+
+- 函数的命名使用下划线连接各个小写单词，示例如下：
+
+```php
+/**
+* 传入用户id，渲染编辑用户界面
+* @param Request $request
+* @return mixed
+*/
+public function edit_user()
+{
+    $user_id = input('get.id');
+    $user = new UserModel();
+    $rel = $user->gettheuser($userid);
+    $this->assign('id', $userid);
+    $this->assign('rel', $rel['data']);
+    return $this->fetch('user/edituser');
+}
+```
+
+
+
+- 非define的变量使用下划线连接各个小写单词，示例如下：
+
+```php
+$panel_user = Session::get('panel_user');
+$user_id = $panel_user['id'];
+```
+
+
+
+- define的变量使用下划线连接各个大写单词，示例如下：
+
+```php
+define("VALIDATE_PASS", true);
+define("VALIDATE_ERROR", false);
+define("CODE_SUCCESS", 0);
+define("CODE_ERROR", -1);
+```
+
+
+
 ### 控制器与模型
 
 - **！全部写在panel下面！**
