@@ -13,29 +13,41 @@ use app\panel\model\UserModel;
 use think\Request;
 use think\Session;
 
-class user extends Base
+class User extends Base
 {
     /****************************用户管理*********************************/
 
+    /**
+     * 获取届数并渲染用户界面
+     * @return mixed
+     */
     public function ziqiang()
     {
-        $this->assign('ses', isset($_GET['ses']) ? $_GET['ses'] : 0);
+        $ses = input('get.ses');
+        if (!isset($ses)) {
+            $ses = 0;
+        }
+        $this->assign('ses', $ses);
         return $this->fetch('user/ziqiang');
     }
 
+    /**
+     * 渲染创建用户页面
+     * @return mixed
+     */
     public function create()
     {
         return $this->fetch('user/create');
     }
 
     /**
-     * 查看某个自强人信息
+     * 查看某个自强人的信息，渲染查看用户页面
      * @param Request $request
      * @return mixed
      */
-    public function lookuser(Request $request)
+    public function lookuser()
     {
-        $userid = $request->get('id');
+        $userid = input('get.id');
         $user = new UserModel();
         $rel = $user->gettheuser($userid);
         $this->assign('rel', $rel['data']);
@@ -43,13 +55,13 @@ class user extends Base
     }
 
     /**
-     * 传入id，进入编辑自强人界面
+     * 传入用户id，渲染编辑用户界面
      * @param Request $request
      * @return mixed
      */
-    public function edituser(Request $request)
+    public function edituser()
     {
-        $userid = $request->get('id');
+        $userid = input('get.id');
         $user = new UserModel();
         $rel = $user->gettheuser($userid);
         $this->assign('id', $userid);
@@ -59,24 +71,32 @@ class user extends Base
 
 
     /**
-     * 增加自强人成员
+     * 增加自强社成员
      * @param Request $request
      * @return \think\response\Json
      */
-    public function createuser(Request $request)
+    public function createuser()
     {
-        $username = $request->get('username');
-        $password = $request->get('password');
-        $realname = empty($request->get('realname'))?'':$request->get('realname');
-        $session = $request->get('session');
-        $sex = $request->get('sex');
-        $position = $request->get('position');
+        $input_data = input('post.');
+        $result = $this->validate($input_data, 'User.create_user');
+        if(VALIDATE_PASS !== $result){
+            // 验证失败 输出错误信息
+            return apireturn(-1, $result, '');
+        }
+        $username = $result['username'];
+        $password = $result['password'];
+        $realname = $result['realname'];
+        $session = $result['session'];
+        $sex = $result['sex'];
+        $position = $result['position'];
+        // 完善职位信息
         if (strcmp($position, "社长") == 0 || strcmp($position, "副社") == 0) {
             $position = $position.'大人';
         } else {
             $position = $position.'成员';
         }
 
+        // 密码加盐验证
         $created = date("Y-m-d H:i:s",time());
         $salt = config('salt');
         $salted = crypt($password, $salt);
@@ -104,9 +124,9 @@ class user extends Base
      * @param Request $request
      * @return \think\response\Json
      */
-    public function deluser(Request $request)
+    public function deluser()
     {
-        $userid = $request->get('id');
+        $userid = input('get.id');
         // 检查权限
         $panel_user = Session::get('panel_user');
         if ($panel_user['role'] < 1) {
@@ -121,10 +141,11 @@ class user extends Base
      * 获取所有自强人信息
      * @param Request $request
      */
-    public function getalluser(Request $request)
+    public function getalluser()
     {
-        $aoData = json_decode($request->post('aoData'));
-        $ses = $request->get('ses');
+        $input_data = input('post.aoData');
+        $aoData = json_decode($input_data);
+        $ses = input('get.ses');
         $offset = 0;
         $limit = 10;
         if ($ses == 0) {
@@ -170,12 +191,18 @@ class user extends Base
      * @param Request $request
      * @return \think\response\Json
      */
-    public function updateuser(Request $request)
+    public function updateuser()
     {
-        $info = $request->get();
+//        $info = $request->get();
+        $input_data = input('get.');
+        $result = $this->validate($input_data, 'User.change_role');
+        if(VALIDATE_PASS !== $result){
+            // 验证失败 输出错误信息
+            return apireturn(-1, $result, '');
+        }
         $data = array(
-            'position' => $info['position'],
-            'role' => $info['role']
+            'position' => $result['position'],
+            'role' => $result['role']
         );
         // 检查权限
         $panel_user = Session::get('panel_user');
@@ -183,7 +210,7 @@ class user extends Base
             return apireturn(-1, '权限不足，操作失败', '');
         }
         $user = new UserModel();
-        $rel = $user->updateuser($info['id'], $data);
+        $rel = $user->updateuser($result['id'], $data);
         return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 
@@ -208,15 +235,17 @@ class user extends Base
      * @param Request $request
      * @return \think\response\Json
      */
-    public function updatemine(Request $request)
+    public function updatemine()
     {
-        $info = $request->post();
+//        $info = $request->post();
+        $input_data = input('post.');
+        $result = $this->validate($input_data, 'User.update_mine');
         $data = array(
-            'class' => $info['class'],
-            'qq' => $info['qq'],
-            'tel' => $info['tel'],
-            'email' => $info['email'],
-            'introduce' => $info['introduce'],
+            'class'     => $result['class'],
+            'qq'        => $result['qq'],
+            'tel'       => $result['tel'],
+            'email'     => $result['email'],
+            'introduce' => $result['introduce'],
         );
         $panel_user = Session::get('panel_user');
         $user = new UserModel();

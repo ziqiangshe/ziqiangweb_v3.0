@@ -22,7 +22,7 @@ class Test extends Controller
 
         // 根据场景进行验证
         $result = $this->validate($data, 'Vtest.add');
-        if(VA_PASS !== $result){
+        if(VALIDATE_PASS !== $result){
             // 验证失败 输出错误信息
             echo $result;
         }

@@ -1,6 +1,6 @@
 <?php
-define("VA_PASS", true);
-define("VA_ERROR", false);
+define("VALIDATE_PASS", true);
+define("VALIDATE_ERROR", false);
 //配置文件
 return [
     //模板参数替换

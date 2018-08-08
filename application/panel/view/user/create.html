@@ -35,7 +35,7 @@
                     <div class="panel-heading"> 添加自强人 </div>
                     <div class="panel-body">
                         <div class="row">
-                            <form action="{:url('user/createuser')}">
+                            <form action="">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>用户名</label>
@@ -107,8 +107,8 @@
 <script>
     $("button").click(function(){
     	$.ajax({
-        	url:"{:url('user/createuser')}",
-            type:"GET",
+        	url:"__PANEL__/user/createuser",
+            type:"POST",
             dataType:"json",
             data:{
             	realname:$("#realname").val(),
@@ -124,7 +124,7 @@
                 	alert("添加成功！");
                 }
                 else if(data.errcode==-1){
-                	alert("添加失败！");
+                	alert(data.errmsg);
                 }
             },
         });
