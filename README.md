@@ -280,9 +280,25 @@ class Vtest extends Validate
 $result = $User->validate('Member')->save($data);
 ```
 
+### 路由
 
+路由规则严格按照RESTfulAPI。
 
+在app目录下的route.php进行路由定义
 
+具体格式参考：
+
+```php
+/**
+ * 活动相关路由
+ */
+//添加活动
+Route::post('panel/activity', 'panel/activity/add');
+//查询活动
+Route::get('panel/activity', 'panel/activity/get');
+```
+
+路由也要加注释！！！
 
 
 
