@@ -129,7 +129,7 @@
                 "mRender": function(data, type, full) {
                     return "<a href='__PANEL__/user/lookuser?id=" + data + "' target='_self'>查看</a> | " +
                             "<a href='__PANEL__/user/edituser?id=" + data + "' target='_self'>权限修改</a> | " +
-                            "<a href='__PANEL__/user/deluser?id=" + data + "' target='_self'>删除</a>";
+                            "<a href='__API__/user/del_user?id=" + data + "' target='_self'>删除</a>";
                 }
             }],
             "fnServerData": function(sSource, aoData, fnCallback) {

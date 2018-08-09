@@ -107,7 +107,7 @@
 <script>
     $("button").click(function(){
     	$.ajax({
-        	url:"__PANEL__/user/createuser",
+        	url:"__API__/user/create_user",
             type:"POST",
             dataType:"json",
             data:{
@@ -118,13 +118,13 @@
                 username:$("#username").val(),
                 password:$("#password").val(),
             },
-            success:function(data){
-            	if(data.errcode==0){
+            success:function(data) {
+            	if(data.status==0) {
                     window.location.href="__PANEL__/user/ziqiang";
                 	alert("添加成功！");
                 }
-                else if(data.errcode==-1){
-                	alert(data.errmsg);
+                else if(data.status==-1) {
+                	alert("添加失败！\n失败原因："+data.message);
                 }
             },
         });
