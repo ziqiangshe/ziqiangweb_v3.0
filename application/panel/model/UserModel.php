@@ -28,12 +28,12 @@ class UserModel extends Model
                 ->where('password', '=', $password)
                 ->find();
             if ($info === false || empty($info)) {
-                return ['code' => -1, 'msg' => $this->getError(), 'data' => $info];
+                return ['code' => CODE_ERROR, 'msg' => $this->getError(), 'data' => $info];
             } else {
-                return ['code' => 0, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
             }
         } catch (PDOException $e) {
-            return ['code' => -1,'msg' => $e->getMessage(), 'data' => ''];
+            return ['code' => CODE_ERROR,'msg' => $e->getMessage(), 'data' => ''];
         }
     }
 
@@ -53,12 +53,12 @@ class UserModel extends Model
                 ->limit($offset, $limit)
                 ->select();
             if ($info === false) {
-                return ['code' => -1, 'msg' => $this->getError(), 'data' => $info];
+                return ['code' => CODE_ERROR, 'msg' => $this->getError(), 'data' => $info];
             } else {
-                return ['code' => 0, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
             }
         } catch (PDOException $e) {
-            return ['code' => -1, 'msg' => $e->getMessage(), 'data' => ''];
+            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
         }
     }
 
@@ -77,72 +77,12 @@ class UserModel extends Model
                 ->where($where)
                 ->find();
             if ($info === false) {
-                return ['code' => -1, 'msg' => $this->getError(), 'data' => $info];
+                return ['code' => CODE_ERROR, 'msg' => $this->getError(), 'data' => $info];
             } else {
-                return ['code' => 0, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
             }
         } catch (PDOException $e) {
-            return ['code' => -1, 'msg' => $e->getMessage(), 'data' => ''];
-        }
-    }
-
-    /**
-     * 删除某一个用户
-     * @param $id
-     * @return array
-     */
-    public function deluser($id)
-    {
-        $where = ['id' => $id];
-        try{
-            $info = $this->where($where)->delete();
-
-            if($info === false){
-                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$info];
-            } else {
-                return ['code'=>0,'msg'=>'Success','data'=>$info];
-            }
-        } catch (PDOException $e){
-            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
-        }
-    }
-
-    /**
-     * 用户注册
-     * @param $data
-     * @return array
-     */
-    public function adduser($data)
-    {
-        try {
-            $info = $this->strict(false)->insertGetId($data);
-            if ($info === false) {
-                return ['code' => -1, 'msg' => $this->getError(), 'data' => $info];
-            } else {
-                return ['code' => 0, 'msg' => 'Success', 'data' => $info];
-            }
-        } catch (PDOException $e) {
-            return ['code' => -1, 'msg' => $e->getMessage(), 'data' => ''];
-        }
-    }
-
-    /**
-     * 更新管理员信息
-     * @param $userid
-     * @param $data
-     * @return array
-     */
-    public function updateuser($userid, $data)
-    {
-        try{
-            $info = $this ->where('id','=',$userid)->update($data);
-            if($info === false){
-                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$info];
-            } else {
-                return ['code' => 0, 'msg' => 'Success', 'data' => $info];
-            }
-        } catch(PDOException $e){
-            return ['code'=>-1,'msg'=> $e->getMessage(),'data'=>''];
+            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
         }
     }
 
@@ -160,12 +100,12 @@ class UserModel extends Model
             $info = $this->all($where);
 
             if($info === false){
-                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$info];
+                return ['code' => CODE_ERROR,'msg' => $this->getError(),'data' => $info];
             } else {
-                return ['code'=>0,'msg'=>'Success','data'=>$info];
+                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
             }
         } catch (PDOException $e){
-            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
+            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
         }
     }
 
@@ -184,12 +124,12 @@ class UserModel extends Model
                 'introduce' => $info['introduce'],
             ]);
             if($info === false){
-                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$data];
+                return ['code' => CODE_ERROR,'msg' => $this->getError(),'data' => $info];
             } else {
-                return ['code'=>0,'msg'=>'Success','data'=>$data];
+                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $data];
             }
         } catch (PDOException $e){
-            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
+            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
         }
     }
 
@@ -206,12 +146,12 @@ class UserModel extends Model
             $info = $this->where($where)->update(array('status'=>0));
 
             if($info === false){
-                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$info];
+                return ['code' => CODE_ERROR,'msg' => $this->getError(),'data' => $info];
             } else {
-                return ['code'=>0,'msg'=>'Success','data'=>$info];
+                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
             }
         } catch (PDOException $e){
-            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
+            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
         }
     }
 
@@ -227,12 +167,12 @@ class UserModel extends Model
             $info = $this->where($where)->update(array('status'=>1));
 
             if($info === false){
-                return ['code'=>-1,'msg'=>$this->getError(),'data'=>$info];
+                return ['code' => CODE_ERROR,'msg' => $this->getError(),'data' => $info];
             } else {
-                return ['code'=>0,'msg'=>'Success','data'=>$info];
+                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
             }
         } catch (PDOException $e){
-            return ['code'=>-1,'msg'=>$e->getMessage(),'data'=>''];
+            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
         }
     }
 }
