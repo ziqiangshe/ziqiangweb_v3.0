@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 2018-08-06 05:33:38
+-- Generation Time: 2018-08-08 02:02:09
 -- 服务器版本： 5.7.19
 -- PHP Version: 7.1.9
 
@@ -50,9 +50,9 @@ CREATE TABLE IF NOT EXISTS `blog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `date` date DEFAULT NULL,
-  `pageview` int(11) DEFAULT NULL,
+  `pageview` int(11) DEFAULT '0' COMMENT '浏览量',
   `anthor` varchar(30) NOT NULL,
-  `tag` varchar(30) DEFAULT NULL,
+  `tag` varchar(30) DEFAULT NULL COMMENT '博客类型',
   `content` text,
   `create_time` int(11) UNSIGNED DEFAULT NULL,
   `update_time` int(11) UNSIGNED DEFAULT NULL,
@@ -87,15 +87,16 @@ CREATE TABLE IF NOT EXISTS `sign` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `sex` varchar(10) NOT NULL,
-  `dept1` varchar(30) NOT NULL,
-  `dept2` varchar(30) DEFAULT NULL,
+  `cardNo` varchar(10) NOT NULL COMMENT '卡号',
+  `dept1` varchar(30) NOT NULL COMMENT '第一志愿',
+  `dept2` varchar(30) DEFAULT NULL COMMENT '第二志愿',
   `class` varchar(30) NOT NULL,
   `date` date DEFAULT NULL,
   `qq` varchar(30) DEFAULT NULL,
   `tel` varchar(30) DEFAULT NULL,
-  `dorm` varchar(30) DEFAULT NULL,
+  `dorm` varchar(30) DEFAULT NULL COMMENT '宿舍',
   `status` int(10) DEFAULT NULL,
-  `content` text,
+  `content` text COMMENT '介绍',
   `create_time` int(10) UNSIGNED DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -114,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(20) NOT NULL,
   `realname` varchar(20) DEFAULT NULL,
   `introduce` text COMMENT '介绍',
-  `summary` text CHARACTER SET utf8,
+  `message` text CHARACTER SET utf8 COMMENT '寄语',
   `birthday` varchar(32) CHARACTER SET utf8 DEFAULT NULL,
   `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-未知1-男2-女',
   `class` varchar(40) DEFAULT NULL,
@@ -134,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- 转存表中的数据 `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `realname`, `introduce`, `summary`, `birthday`, `sex`, `class`, `qq`, `tel`, `email`, `session`, `position`, `role`, `status`, `create_time`, `update_time`) VALUES
+INSERT INTO `user` (`id`, `username`, `password`, `realname`, `introduce`, `message`, `birthday`, `sex`, `class`, `qq`, `tel`, `email`, `session`, `position`, `role`, `status`, `create_time`, `update_time`) VALUES
 (1, 'xzfff', 'wqZMQtV37/w8I', '谢泽丰', '简介：\r\n\r\n   大一主要参加的比赛有武汉市内各大高校的ACM竞赛以及华为精英赛。最近参加的是理工黄页以及自强社的网站开发。掌握的编程语言是C、C++、Html5+CSS3、PHP（个人比较喜欢C++和PHP，C++的博大精深，支持多种编程方式，其中的STL更是好玩。PHP语言入门容易，功能强大，在编写脚本与后台的时候十分好用）感觉要学好一门语言或技术需要多写代码多调试，个人觉得技术学习最需要的是兴趣和愿意付出的时间。\r\n\r\n寄语：\r\n\r\n   这一届的新生很多都开始提前学习，也有很多巨巨出现。但是小白也不要灰心（我大一时候也是纯小白）不要好高骛远，学习需要一步一个脚印，学技术更是如此。另外，不要把计算机专业和外面的培训机构相提并论，最后希望你们能加入服务队与我们一起交流。\r\n\r\n', NULL, NULL, 1, NULL, NULL, NULL, NULL, 15, '服务队队长', '1', '0', 0, NULL),
 (2, 'lsj575', 'wq.9Mwm0rBUGI', '龙思杰', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 16, '服务队队长', '2', '0', 0, NULL),
 (4, '', '', '骆代鹏', '感触：好一点，再好一点\r\n\r\n   自强君最吸引人的地方不仅是他的人格魅力，而且是和小伙伴们一起努力干活的那种感觉。当时自强社情况不是太好，出于责任心，我们想出一个个点子慢慢来改变现状。还记得大二上学期几乎天天熬夜，只为无愧于心，无愧于前辈们的托付。\r\n\r\n寄语：\r\n\r\n   作为计算机学院的宝宝们，应该抛开传统思维，用互联网思维来思考问题我们对自己的要求。尝试着去做产品，发展成学院内的互联网技术团队，这是一幅美好的画面，当然需要不只一年不只一代人来实现。但是梦想还是要有的，万一实现了呢？', NULL, NULL, 1, NULL, NULL, NULL, NULL, 12, '自强副社', '0', '0', 0, NULL),

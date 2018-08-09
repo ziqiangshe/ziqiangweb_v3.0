@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>自强社主页</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/fullpage.css" />
+	<link rel="stylesheet" type="text/css" href="../static/css/examples.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/fullpage.js"></script>
+	<style>
+
+	/* Style for our header texts
+	* --------------------------------------- */
+	h1{
+		font-size: 5em;
+		font-family: arial,helvetica;
+		color: #fff;
+		margin:0;
+		padding:0;
+	}
+
+	/* Centered texts in each section
+	* --------------------------------------- */
+	.section{
+		text-align:center;
+	}
+
+
+	/* Backgrounds will cover all the section
+	* --------------------------------------- */
+	.section{
+		background-size: cover;
+	}
+	.slide{
+		background-size: cover;
+	}
+
+	/* Defining each section background and styles
+	* --------------------------------------- */
+	#section0{
+		background-image: url(../static/images/bg1.jpg);
+	}
+	#section0 h1{
+		top: 50%;
+		transform: translateY(-50%);
+		position: relative;
+	}
+	#section2{
+		background-image: url(../static/images/bg3.jpg);
+		padding: 6% 0 0 0;
+	}
+	#section3{
+		background-image: url(../static/images/bg4.jpg);
+		padding: 6% 0 0 0;
+	}
+	#section3 h1{
+		color: #000;
+	}
+
+
+	/*Adding background for the slides
+	* --------------------------------------- */
+	#slide1{
+		background-image: url(../static/images/bg2.jpg);
+		padding: 6% 0 0 0;
+	}
+	#slide2{
+		background-image: url(../static/images/bg5.jpg);
+		padding: 6% 0 0 0;
+	}
+
+
+	/* Bottom menu
+	* --------------------------------------- */
+	#infoMenu li a {
+		color: #fff;
+	}
+	</style>
+
+</head>
+<body>
+<div id="fullpage">
+<ul id="menu">
+        <li data-menuanchor="page1" class="active"><a href="#page1">主页</a></li>
+        <li data-menuanchor="page2"><a href="#page2">部门介绍</a></li>
+        <li data-menuanchor="page3"><a href="#page3">活动介绍</a></li>
+		<li data-menuanchor="page3"><a href="#page3">联系我们</a></li>
+    </ul>
+	<div class="section active" id="section0"><h1>自强社主页</h1></div>
+	<div class="section" id="section1">
+		<div class="slide" id="slide1"><h1>我们的团队</h1></div>
+		<div class="slide" id="slide2"><h1>义工服务队</h1></div>
+		<div class="slide" id="slide3"><h1>办公室</h1></div>
+		<div class="slide" id="slide4"><h1>宣传部</h1></div>
+		<div class="slide" id="slide5"><h1>策划部</h1></div>
+		<div class="slide" id="slide6"><h1>外联部</h1></div>
+	</div>
+	<div class="section" id="section2"><h1>活动介绍<br/></h1></div>
+	<div class="section" id="section3"><h1>联系我们<br/></h1></div>
+	<div class="section" id="section4"><h1>彩蛋页面<br/></h1></div>
+</div>
+<script type="text/javascript">
+    var myFullpage = new fullpage('#fullpage', {
+        verticalCentered: false,
+		navigation:true,
+		navigationPostion:'right',
+    });
+</script>
+
+</body>
+</html>

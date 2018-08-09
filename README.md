@@ -76,6 +76,214 @@
 
 - PHP代码规范：https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-2-coding-style-guide-cn.md
 
+## 后端代码规范[重点]
+
+### 注释！！！
+
+- 函数注释，示例如下：
+
+```php
+/**
+ * api返回格式化函数
+ * @param $errcode
+ * @param $errmsg
+ * @param $data
+ * @param $status
+ * @return \think\response\Json
+ */
+function apireturn($errcode, $errmsg, $data)
+{
+    return json([
+        'errcode' => $errcode,
+        'errmsg' => $errmsg,
+        'data' => $data
+    ]);
+}
+```
+
+注：在PhpStorm中函数上一行输入`/**`后回车，自动生成变量及返回注释，再加上函数的作用`api返回格式化函数`即可
+
+- 语句注释，示例如下：
+
+```php
+// 检查权限
+$panel_user = Session::get('panel_user');
+if ($panel_user['role'] < 1) {
+    return apireturn(-1, '权限不足，操作失败', '');
+}
+```
+
+
+
+### 控制器与模型
+
+- **！全部写在panel下面！**
+- 有且只有Model层与数据库直接产生交互（Model层需要try..catch，样例如下）
+
+```php
+/**
+* 用户登录
+* @param $username
+* @param $password
+* @return array
+*/
+public function userlogin($username, $password)
+{
+    $field = ['id, username, password, realname, sex, role, status'];
+    try {
+        $info = $this->field($field)
+            ->where('username', '=', $username)
+            ->where('password', '=', $password)
+            ->find();
+        if ($info === false || empty($info)) {
+            return ['code' => -1, 'msg' => $this->getError(), 'data' => $info];
+        } else {
+            return ['code' => 0, 'msg' => 'Success', 'data' => $info];
+        }
+    } catch (PDOException $e) {
+        return ['code' => -1,'msg' => $e->getMessage(), 'data' => ''];
+    }
+}
+```
+
+
+
+### 定义变量&常用函数
+
+在application/panel/config.php中定义后台全局变量及模板参数替换，示例如下：
+
+```php
+define("VA_PASS", true);
+define("VA_ERROR", false);
+//配置文件
+return [
+    //模板参数替换
+    'view_replace_str'       => array(
+        '__PANEL__'=>'/ziqiangweb_v3.0/public/index.php/panel',
+      ),
+]
+```
+
+
+
+在application/panel/common.php中定义后台全局常用函数，示例如下：
+
+```php
+function apireturn($errcode, $errmsg, $data)
+{
+    return json([
+        'errcode' => $errcode,
+        'errmsg' => $errmsg,
+        'data' => $data
+    ]);
+}
+```
+
+
+
+
+
+### 获取请求数据
+
+使用TP框架中的助手函数获取请求接口传来的数据
+
+参考：https://www.kancloud.cn/manual/thinkphp5/118044
+
+get/post：
+
+```php
+input('get.username'); // 获取get类型中name为username的数据
+input('get.'); // 获取所有get请求发来的数据
+```
+
+```php
+input('post.username'); // 获取post类型中name为username的数据
+input('post.'); // 获取所有post请求发来的数据
+```
+
+
+
+### 数据验证
+
+
+
+#### 控制器中的数据验证
+
+参考：https://www.kancloud.cn/manual/thinkphp5/129354
+
+controller中代码：
+
+验证核心代码：
+
+```php
+$result = $this->validate($data,'Vtest'); // 用/application/common/validate/Vtest验证器中的验证格式来验证
+```
+
+场景验证代码：
+
+```php
+// 根据场景进行验证
+$result = $this->validate($data, 'Vtest.add');
+if(true !== $result){
+    // 验证失败 输出错误信息
+}
+```
+
+
+
+validate验证代码：（放在/application/common/validate下）
+
+```php
+namespace app\common\validate;
+
+use think\Validate;
+
+class Vtest extends Validate
+{
+    // 提交规则，|号之间不能加多余符号，包括空格
+    protected $rule = [
+        'username'    => 'require|max:40',
+        'password' => 'require',
+        'email'   => 'email',
+
+    ];
+
+    // 不符规则的错误提示
+    protected $message = [
+        'username.require'  =>  '必须输入用户名',
+        'username.max'     => '名称最多不能超过25个字符',
+        'password.require' => '必须输入密码',
+        'email.email' =>  '邮箱格式错误',
+    ];
+
+    // 场景验证
+    protected $scene = [
+        'add'   =>  ['username','email'], // 必须输入用户名且长度不可超过40，可选输入邮箱但格式必须正确
+        'edit'  =>  ['email', 'password'], // 必须输入用户名及密码
+    ];
+
+}
+```
+
+注：在验证文件中，必须有rule变量、message变量，场景验证可选
+
+
+
+#### 模型中的数据验证
+
+参考：https://www.kancloud.cn/manual/thinkphp5/129355
+
+注：由于验证方式与控制器验证基本一致，因此不再赘述，但是在调用验证时，调用方式统一成如下格式，即写明验证器名称！
+
+```php
+// 调用Member验证器类进行数据验证
+$result = $User->validate('Member')->save($data);
+```
+
+
+
+
+
 
 
 # 网页设计
