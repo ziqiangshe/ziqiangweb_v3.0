@@ -7,9 +7,7 @@
  */
 namespace app\panel\controller;
 
-use think\Controller;
-
-class Activity extends Controller
+class Activity extends Base
 {
     /**
      * 活动添加函数
@@ -23,7 +21,6 @@ class Activity extends Controller
         $validate = validate('AdminUser');
         if (!$validate->check($data)) {
             return apireturn(0, "提交的数据不合法", "");
-
         }
 
         $data = array(
