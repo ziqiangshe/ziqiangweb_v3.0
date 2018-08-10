@@ -69,74 +69,6 @@ class User extends Base
         return $this->fetch('user/edituser');
     }
 
-
-    /**
-     * 增加自强社成员
-     * @param Request $request
-     * @return \think\response\Json
-     */
-    public function createuser()
-    {
-        $input_data = input('post.');
-        $result = $this->validate($input_data, 'User.create_user');
-        if($result !== VALIDATE_PASS){
-            // 验证失败 输出错误信息
-            return apireturn(CODE_ERROR, $result, '');
-        }
-        $username = $result['username'];
-        $password = $result['password'];
-        $realname = $result['realname'];
-        $session = $result['session'];
-        $sex = $result['sex'];
-        $position = $result['position'];
-        // 完善职位信息
-        if (strcmp($position, "社长") == 0 || strcmp($position, "副社") == 0) {
-            $position = $position.'大人';
-        } else {
-            $position = $position.'成员';
-        }
-
-        // 密码加盐验证
-        $created = date("Y-m-d H:i:s",time());
-        $salt = config('salt');
-        $salted = crypt($password, $salt);
-        $data = array(
-            'username' => $username,
-            'password' => $salted,
-            'created' => $created,
-            'realname' => $realname,
-            'session' => $session,
-            'sex' => $sex,
-            'position' => $position,
-        );
-        // 检查权限
-        $panel_user = Session::get('panel_user');
-        if ($panel_user['role'] < 1) {
-            return apireturn(CODE_ERROR, '权限不足，操作失败', '');
-        }
-        $user = new UserModel();
-        $rel = $user->adduser($data);
-        return apireturn($rel['code'], $rel['msg'], $rel['data']);
-    }
-
-    /**
-     * 删除用户信息
-     * @param Request $request
-     * @return \think\response\Json
-     */
-    public function deluser()
-    {
-        $userid = input('get.id');
-        // 检查权限
-        $panel_user = Session::get('panel_user');
-        if ($panel_user['role'] < 1) {
-            return apireturn(CODE_ERROR, '权限不足，操作失败', '');
-        }
-        $user = new UserModel();
-        $rel = $user->deluser($userid);
-        return apireturn($rel['code'], $rel['msg'], $rel['data']);
-    }
-
     /**
      * 获取所有自强人信息
      * @param Request $request
@@ -186,33 +118,7 @@ class User extends Base
     }
 
 
-    /**
-     * 修改某个自强人的权限
-     * @param Request $request
-     * @return \think\response\Json
-     */
-    public function updateuser()
-    {
-//        $info = $request->get();
-        $input_data = input('get.');
-        $result = $this->validate($input_data, 'User.change_role');
-        if($result !== VALIDATE_PASS){
-            // 验证失败 输出错误信息
-            return apireturn(CODE_ERROR, $result, '');
-        }
-        $data = array(
-            'position' => $result['position'],
-            'role' => $result['role']
-        );
-        // 检查权限
-        $panel_user = Session::get('panel_user');
-        if ($panel_user['role'] < 2) {
-            return apireturn(CODE_ERROR, '权限不足，操作失败', '');
-        }
-        $user = new UserModel();
-        $rel = $user->updateuser($result['id'], $data);
-        return apireturn($rel['code'], $rel['msg'], $rel['data']);
-    }
+
 
     /****************************个人信息*********************************/
     /**
@@ -230,29 +136,4 @@ class User extends Base
         return $this->fetch('user/mine');
     }
 
-    /**
-     * 更新个人信息
-     * @param Request $request
-     * @return \think\response\Json
-     */
-    public function updatemine()
-    {
-        $input_data = input('post.');
-        $result = $this->validate($input_data, 'User.update_mine');
-        if($result !== VALIDATE_PASS){
-            // 验证失败 输出错误信息
-            return apireturn(CODE_ERROR, $result, '');
-        }
-        $data = array(
-            'class'     => $result['class'],
-            'qq'        => $result['qq'],
-            'tel'       => $result['tel'],
-            'email'     => $result['email'],
-            'introduce' => $result['introduce'],
-        );
-        $panel_user = Session::get('panel_user');
-        $user = new UserModel();
-        $rel = $user->updateuser($panel_user['id'], $data);
-        return apireturn($rel['code'], $rel['msg'], $rel['data']);
-    }
 }
