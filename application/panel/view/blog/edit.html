@@ -121,9 +121,9 @@
             success: function (data) {
                 if (data.status == 0) {
                     window.location.reload();
-                    alert("提交成功！");
+                    alert(data.message);
                 } else if (data.status == -1) {
-                    alert("提交失败！");
+                    alert(data.message);
                 }
             },
         });

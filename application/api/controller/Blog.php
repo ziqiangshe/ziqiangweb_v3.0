@@ -20,25 +20,26 @@ class Blog extends Base
      */
     public function add_blog(Request $request)
     {
-        $title = $request->post('title');
-        $tag = $request->post('tag');
-        $content = $request->post('content');
-        $summary = $request->post('summary');
-        $panel_user = Session::get('panel_user');
+        $input_data = input('post.');
+        $result = $this->validate($input_data, 'Blog.add_blog');
+        if ($result !== VALIDATE_PASS) {
+            // 验证失败 输出错误信息
+            return apireturn(CODE_ERROR, $result, '');
+        }
+        $panel_user = Session::get('panel_user', 'ziqiang');
         $author_id = $panel_user['id'];
-        $created = date("Y-m-d H:i:s", time());
-        $data = array(
-            'title' => $title,
-            'authorid' => $author_id,
-            'tag' => $tag,
-            'summary' => $summary,
-            'content' => $content,
-            'created' => $created
-        );
+        $create_time = date("Y-m-d H:i:s", time());
         $blog = new BlogModel();
+        $data = array(
+            'title'       => $input_data['title'],
+            'tag'         => $input_data['tag'],
+            'summary'     => $input_data['summary'],
+            'content'     => $input_data['content'],
+            'authorid'    => $author_id,
+            'create_time' => $create_time,
+        );
         $rel = $blog->add_blog($data);
-        return apireturn($rel['code'], $rel['msg'], $rel['data'], 200);
-//        return $this->fetch('blog/datatable');
+        return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 
     /**
@@ -48,28 +49,30 @@ class Blog extends Base
      */
     public function edit_blog(Request $request)
     {
-        $blog_id = $request->post('id');
-        $title = $request->post('title');
-        $tag = $request->post('tag');
-        $summary = $request->post('summary');
-        $content = $request->post('content');
-        $created = date("Y-m-d H:i:s", time());
-        $panel_user = Session::get('panel_user');
+        $input_data = input('post.');
+        $result = $this->validate($input_data, 'Blog.edit_blog');
+        if ($result !== VALIDATE_PASS) {
+            // 验证失败 输出错误信息
+            return apireturn(CODE_ERROR, $result, '');
+        }
+        $panel_user = Session::get('panel_user', 'ziqiang');
         $author_id = $panel_user['id'];
+        $update_time = date("Y-m-d H:i:s", time());
+        $blog_id = $input_data['blog_id'];
+
         $blog = new BlogModel();
-        // 检查权限
+        // 检查权限-MARK--这里最好也放在Model里面
         $old_author_id = $blog->where('id', '=', $blog_id)->value('authorid');
         if (!($old_author_id == $author_id)) {
-            return apireturn(-1, '权限不足，操作失败', '', 200);
+            return apireturn(-1, '权限不足，操作失败', '');
         }
-
         $data = array(
-            'title' => $title,
-            'authorid' => $old_author_id,
-            'summary' => $summary,
-            'tag' => $tag,
-            'content' => $content,
-            'created' => $created
+            'title'       => $input_data['title'],
+            'tag'         => $input_data['tag'],
+            'summary'     => $input_data['summary'],
+            'content'     => $input_data['content'],
+            'authorid'    => $old_author_id,
+            'update_time' => $update_time
         );
         $rel = $blog->edit_blog($blog_id, $data);
         return apireturn($rel['code'], $rel['msg'], $rel['data'], 200);
@@ -82,17 +85,18 @@ class Blog extends Base
      */
     public function del_blog(Request $request)
     {
-        $blog_id = $request->get('id');
+        $blog_id = input('get.id');
         $panel_user = Session::get('panel_user');
         $author_id = $panel_user['id'];
+
         $blog = new BlogModel();
-        // 检查权限
+        // 检查权限-MARK--这里最好也放在Model里面
         $old_author_id = $blog->where('id', '=', $blog_id)->value('authorid');
         if (!($old_author_id == $author_id)) {
-            return apireturn(-1, '权限不足，操作失败', '', 200);
+            MessageBox('作者信息不匹配，操作失败', -1);
         }
         $rel = $blog->del_blog($blog_id);
-        return apireturn($rel['code'], $rel['msg'], $rel['data'], 200);
+        MessageBox($rel['msg'], -1);
     }
 
 

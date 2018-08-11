@@ -152,9 +152,9 @@
                 success: function (data) {
                     if (data.status == 0) {
                         window.location.href = "__PANEL__/blog/index";
-                        alert("提交成功！");
+                        alert(data.message);
                     } else if (data.status == -1) {
-                        alert("提交失败！");
+                        alert(data.message);
                     }
                 },
             });
@@ -168,7 +168,7 @@
             if (UM.getEditor('container').getContentTxt() == "") {
                 $(".blog_error").css("visibility", "visible");
             }
-            alert("提交失败！");
+            alert("标题、摘要及内容不能为空！");
             return false;
         }
     });
