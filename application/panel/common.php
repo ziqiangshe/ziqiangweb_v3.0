@@ -15,6 +15,9 @@ function change_user_info(array $rel) {
         } elseif ($rel['data']['role'] == CIVILIAN) {
             $rel['data']['role'] = CIVILIAN_NAME;
         }
+
+        // 义工服务队 队员
+        $rel['data']['position'] = $rel['data']['department'].$rel['data']['position'];
     } else {
         foreach ($rel['data'] as $key => $val) {
             if ($rel['data'][$key]['sex'] == 1) {
@@ -30,6 +33,8 @@ function change_user_info(array $rel) {
             } elseif ($rel['data'][$key]['role'] == CIVILIAN) {
                 $rel['data'][$key]['role'] = CIVILIAN_NAME;
             }
+
+            $rel['data'][$key]['position'] = $rel['data'][$key]['department'].$rel['data'][$key]['position'];
         }
     }
     return $rel;

@@ -20,6 +20,7 @@ class User extends Validate
         'session'     => 'require|number',
         'sex'         => 'require|in:0,1,2',
         'position'    => 'require',
+        'department'  => 'require',
         'role'        => 'require',
         'class'       => 'chsAlphaNum', // 汉字、字母、数字
         'qq'          => 'number',
@@ -29,28 +30,29 @@ class User extends Validate
 
     // 不符规则的错误提示
     protected $message = [
-        'id.require'        => '请输入用户id~',
-        'username.require'  => '请输入用户名~',
-        'username.max'      => '你用户名也忒长了吧...',
-        'password.require'  => '请输入密码~',
-        'password.min'      => '密码至少要3位吧...',
-        'realname.require'  => '请输入真实姓名~',
-        'realname.chs'      => '真实姓名不是中文？你骗谁呢？',
-        'session.require'   => '请选择届数~',
-        'session.number'    => '届数得是数字啊兄die~',
-        'sex.require'       => '你别告诉我你没有性别！你别过来！我报警啦！',
-        'sex.in'            => '你是外星人吧？？？',
-        'position.require'  => '请选择职务~',
-        'role.require'      => '请选择权限~',
-        'class.chsAlphaNum' => '班级信息请由汉字、字母、数字组合',
-        'qq.number'         => 'QQ还有非数字情况？',
-        'tel.number'        => '电话不是数字组成，你是在8102年吧...',
-        'email.email'       => '邮箱格式错误~',
+        'id.require'         => '请输入用户id~',
+        'username.require'   => '请输入用户名~',
+        'username.max'       => '你用户名也忒长了吧...',
+        'password.require'   => '请输入密码~',
+        'password.min'       => '密码至少要3位吧...',
+        'realname.require'   => '请输入真实姓名~',
+        'realname.chs'       => '真实姓名不是中文？你骗谁呢？',
+        'session.require'    => '请选择届数~',
+        'session.number'     => '届数得是数字啊兄die~',
+        'sex.require'        => '你别告诉我你没有性别！你别过来！我报警啦！',
+        'sex.in'             => '你是外星人吧？？？',
+        'department.require' => '请选择所属部门~',
+        'position.require'   => '请选择职务~',
+        'role.require'       => '请选择权限~',
+        'class.chsAlphaNum'  => '班级信息请由汉字、字母、数字组合',
+        'qq.number'          => 'QQ还有非数字情况？',
+        'tel.number'         => '电话不是数字组成，你是在8102年吧...',
+        'email.email'        => '邮箱格式错误~',
     ];
 
     // 场景验证
     protected $scene = [
-        'create_user'   =>  ['username', 'password', 'realname', 'session', 'sex', 'position'],
+        'create_user'   =>  ['username', 'password', 'realname', 'session', 'sex', 'department', 'position'],
         'change_role'   =>  ['id', 'position', 'role'],
         'update_mine'   =>  ['class', 'qq', 'tel', 'email'],
     ];

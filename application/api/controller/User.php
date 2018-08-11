@@ -27,31 +27,33 @@ class User extends Base
             // 验证失败 输出错误信息
             return apireturn(CODE_ERROR, $result, '');
         }
-        $username = $input_data['username'];
-        $password = $input_data['password'];
-        $realname = $input_data['realname'];
-        $session  = $input_data['session'];
-        $sex      = $input_data['sex'];
-        $position = $input_data['position'];
-        // 完善职位信息
-        if (strcmp($position, "社长") == 0 || strcmp($position, "副社") == 0) {
-            $position = $position . '大人';
-        } else {
-            $position = $position . '成员';
-        }
+        $username   = $input_data['username'];
+        $password   = $input_data['password'];
+        $realname   = $input_data['realname'];
+        $session    = $input_data['session'];
+        $sex        = $input_data['sex'];
+        $department = $input_data['department'];
+        $position   = $input_data['position'];
+//        // 完善职位信息
+//        if (strcmp($position, "社长") == 0 || strcmp($position, "副社") == 0) {
+//            $position = $position . '大人';
+//        } else {
+//            $position = $position . '成员';
+//        }
 
         // 密码加盐验证
         $created = date("Y-m-d H:i:s", time());
         $salt = config('salt');
         $salted = crypt($password, $salt);
         $data = array(
-            'username' => $username,
-            'password' => $salted,
-            'created'  => $created,
-            'realname' => $realname,
-            'session'  => $session,
-            'sex'      => $sex,
-            'position' => $position,
+            'username'   => $username,
+            'password'   => $salted,
+            'created'    => $created,
+            'realname'   => $realname,
+            'session'    => $session,
+            'sex'        => $sex,
+            'department' => $department,
+            'position'   => $position,
         );
         // 检查权限
         $panel_user = Session::get('panel_user', 'ziqiang');

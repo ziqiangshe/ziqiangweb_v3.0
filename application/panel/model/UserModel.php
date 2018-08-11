@@ -48,7 +48,7 @@ class UserModel extends Model
      */
     public function get_all_user($where, $offset, $limit)
     {
-        $field = ['id, username, realname, sex, class, session, position, role, status'];
+        $field = ['id, username, realname, sex, class, session, department, position, role, status'];
         try {
             $info = $this->field($field)
                 ->where($where)
@@ -72,7 +72,8 @@ class UserModel extends Model
     public function get_the_user($userid)
     {
         $where['id'] = ['=', $userid];
-        $field = ['username, realname, introduce, message, sex, class, qq, tel, email, session, position, role, status'];
+        $field = ['username, realname, introduce, message, sex, class, 
+        qq, tel, email, session, department, position, role, status'];
         try {
             $info = $this
                 ->field($field)
