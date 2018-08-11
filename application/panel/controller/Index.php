@@ -7,7 +7,7 @@ class Index extends Base
 {
     public function index()
     {
-        $panel_user = Session::get('panel_user');
+        $panel_user = Session::get('panel_user', 'ziqiang');
         $id = $panel_user['id'];
         $this->assign('id', $id);
 

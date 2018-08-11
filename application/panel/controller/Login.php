@@ -34,6 +34,7 @@ class Login extends Controller
         $salted = crypt($password, $salt);
         $user = new UserModel();
         $rel = $user->user_login($username, $salted);
+//        return json([$rel]);
         if (!empty($rel['data'])) {
             $panel_user = $rel['data'];
             Session::set('panel_user', $panel_user, 'ziqiang');
