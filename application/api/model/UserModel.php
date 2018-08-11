@@ -65,7 +65,7 @@ class UserModel extends Model
             if($info === false){
                 return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
             } else {
-                return ['code' => CODE_SUCCESS,'msg'=>'更新成功','data'=>$info];
+                return ['code' => CODE_SUCCESS,'msg'=>'删除成功','data'=>$info];
             }
         } catch (PDOException $e){
             return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
