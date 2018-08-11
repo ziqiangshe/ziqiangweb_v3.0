@@ -52,6 +52,7 @@ class User extends Validate
 
     // 场景验证
     protected $scene = [
+        'do_login'      =>  ['username', 'password'],
         'create_user'   =>  ['username', 'password', 'realname', 'session', 'sex', 'department', 'position'],
         'change_role'   =>  ['id', 'position', 'role'],
         'update_mine'   =>  ['class', 'qq', 'tel', 'email'],

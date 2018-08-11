@@ -13,6 +13,30 @@ class UserModel extends Model
     protected $table = 'user';
 
     /**
+     * 用户登录
+     * @param $username
+     * @param $password
+     * @return array
+     */
+    public function user_login($username, $password)
+    {
+        $field = ['id, username, password, realname, sex, role, status'];
+        try {
+            $info = $this->field($field)
+                ->where('username', '=', $username)
+                ->where('password', '=', $password)
+                ->find();
+            if ($info === false || empty($info)) {
+                return ['code' => CODE_ERROR,'msg' => '用户名或密码错误','data' => $this->getError()];
+            } else {
+                return ['code' => CODE_SUCCESS, 'msg' => '登录成功', 'data' => $info];
+            }
+        } catch(PDOException $e){
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
+        }
+    }
+
+    /**
      * 用户注册
      * @param $data
      * @return array

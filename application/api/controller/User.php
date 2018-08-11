@@ -14,6 +14,7 @@ use think\Session;
 
 class User extends Base
 {
+
     /**
      * 增加自强社成员
      * @param Request $request
@@ -42,18 +43,18 @@ class User extends Base
 //        }
 
         // 密码加盐验证
-        $created = date("Y-m-d H:i:s", time());
+        $create_time = date("Y-m-d H:i:s", time());
         $salt = config('salt');
         $salted = crypt($password, $salt);
         $data = array(
-            'username'   => $username,
-            'password'   => $salted,
-            'created'    => $created,
-            'realname'   => $realname,
-            'session'    => $session,
-            'sex'        => $sex,
-            'department' => $department,
-            'position'   => $position,
+            'username'    => $username,
+            'password'    => $salted,
+            'realname'    => $realname,
+            'session'     => $session,
+            'sex'         => $sex,
+            'department'  => $department,
+            'position'    => $position,
+            'create_time' => $create_time,
         );
         // 检查权限
         $panel_user = Session::get('panel_user', 'ziqiang');
@@ -79,9 +80,11 @@ class User extends Base
             // 验证失败 输出错误信息
             return apireturn(CODE_ERROR, $result, '');
         }
+        $update_time = date("Y-m-d H:i:s", time());
         $data = array(
             'position' => $input_data['position'],
-            'role'     => $input_data['role']
+            'role'     => $input_data['role'],
+            'update_time' => $update_time,
         );
         // 检查权限
         $panel_user = Session::get('panel_user', 'ziqiang');
@@ -122,13 +125,15 @@ class User extends Base
             // 验证失败 输出错误信息
             return apireturn(CODE_ERROR, $result, '');
         }
+        $update_time = date("Y-m-d H:i:s", time());
         $data = array(
-            'class'     => $input_data['class'],
-            'qq'        => $input_data['qq'],
-            'tel'       => $input_data['tel'],
-            'email'     => $input_data['email'],
-            'introduce' => $input_data['introduce'],
-            'message'   => $input_data['message']
+            'class'       => $input_data['class'],
+            'qq'          => $input_data['qq'],
+            'tel'         => $input_data['tel'],
+            'email'       => $input_data['email'],
+            'introduce'   => $input_data['introduce'],
+            'message'     => $input_data['message'],
+            'update_time' => $update_time,
         );
         $panel_user = Session::get('panel_user', 'ziqiang');
         $user = new UserModel();

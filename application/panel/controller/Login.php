@@ -22,31 +22,9 @@ class Login extends Controller
         return $this->fetch('login/index');
     }
 
-    /**
-     * 用户登录
-     * @return mixed
-     */
-    public function dologin(Request $request)
-    {
-        $username = $request->post('username');
-        $password = $request->post('password');
-        $salt = config('salt');
-        $salted = crypt($password, $salt);
-        $user = new UserModel();
-        $rel = $user->user_login($username, $salted);
-//        return json([$rel]);
-        if (!empty($rel['data'])) {
-            $panel_user = $rel['data'];
-            Session::set('panel_user', $panel_user, 'ziqiang');
-            $this->redirect('index/index');
-        }
-        return $this->fetch('login/index');
-    }
-
-
 
     /**
-     * 注销登陆
+     * 注销登陆-理论上应该放在API模块，但是实在不想改V层了，后面看到的人改一下吧= =
      */
     public function logout()
     {
