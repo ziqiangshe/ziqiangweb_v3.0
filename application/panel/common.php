@@ -8,12 +8,12 @@ function change_user_info(array $rel) {
             $rel['data']['sex'] = '女';
         }
 
-        if ($rel['data']['role'] == 2) {
-            $rel['data']['role'] = '大狗官';
-        } elseif ($rel['data']['role'] == 1) {
-            $rel['data']['role'] = '狗官';
-        } else {
-            $rel['data']['role'] = '平民';
+        if ($rel['data']['role'] == SUPER_ADMIN) {
+            $rel['data']['role'] = SUPER_ADMIN_NAME;
+        } elseif ($rel['data']['role'] == GENERAL_ADMIN) {
+            $rel['data']['role'] = GENERAL_ADMIN_NAME;
+        } elseif ($rel['data']['role'] == CIVILIAN) {
+            $rel['data']['role'] = CIVILIAN_NAME;
         }
     } else {
         foreach ($rel['data'] as $key => $val) {
@@ -22,13 +22,13 @@ function change_user_info(array $rel) {
             } else {
                 $rel['data'][$key]['sex'] = '女';
             }
-
-            if ($rel['data'][$key]['role'] == 2) {
-                $rel['data'][$key]['role'] = '大狗官';
-            } elseif ($rel['data'][$key]['role'] == 1) {
-                $rel['data'][$key]['role'] = '狗官';
-            } else {
-                $rel['data'][$key]['role'] = '平民';
+            
+            if ($rel['data'][$key]['role'] == SUPER_ADMIN) {
+                $rel['data'][$key]['role'] = SUPER_ADMIN_NAME;
+            } elseif ($rel['data'][$key]['role'] == GENERAL_ADMIN) {
+                $rel['data'][$key]['role'] = GENERAL_ADMIN_NAME;
+            } elseif ($rel['data'][$key]['role'] == CIVILIAN) {
+                $rel['data'][$key]['role'] = CIVILIAN_NAME;
             }
         }
     }
