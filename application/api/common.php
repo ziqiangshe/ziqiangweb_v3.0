@@ -29,5 +29,4 @@ function MessageBox($message, $goto = '') {
     else if ($goto != '')
         echo "document.location='{$goto}';\n";
     echo "</script>";
-//    exit();
 }
