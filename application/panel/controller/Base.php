@@ -63,12 +63,12 @@ class Base extends Controller
                 ),
                 array(
                     'c' => 'activity',
-                    'a' => 'webContest',
+                    'a' => 'web_contest',
                     'title' => '网页大赛'
                 ),
                 array(
                     'c' => 'activity',
-                    'a' => 'speechContest',
+                    'a' => 'speech_contest',
                     'title' => '演讲比赛'
                 ),
                 array(
