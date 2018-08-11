@@ -7,8 +7,10 @@
  */
 
 namespace app\panel\model;
+
 use think\Model;
 use think\exception\PDOException;
+
 class UserModel extends Model
 {
     protected $table = 'user';
@@ -19,7 +21,7 @@ class UserModel extends Model
      * @param $password
      * @return array
      */
-    public function userlogin($username, $password)
+    public function user_login($username, $password)
     {
         $field = ['id, username, password, realname, sex, role, status'];
         try {
@@ -28,13 +30,13 @@ class UserModel extends Model
                 ->where('password', '=', $password)
                 ->find();
             if ($info === false || empty($info)) {
-                return ['code' => CODE_ERROR, 'msg' => $this->getError(), 'data' => $info];
-            } else {
-                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
+                    return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
+                } else {
+                    return ['code' => CODE_SUCCESS, 'msg' => '登录成功', 'data' => $info];
+                }
+            } catch(PDOException $e){
+                return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
             }
-        } catch (PDOException $e) {
-            return ['code' => CODE_ERROR,'msg' => $e->getMessage(), 'data' => ''];
-        }
     }
 
     /**
@@ -44,7 +46,7 @@ class UserModel extends Model
      * @param $limit
      * @return array
      */
-    public function getalluser($where, $offset, $limit)
+    public function get_all_user($where, $offset, $limit)
     {
         $field = ['id, username, realname, sex, class, session, position, role, status'];
         try {
@@ -52,13 +54,13 @@ class UserModel extends Model
                 ->where($where)
                 ->limit($offset, $limit)
                 ->select();
-            if ($info === false) {
-                return ['code' => CODE_ERROR, 'msg' => $this->getError(), 'data' => $info];
+            if($info === false){
+                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
             } else {
-                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => '获取成功', 'data' => $info];
             }
-        } catch (PDOException $e) {
-            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
+        } catch(PDOException $e){
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
 
@@ -67,7 +69,7 @@ class UserModel extends Model
      * @param $userid
      * @return array
      */
-    public function gettheuser($userid)
+    public function get_the_user($userid)
     {
         $where['id'] = ['=', $userid];
         $field = ['username, realname, introduce, sex, class, qq, tel, email, session, position, role, status'];
@@ -76,13 +78,13 @@ class UserModel extends Model
                 ->field($field)
                 ->where($where)
                 ->find();
-            if ($info === false) {
-                return ['code' => CODE_ERROR, 'msg' => $this->getError(), 'data' => $info];
+            if($info === false){
+                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
             } else {
-                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => '获取成功', 'data' => $info];
             }
-        } catch (PDOException $e) {
-            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
+        } catch(PDOException $e){
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
 
@@ -93,19 +95,19 @@ class UserModel extends Model
      * 获取自强人物
      * @return array
      */
-    public function getcharacter()
+    public function get_character()
     {
         $where = ['status' => 0];
-        try{
+        try {
             $info = $this->all($where);
 
             if($info === false){
-                return ['code' => CODE_ERROR,'msg' => $this->getError(),'data' => $info];
+                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
             } else {
-                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => '获取成功', 'data' => $info];
             }
-        } catch (PDOException $e){
-            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
+        } catch(PDOException $e){
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
 
@@ -114,65 +116,23 @@ class UserModel extends Model
      * @param $id
      * @return array
      */
-    public function mymessage($id)
+    public function my_message($id)
     {
         $where = ['id' => $id];
-        try{
+        try {
             $info = $this->where($where)->find();
             $data = array([
                 'realname' => $info['realname'],
                 'introduce' => $info['introduce'],
             ]);
             if($info === false){
-                return ['code' => CODE_ERROR,'msg' => $this->getError(),'data' => $info];
+                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
             } else {
-                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $data];
+                return ['code' => CODE_SUCCESS, 'msg' => '获取成功', 'data' => $data];
             }
-        } catch (PDOException $e){
-            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
+        } catch(PDOException $e){
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
 
-
-    /**
-     * 上架自强人物[前置需要权限验证]
-     * @param $id
-     * @return array
-     */
-    public function oncharacter($id)
-    {
-        $where = ['id' => $id];
-        try{
-            $info = $this->where($where)->update(array('status'=>0));
-
-            if($info === false){
-                return ['code' => CODE_ERROR,'msg' => $this->getError(),'data' => $info];
-            } else {
-                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
-            }
-        } catch (PDOException $e){
-            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
-        }
-    }
-
-    /**
-     * 下架自强人物[前置需要权限验证]
-     * @param $id
-     * @return array
-     */
-    public function downcharacter($id)
-    {
-        $where = ['id' => $id];
-        try{
-            $info = $this->where($where)->update(array('status'=>1));
-
-            if($info === false){
-                return ['code' => CODE_ERROR,'msg' => $this->getError(),'data' => $info];
-            } else {
-                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
-            }
-        } catch (PDOException $e){
-            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
-        }
-    }
 }

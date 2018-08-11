@@ -5,6 +5,7 @@
  * Date: 2018/8/5
  * Time: 17:50
  */
+
 namespace app\panel\controller;
 
 use app\panel\model\UserModel;
@@ -26,14 +27,15 @@ class Character extends Base
     /**
      * 获取自强人物列表
      */
-    public function getmessage()
+    public function get_message()
     {
         $user = new UserModel();
         $where = [];
         $rel['data'] = $user->where($where)->select();
         $count = count($user->where($where)->select());
+        // 0-下架 1-上架
         foreach ($rel['data'] as $key => $val) {
-            if ($rel['data'][$key]['status'] == 0) {
+            if ($rel['data'][$key]['status'] == 1) {
                 $rel['data'][$key]['status'] = '已上架';
             } else {
                 $rel['data'][$key]['status'] = '未上架';
@@ -50,48 +52,12 @@ class Character extends Base
      * @param Request $request
      * @return mixed
      */
-    public function manage_lookword(Request $request)
+    public function manage_look_word(Request $request)
     {
-        $characterid = $request->get('id');
+        $character_id = $request->get('id');
         $user = new UserModel();
-        $rel = $user->where(['id'=>$characterid])->find();
+        $rel = $user->where(['id' => $character_id])->find();
         $this->assign('rel', $rel);
         return $this->fetch();
-    }
-
-    /**
-     * 上架自强人物
-     * @return \think\response\Json
-     */
-    public function on()
-    {
-        $id = Request::instance()->get('id');
-
-        $user = new UserModel();
-
-        $panel_user = Session::get('panel_user');
-        if ($panel_user['role'] < 1) {
-            return apireturn(-1, '权限不足，操作失败', '');
-        }
-        $rel = $user->oncharacter($id);
-        return apireturn($rel['code'],$rel['msg'],$rel['data']);
-    }
-
-
-    /**
-     * 下架自强人物
-     * @return \think\response\Json
-     */
-    public function down()
-    {
-        $id = Request::instance()->get('id');
-
-        $user = new UserModel();
-        $panel_user = Session::get('panel_user');
-        if ($panel_user['role'] < 1) {
-            return apireturn(-1, '权限不足，操作失败', '');
-        }
-        $rel = $user->downcharacter($id);
-        return apireturn($rel['code'],$rel['msg'],$rel['data']);
     }
 }

@@ -22,12 +22,12 @@ class UserModel extends Model
         try {
             $info = $this->strict(false)->insertGetId($data);
             if ($info === false) {
-                return ['code' => CODE_ERROR, 'msg' => $this->getError(), 'data' => $info];
+                return ['code' => CODE_ERROR, 'msg' => '返回值异常', 'data' => $this->getError()];
             } else {
-                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => '注册成功', 'data' => $info];
             }
         } catch (PDOException $e) {
-            return ['code' => CODE_ERROR, 'msg' => $e->getMessage(), 'data' => ''];
+            return ['code' => CODE_ERROR, 'msg' => '操作数据库异常', 'data' => $e->getMessage()];
         }
     }
 
@@ -42,12 +42,12 @@ class UserModel extends Model
         try{
             $info = $this ->where('id','=',$userid)->update($data);
             if($info === false){
-                return ['code' => CODE_ERROR,'msg' => $this->getError(),'data' => $info];
+                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
             } else {
-                return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => '更新成功', 'data' => $info];
             }
         } catch(PDOException $e){
-            return ['code' => CODE_ERROR,'msg' => $e->getMessage(),'data' => ''];
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
 
@@ -63,12 +63,12 @@ class UserModel extends Model
             $info = $this->where($where)->delete();
 
             if($info === false){
-                return ['code' => CODE_ERROR ,'msg'=>$this->getError(),'data'=>$info];
+                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
             } else {
-                return ['code' => CODE_SUCCESS,'msg'=>'Success','data'=>$info];
+                return ['code' => CODE_SUCCESS,'msg'=>'更新成功','data'=>$info];
             }
         } catch (PDOException $e){
-            return ['code' => CODE_ERROR,'msg'=>$e->getMessage(),'data'=>''];
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
 
