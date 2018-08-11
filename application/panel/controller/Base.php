@@ -152,7 +152,8 @@ class Base extends Controller
         if (!Session::has('panel_user', 'ziqiang')) {
             $this->redirect('login/index');
         }
-        $realname = empty(Session::get('panel_user.realname', 'ziqiang'))?'匿名':Session::get('panel_user.realname', 'ziqiang');
+        $realname = empty(Session::get('panel_user.realname', 'ziqiang'))
+            ?'匿名':Session::get('panel_user.realname', 'ziqiang');
         $this->assign('realname', $realname);
         $this->assign('menu', $this->menu);
     }
