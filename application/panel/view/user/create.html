@@ -39,7 +39,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>用户名</label>
-                                        <input class="form-control" name="username" value="">
+                                        <input class="form-control" name="username" id="username" value="">
                                         <p class="help-block">输入用来登录的用户名</p>
                                     </div>
                                     <div class="form-group">
@@ -75,7 +75,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>部门</label>
-                                        <select class="form-control" name="department" id="department">
+                                        <select class="form-control" name="department" id="department" onchange="changeTest(this)">
+                                            <option value = "">请选择</option>
                                             <option value="社长">社长</option>
                                             <option value="副社">副社</option>
                                             <option value="服务队">服务队</option>
@@ -89,13 +90,9 @@
                                     <div class="form-group">
                                         <label>职位</label>
                                         <select class="form-control" name="position" id="position">
-                                            <option value="成员">成员</option>
-                                            <option value="副部长">副部长</option>
-                                            <option value="部长">部长</option>
-                                            <option value="副队长">副队长</option>
-                                            <option value="队长">队长</option>
+                                            <option value = "">请选择</option>
                                         </select>
-                                        <p class="help-block">职务</p>
+                                        <p class="help-block">所属部门</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -116,6 +113,56 @@
 <script src="__JS__/plugins/metisMenu/metisMenu.min.js"></script>
 <script src="__JS__/sb-admin-2.js"></script>
 <script>
+    function changeTest(obj){
+        var selectVal = obj.value;
+        if(selectVal == "社长" || selectVal=="副社"){
+            var objSelectet = document.getElementById("position");
+            for(i=objSelectet.options.length-1 ; i>= 0 ; i--){
+                objSelectet.options[i] = null;
+                objSelectet.innerHTML = "<option value = ''>请选择</option>";
+            }
+            //Array事项动态下拉框
+            var texts = new Array("大人");
+            var values = new Array("大人");
+            for(var i = 0 ; i < texts.length ; i++){
+                var objOption = document.createElement("OPTION");
+                objOption.text= texts[i];
+                objOption.value=values[i];
+                objSelectet.options.add(objOption);
+            }
+        }else if(selectVal == "服务队"){
+            var objSelectet = document.getElementById("position");
+            for(i=objSelectet.options.length-1 ; i>= 0 ; i--){
+                objSelectet.options[i] = null;
+                objSelectet.innerHTML = "<option value = ''>请选择</option>";
+            }
+            //Array事项动态下拉框
+            var texts = new Array("队长","副队长","成员");
+            var values = new Array("队长","副队长","成员");
+            for(var i = 0 ; i < texts.length ; i++){
+                var objOption = document.createElement("OPTION");
+                objOption.text= texts[i];
+                objOption.value=values[i];
+                objSelectet.options.add(objOption);
+            }
+        }else{
+            var objSelectet = document.getElementById("position");
+            for(i=objSelectet.options.length-1 ; i>= 0 ; i--){
+                objSelectet.options[i] = null;
+                objSelectet.innerHTML = "<option value = ''>请选择</option>";
+            }
+            //Array事项动态下拉框
+            var texts = new Array("部长","副部长","成员");
+            var values = new Array("部长","副部长","成员");
+            for(var i = 0 ; i < texts.length ; i++){
+                var objOption = document.createElement("OPTION");
+                objOption.text= texts[i];
+                objOption.value=values[i];
+                objSelectet.options.add(objOption);
+            }
+        }
+    }
+
     $("button").click(function () {
         $.ajax({
             url: "__API__/user/create_user",
