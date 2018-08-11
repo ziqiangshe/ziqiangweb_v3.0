@@ -33,10 +33,10 @@ class Login extends Controller
         $salt = config('salt');
         $salted = crypt($password, $salt);
         $user = new UserModel();
-        $rel = $user->userlogin($username, $salted);
+        $rel = $user->user_login($username, $salted);
         if (!empty($rel['data'])) {
             $panel_user = $rel['data'];
-            Session::set('panel_user', $panel_user);
+            Session::set('panel_user', $panel_user, 'ziqiang');
             $this->redirect('index/index');
         }
         return $this->fetch('login/index');
@@ -49,7 +49,7 @@ class Login extends Controller
      */
     public function logout()
     {
-        Session::delete('panel_user');
+        Session::delete('panel_user', 'ziqiang');
         $this->redirect('login/index');
     }
 }

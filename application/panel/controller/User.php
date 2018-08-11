@@ -45,13 +45,13 @@ class User extends Base
      * @param Request $request
      * @return mixed
      */
-    public function lookuser()
+    public function look_user()
     {
-        $userid = input('get.id');
+        $user_id = input('get.id');
         $user = new UserModel();
-        $rel = $user->gettheuser($userid);
+        $rel = $user->get_the_user($user_id);
         $this->assign('rel', $rel['data']);
-        return $this->fetch('user/lookuser');
+        return $this->fetch('user/look_user');
     }
 
     /**
@@ -59,21 +59,21 @@ class User extends Base
      * @param Request $request
      * @return mixed
      */
-    public function edituser()
+    public function edit_user()
     {
-        $userid = input('get.id');
+        $user_id = input('get.id');
         $user = new UserModel();
-        $rel = $user->gettheuser($userid);
-        $this->assign('id', $userid);
+        $rel = $user->get_the_user($user_id);
+        $this->assign('id', $user_id);
         $this->assign('rel', $rel['data']);
-        return $this->fetch('user/edituser');
+        return $this->fetch('user/edit_user');
     }
 
     /**
      * 获取所有自强人信息
      * @param Request $request
      */
-    public function getalluser()
+    public function get_all_user()
     {
         $input_data = input('post.aoData');
         $aoData = json_decode($input_data);
@@ -91,10 +91,10 @@ class User extends Base
             if ($val->name == 'iDisplayLength')
                 $limit = $val->value;
             if ($val->name == 'sSearch' && $val->value != "")
-                $where['title|content'] = ['like', '%'.$val->value.'%'];
+                $where['title|content'] = ['like', '%' . $val->value . '%'];
         }
         $user = new UserModel();
-        $rel = $user->getalluser($where, $offset, $limit);
+        $rel = $user->get_all_user($where, $offset, $limit);
         foreach ($rel['data'] as $key => $val) {
             if ($rel['data'][$key]['sex'] == 1) {
                 $rel['data'][$key]['sex'] = '男';
@@ -104,7 +104,7 @@ class User extends Base
 
             if ($rel['data'][$key]['role'] == 2) {
                 $rel['data'][$key]['role'] = '大狗官';
-            } elseif($rel['data'][$key]['role'] == 1) {
+            } elseif ($rel['data'][$key]['role'] == 1) {
                 $rel['data'][$key]['role'] = '狗官';
             } else {
                 $rel['data'][$key]['role'] = '平民';
@@ -127,10 +127,10 @@ class User extends Base
      */
     public function mine()
     {
-        $panel_user = Session::get('panel_user');
+        $panel_user = Session::get('panel_user', 'ziqiang');
         $user_id = $panel_user['id'];
         $user = new UserModel();
-        $rel = $user->gettheuser($user_id);
+        $rel = $user->get_the_user($user_id);
         $this->assign('id', $user_id);
         $this->assign('rel', $rel['data']);
         return $this->fetch('user/mine');

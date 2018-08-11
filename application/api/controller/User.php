@@ -5,6 +5,7 @@
  * Date: 2018/8/8
  * Time: 23:57
  */
+
 namespace app\api\controller;
 
 use app\api\model\UserModel;
@@ -22,25 +23,25 @@ class User extends Base
     {
         $input_data = input('post.');
         $result = $this->validate($input_data, 'User.create_user');
-        if($result !== VALIDATE_PASS){
+        if ($result !== VALIDATE_PASS) {
             // 验证失败 输出错误信息
             return apireturn(CODE_ERROR, $result, '');
         }
         $username = $input_data['username'];
         $password = $input_data['password'];
         $realname = $input_data['realname'];
-        $session = $input_data['session'];
-        $sex = $input_data['sex'];
+        $session  = $input_data['session'];
+        $sex      = $input_data['sex'];
         $position = $input_data['position'];
         // 完善职位信息
         if (strcmp($position, "社长") == 0 || strcmp($position, "副社") == 0) {
-            $position = $position.'大人';
+            $position = $position . '大人';
         } else {
-            $position = $position.'成员';
+            $position = $position . '成员';
         }
 
         // 密码加盐验证
-        $created = date("Y-m-d H:i:s",time());
+        $created = date("Y-m-d H:i:s", time());
         $salt = config('salt');
         $salted = crypt($password, $salt);
         $data = array(
@@ -53,7 +54,7 @@ class User extends Base
             'position' => $position,
         );
         // 检查权限
-        $panel_user = Session::get('panel_user');
+        $panel_user = Session::get('panel_user', 'ziqiang');
         if ($panel_user['role'] < 1) {
             return apireturn(CODE_ERROR, '权限不足，操作失败', '');
         }
@@ -72,21 +73,21 @@ class User extends Base
 //        $info = $request->get();
         $input_data = input('get.');
         $result = $this->validate($input_data, 'User.change_role');
-        if($result !== VALIDATE_PASS){
+        if ($result !== VALIDATE_PASS) {
             // 验证失败 输出错误信息
             return apireturn(CODE_ERROR, $result, '');
         }
         $data = array(
             'position' => $input_data['position'],
-            'role' => $input_data['role']
+            'role'     => $input_data['role']
         );
         // 检查权限
-        $panel_user = Session::get('panel_user');
+        $panel_user = Session::get('panel_user', 'ziqiang');
         if ($panel_user['role'] < 2) {
             return apireturn(CODE_ERROR, '权限不足，操作失败', '');
         }
         $user = new UserModel();
-        $rel = $user->update_user($result['id'], $data);
+        $rel = $user->update_user($input_data['id'], $data);
         return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 
@@ -97,14 +98,14 @@ class User extends Base
      */
     public function del_user()
     {
-        $userid = input('get.id');
+        $user_id = input('get.id');
         // 检查权限
-        $panel_user = Session::get('panel_user');
+        $panel_user = Session::get('panel_user', 'ziqiang');
         if ($panel_user['role'] < 1) {
             return apireturn(CODE_ERROR, '权限不足，操作失败', '');
         }
         $user = new UserModel();
-        $rel = $user->del_user($userid);
+        $rel = $user->del_user($user_id);
         return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 
@@ -117,7 +118,7 @@ class User extends Base
     {
         $input_data = input('post.');
         $result = $this->validate($input_data, 'User.update_mine');
-        if($result !== VALIDATE_PASS){
+        if ($result !== VALIDATE_PASS) {
             // 验证失败 输出错误信息
             return apireturn(CODE_ERROR, $result, '');
         }
@@ -128,7 +129,7 @@ class User extends Base
             'email'     => $input_data['email'],
             'introduce' => $input_data['introduce'],
         );
-        $panel_user = Session::get('panel_user');
+        $panel_user = Session::get('panel_user', 'ziqiang');
         $user = new UserModel();
         $rel = $user->update_user($panel_user['id'], $data);
         return apireturn($rel['code'], $rel['msg'], $rel['data']);
