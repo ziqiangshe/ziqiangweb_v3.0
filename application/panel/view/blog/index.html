@@ -51,6 +51,7 @@
                                             <th>编号</th>
                                             <th>标题</th>
                                             <th>作者</th>
+                                            <th>职务</th>
                                             <th>浏览量</th>
                                             <th>标签</th>
                                             <th>创建时间</th>
@@ -109,9 +110,7 @@
                 "bServerSide": true,
                 "bDestroy": true,
                 "bSortCellsTop": true,
-                "sAjaxSource": '__PANEL__/blog/getblog?tag_id=' + {
-                    $tag_id
-                },
+                "sAjaxSource": '__PANEL__/blog/get_blog?tag_id=' + {$tag_id},
                 "aoColumns": [{
                     "mData": "id",
                 }, {
@@ -119,11 +118,13 @@
                 }, {
                     "mData": "realname",
                 }, {
+                    "mData": "position",
+                }, {
                     "mData": "pageview",
                 }, {
                     "mData": "tag",
                 }, {
-                    "mData": "created",
+                    "mData": "create_time",
                 }, {
                     "mData": "id",
                     "mRender": function (data, type, full) {

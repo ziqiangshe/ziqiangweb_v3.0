@@ -58,28 +58,16 @@ class Blog extends Base
 
     /**
      * 根据tag_id|order_type获取博客内容
-     * @param Request $request
-     * @return \think\response\Json
      */
-    public function get_blog(Request $request)
+    public function get_blog()
     {
         $input_data = input('post.aoData');
         $aoData = json_decode($input_data);
-        $tag_id = $request->get('tag_id');
-        $where = [];
-        switch ($tag_id) {
-            case 1:
-                $tag = '技术'; break;
-            case 2:
-                $tag = '经验'; break;
-            case 3:
-                $tag = '杂谈'; break;
-            default:
-                $tag = null; break;
-        }
-        if (!empty($tag)) {
-            $where['tag'] = ['=', $tag];
-        }
+        $tag = input('get.tag_id');
+        // 按创建时间排序
+        $order = ['create_time desc'];
+        $where['tag'] = $tag;
+
         $offset = 0;
         $limit = 10;
         foreach ($aoData as $key => $val) {
@@ -90,26 +78,19 @@ class Blog extends Base
             if ($val->name == 'sSearch' && $val->value != "")
                 $where['title|content'] = ['like', '%'.$val->value.'%'];
         }
-        // 1-按创建时间排序 2-按浏览量排序
-        $order_type = empty($request->get('order_type'))?1:$request->get('order_type');
-        $order = [];
-        switch ($order_type) {
-            case 1:
-                $order = ['created desc'];break;
-            case 2:
-                $order = ['pageview desc'];break;
-            default:
-                break;
-        }
+
         $blog = new BlogModel();
         $rel = $blog->get_all_blog($where, $order, $offset, $limit);
+        $rel = change_user_info($rel);
+
         $count = count($blog->where($where)->order($order)->select());
         $response['recordsTotal'] = $count;
         $response['recordsFiltered'] = $count;
         $response['data'] = $rel['data'];
+        $response['errmsg'] = $rel['msg'];
         $response['inf'] = $aoData;
-//        $response['tag'] = $tag_id;
         $response['where'] = $where;
+        $response['order_type'] = $order;
         echo json_encode($response);
     }
 }

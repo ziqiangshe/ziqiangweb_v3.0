@@ -52,8 +52,8 @@ class BlogModel extends Model
     public function get_all_blog($where, $order, $offset, $limit)
     {
         $join = [['user u', 'b.authorid=u.id']];
-        $field = ['b.id, b.title, b.authorid, b.summary, u.realname,
-         u.position, b.tag, b.content, b.created, b.pageview'];
+        $field = ['b.id, b.title, b.authorid, b.summary, u.sex, u.realname, u.department,
+         u.position, u.role, b.tag, b.content, b.create_time, b.pageview'];
         try {
             $info = $this->alias('b')
                 ->join($join)
