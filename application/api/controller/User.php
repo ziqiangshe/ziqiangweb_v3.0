@@ -106,7 +106,8 @@ class User extends Base
         }
         $user = new UserModel();
         $rel = $user->del_user($user_id);
-        return apireturn($rel['code'], $rel['msg'], $rel['data']);
+        MessageBox($rel['msg'], -1);
+//        return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 
     /**
