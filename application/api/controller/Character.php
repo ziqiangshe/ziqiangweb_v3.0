@@ -16,7 +16,6 @@ class Character extends Base
 {
     /**
      * 上架自强人物
-     * @return \think\response\Json
      */
     public function on_character()
     {
@@ -25,16 +24,15 @@ class Character extends Base
         $user = new CharacterModel();
         $panel_user = Session::get('panel_user', 'ziqiang');
         if ($panel_user['role'] < 1) {
-            return apireturn(-1, '权限不足，操作失败', '');
+            MessageBox('权限不足，操作失败', -1);
         }
         $rel = $user->on_character($id);
-        return apireturn($rel['code'], $rel['msg'], $rel['data']);
+        MessageBox($rel['msg'], -1);
     }
 
 
     /**
      * 下架自强人物
-     * @return \think\response\Json
      */
     public function down_character()
     {
@@ -43,9 +41,9 @@ class Character extends Base
         $user = new CharacterModel();
         $panel_user = Session::get('panel_user', 'ziqiang');
         if ($panel_user['role'] < 1) {
-            return apireturn(-1, '权限不足，操作失败', '');
+            MessageBox('权限不足，操作失败', -1);
         }
         $rel = $user->down_character($id);
-        return apireturn($rel['code'], $rel['msg'], $rel['data']);
+        MessageBox($rel['msg'], -1);
     }
 }

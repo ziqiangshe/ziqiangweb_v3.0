@@ -93,8 +93,6 @@ class User extends Base
 
     /**
      * 删除用户信息
-     * @param Request $request
-     * @return \think\response\Json
      */
     public function del_user()
     {
@@ -102,12 +100,11 @@ class User extends Base
         // 检查权限
         $panel_user = Session::get('panel_user', 'ziqiang');
         if ($panel_user['role'] < 1) {
-            return apireturn(CODE_ERROR, '权限不足，操作失败', '');
+            MessageBox('权限不足，操作失败', -1);
         }
         $user = new UserModel();
         $rel = $user->del_user($user_id);
         MessageBox($rel['msg'], -1);
-//        return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 
     /**
