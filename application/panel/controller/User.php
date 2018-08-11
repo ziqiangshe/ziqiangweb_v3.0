@@ -50,19 +50,7 @@ class User extends Base
         $user_id = input('get.id');
         $user = new UserModel();
         $rel = $user->get_the_user($user_id);
-        if ($rel['data']['sex'] == 1) {
-            $rel['data']['sex'] = '男';
-        } else {
-            $rel['data']['sex'] = '女';
-        }
-
-        if ($rel['data']['role'] == 2) {
-            $rel['data']['role'] = '大狗官';
-        } elseif ($rel['data']['role'] == 1) {
-            $rel['data']['role'] = '狗官';
-        } else {
-            $rel['data']['role'] = '平民';
-        }
+        $rel = change_user_info($rel);
         $this->assign('rel', $rel['data']);
         return $this->fetch('user/look_user');
     }
@@ -108,21 +96,7 @@ class User extends Base
         }
         $user = new UserModel();
         $rel = $user->get_all_user($where, $offset, $limit);
-        foreach ($rel['data'] as $key => $val) {
-            if ($rel['data'][$key]['sex'] == 1) {
-                $rel['data'][$key]['sex'] = '男';
-            } else {
-                $rel['data'][$key]['sex'] = '女';
-            }
-
-            if ($rel['data'][$key]['role'] == 2) {
-                $rel['data'][$key]['role'] = '大狗官';
-            } elseif ($rel['data'][$key]['role'] == 1) {
-                $rel['data'][$key]['role'] = '狗官';
-            } else {
-                $rel['data'][$key]['role'] = '平民';
-            }
-        }
+        $rel = change_user_info($rel);
         $count = count($user->where($where)->select());
         $response['recordsTotal'] = $count;
         $response['recordsFiltered'] = $count;
@@ -144,19 +118,7 @@ class User extends Base
         $user_id = $panel_user['id'];
         $user = new UserModel();
         $rel = $user->get_the_user($user_id);
-        if ($rel['data']['sex'] == 1) {
-            $rel['data']['sex'] = '男';
-        } else {
-            $rel['data']['sex'] = '女';
-        }
-
-        if ($rel['data']['role'] == 2) {
-            $rel['data']['role'] = '大狗官';
-        } elseif ($rel['data']['role'] == 1) {
-            $rel['data']['role'] = '狗官';
-        } else {
-            $rel['data']['role'] = '平民';
-        }
+        $rel = change_user_info($rel);
         $this->assign('id', $user_id);
         $this->assign('rel', $rel['data']);
         return $this->fetch('user/mine');
