@@ -25,7 +25,6 @@ class User extends Validate
         'qq'          => 'number',
         'tel'         => 'number',
         'email'       => 'email',
-        'introduce'   => '', // introduce 不做限制
     ];
 
     // 不符规则的错误提示
@@ -53,6 +52,7 @@ class User extends Validate
     protected $scene = [
         'create_user'   =>  ['username', 'password', 'realname', 'session', 'sex', 'position'],
         'change_role'   =>  ['id', 'position', 'role'],
+        'update_mine'   =>  ['class', 'qq', 'tel', 'email'],
     ];
 
 }

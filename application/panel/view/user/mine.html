@@ -108,8 +108,8 @@
                                             <div class="introduce_wrapper">
                                                 <div class="circle"></div>
                                                 <label>我的寄语：</label>
-                                                <textarea name="myword" id="myword" class="form-control" rows="8"
-                                                          autofocus="autofocus"></textarea>
+                                                <textarea name="message" id="message" class="form-control" rows="8"
+                                                          autofocus="autofocus">{if $rel}{$rel.message}{/if}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -143,14 +143,15 @@
                 tel:       $("#tel").val(),
                 email:     $("#email").val(),
                 introduce: $("#introduce").val(),
+                message:   $("#message").val()
             },
             success: function (data) {
-                if (data.errcode == 0) {
+                if (data.status == 0) {
                     window.location.href = "__PANEL__/user/mine";
                     alert(data.message);
                     return true;
                 }
-                else if (data.errcode == -1) {
+                else if (data.status == -1) {
                     alert(data.message);
                     return false;
                 }

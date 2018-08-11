@@ -126,6 +126,7 @@ class User extends Base
             'tel'       => $input_data['tel'],
             'email'     => $input_data['email'],
             'introduce' => $input_data['introduce'],
+            'message'   => $input_data['message']
         );
         $panel_user = Session::get('panel_user', 'ziqiang');
         $user = new UserModel();
