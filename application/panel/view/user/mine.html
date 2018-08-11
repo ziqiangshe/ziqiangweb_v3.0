@@ -80,7 +80,7 @@
                                             <div class="sex_wrapper">
                                                 <div class="circle"></div>
                                                 <label>性别：</label>
-                                                {if $rel}{eq name='$rel.sex' value='1'}男{else/}女{/eq}{/if}
+                                                {if $rel}{$rel.sex}{/if}
                                             </div>
                                         </div>
                                         <div class="form-group">

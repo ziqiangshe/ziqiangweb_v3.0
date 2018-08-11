@@ -131,6 +131,19 @@ class User extends Base
         $user_id = $panel_user['id'];
         $user = new UserModel();
         $rel = $user->get_the_user($user_id);
+        if ($rel['data']['sex'] == 1) {
+            $rel['data']['sex'] = '男';
+        } else {
+            $rel['data']['sex'] = '女';
+        }
+
+        if ($rel['data']['role'] == 2) {
+            $rel['data']['role'] = '大狗官';
+        } elseif ($rel['data']['role'] == 1) {
+            $rel['data']['role'] = '狗官';
+        } else {
+            $rel['data']['role'] = '平民';
+        }
         $this->assign('id', $user_id);
         $this->assign('rel', $rel['data']);
         return $this->fetch('user/mine');
