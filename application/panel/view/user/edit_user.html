@@ -43,16 +43,33 @@
                                         {if $rel}{$rel.realname}{/if}
                                     </div>
                                     <div class="form-group">
-                                        <label>职务：</label>
-                                        <input class="form-control" id="position" name="position"
-                                               value="{if $rel}{$rel.position}{/if}">
+                                        <label>部门</label>
+                                        <select class="form-control" name="department" id="department">
+                                            <option value="服务队" {eq name='rel.department' value='服务队'} selected {/eq}>服务队</option>
+                                            <option value="外联部" {eq name='rel.department' value='外联部'} selected {/eq}>外联部</option>
+                                            <option value="宣传部" {eq name='rel.department' value='宣传部'} selected {/eq}>宣传部</option>
+                                            <option value="秘书部" {eq name='rel.department' value='办公室'} selected {/eq}>办公室</option>
+                                            <option value="策划部" {eq name='rel.department' value='策划部'} selected {/eq}>策划部</option>
+                                            <option value="副社" {eq name='rel.department' value='副社'} selected {/eq}>副社</option>
+                                            <option value="社长" {eq name='rel.department' value='社长'} selected {/eq}>社长</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>职位</label>
+                                        <select class="form-control" name="position" id="position">
+                                            <option value="成员" {eq name='rel.position' value='成员'} selected {/eq}>成员</option>
+                                            <option value="副部长" {eq name='rel.position' value='副部长'} selected {/eq}>副部长</option>
+                                            <option value="部长" {eq name='rel.position' value='部长'} selected {/eq}>部长</option>
+                                            <option value="副队长" {eq name='rel.position' value='副队长'} selected {/eq}>副队长</option>
+                                            <option value="队长" {eq name='rel.position' value='队长'} selected {/eq}>队长</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>权限：</label>
                                         <select class="form-control" id="role" name="role">
-                                            <option value="0">平民</option>
-                                            <option value="1">狗官</option>
-                                            <option value="2">大狗官</option>
+                                            <option value="0" {eq name='rel.role' value='0'} selected {/eq}>平民</option>
+                                            <option value="1" {eq name='rel.role' value='1'} selected {/eq}>狗官</option>
+                                            <option value="2" {eq name='rel.role' value='2'} selected {/eq}>大狗官</option>
                                         </select>
                                     </div>
                                 </div>
