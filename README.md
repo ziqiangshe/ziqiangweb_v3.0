@@ -115,7 +115,11 @@ if ($panel_user['role'] < 1) {
 
 
 
-### 函数命名&变量命名
+### 文件命名&函数命名&变量命名
+
+- 文件命名中Controller使用
+
+
 
 - 函数的命名使用下划线连接各个小写单词，示例如下：
 
@@ -129,10 +133,10 @@ public function edit_user()
 {
     $user_id = input('get.id');
     $user = new UserModel();
-    $rel = $user->gettheuser($userid);
-    $this->assign('id', $userid);
+    $rel = $user->get_the_user($userid);
+    $this->assign('id', $user_id);
     $this->assign('rel', $rel['data']);
-    return $this->fetch('user/edituser');
+    return $this->fetch('user/edit_user');
 }
 ```
 
@@ -170,7 +174,7 @@ define("CODE_ERROR", -1);
 * @param $password
 * @return array
 */
-public function userlogin($username, $password)
+public function user_login($username, $password)
 {
     $field = ['id, username, password, realname, sex, role, status'];
     try {
@@ -179,12 +183,12 @@ public function userlogin($username, $password)
             ->where('password', '=', $password)
             ->find();
         if ($info === false || empty($info)) {
-            return ['code' => -1, 'msg' => $this->getError(), 'data' => $info];
+            return ['code' => CODE_ERROR, 'msg' => $this->getError(), 'data' => $info];
         } else {
-            return ['code' => 0, 'msg' => 'Success', 'data' => $info];
+            return ['code' => CODE_SUCCESS, 'msg' => 'Success', 'data' => $info];
         }
     } catch (PDOException $e) {
-        return ['code' => -1,'msg' => $e->getMessage(), 'data' => ''];
+        return ['code' => CODE_ERROR,'msg' => $e->getMessage(), 'data' => ''];
     }
 }
 ```
@@ -193,11 +197,11 @@ public function userlogin($username, $password)
 
 ### 定义变量&常用函数
 
-在application/panel/config.php中定义后台全局变量及模板参数替换，示例如下：
+在application/模块名/config.php中定义后台全局变量及模板参数替换，示例如下：
 
 ```php
-define("VA_PASS", true);
-define("VA_ERROR", false);
+define("VALIDATE_PASS", true);
+define("VALIDATE_ERROR", false);
 //配置文件
 return [
     //模板参数替换
@@ -209,16 +213,24 @@ return [
 
 
 
-在application/panel/common.php中定义后台全局常用函数，示例如下：
+在application/模块名/common.php中定义常用函数，示例如下：
 
 ```php
-function apireturn($errcode, $errmsg, $data)
+/**
+ * 通用化API接口数据输出
+ * @param $status
+ * @param $message
+ * @param array $data
+ * @param int $httpCode
+ * @return \think\response\Json
+ */
+function apireturn($status, $message, $data=[], $httpCode=200)
 {
     return json([
-        'errcode' => $errcode,
-        'errmsg' => $errmsg,
-        'data' => $data
-    ]);
+        'status'  => $status,
+        'message' => $message,
+        'data'    => $data,
+    ], $httpCode);
 }
 ```
 
