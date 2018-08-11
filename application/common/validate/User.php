@@ -54,7 +54,7 @@ class User extends Validate
     protected $scene = [
         'do_login'      =>  ['username', 'password'],
         'create_user'   =>  ['username', 'password', 'realname', 'session', 'sex', 'department', 'position'],
-        'change_role'   =>  ['id', 'position', 'role'],
+        'change_role'   =>  ['id', 'department', 'position', 'role'],
         'update_mine'   =>  ['class', 'qq', 'tel', 'email'],
     ];
 

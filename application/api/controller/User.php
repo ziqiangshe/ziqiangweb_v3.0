@@ -74,7 +74,7 @@ class User extends Base
     public function update_user()
     {
 //        $info = $request->get();
-        $input_data = input('get.');
+        $input_data = input('post.');
         $result = $this->validate($input_data, 'User.change_role');
         if ($result !== VALIDATE_PASS) {
             // 验证失败 输出错误信息
@@ -82,8 +82,9 @@ class User extends Base
         }
         $update_time = date("Y-m-d H:i:s", time());
         $data = array(
-            'position' => $input_data['position'],
-            'role'     => $input_data['role'],
+            'department'  => $input_data['department'],
+            'position'    => $input_data['position'],
+            'role'        => $input_data['role'],
             'update_time' => $update_time,
         );
         // 检查权限
