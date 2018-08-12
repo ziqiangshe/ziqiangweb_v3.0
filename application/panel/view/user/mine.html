@@ -45,63 +45,68 @@
                                             <div class="name_wrapper">
                                                 <div class="circle"></div>
                                                 <label>姓名：</label>
-                                                {if $rel}{$rel.realname}{/if}
+                                                {if isset($rel)}{$rel.realname}{/if}
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="power_wrapper">
                                                 <div class="circle"></div>
                                                 <label>权限：</label>
-                                                {if $rel}{$rel.role}{/if}
+                                                {if isset($rel)}{$rel.role}{/if}
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="grade_wrapper">
                                                 <div class="circle"></div>
                                                 <label>届数：</label>
-                                                {if $rel}{$rel.session}{/if}
+                                                {if isset($rel)}{$rel.session}{/if}
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="position_wrapper">
                                                 <div class="circle"></div>
                                                 <label>职务：</label>
-                                                {if $rel}{$rel.position}{/if}
+                                                {if isset($rel)}{$rel.position}{/if}
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="sex_wrapper">
                                                 <div class="circle"></div>
                                                 <label>性别：</label>
-                                                {if $rel}{$rel.sex}{/if}
+                                                {if isset($rel)}{$rel.sex}{/if}
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>生日：</label>
+                                            <input class="form-control" name="birthday" id="birthday"
+                                                   value="{if isset($rel)}{$rel.birthday}{/if}">
                                         </div>
                                         <div class="form-group">
                                             <label>班级：</label>
                                             <input class="form-control" name="class" id="class"
-                                                   value="{if $rel}{$rel.class}{/if}">
+                                                   value="{if isset($rel)}{$rel.class}{/if}">
                                         </div>
                                         <div class="form-group">
                                             <label>QQ：</label>
                                             <input class="form-control" name="qq" id="qq"
-                                                   value="{if $rel}{$rel.qq}{/if}">
+                                                   value="{if isset($rel)}{$rel.qq}{/if}">
                                         </div>
                                         <div class="form-group">
                                             <label>电话：</label>
                                             <input class="form-control" name="tel" id="tel"
-                                                   value="{if $rel}{$rel.tel}{/if}">
+                                                   value="{if isset($rel)}{$rel.tel}{/if}">
                                         </div>
                                         <div class="form-group">
                                             <label>邮箱：</label>
                                             <input class="form-control" name="email" id="email"
-                                                   value="{if $rel}{$rel.email}{/if}">
+                                                   value="{if isset($rel)}{$rel.email}{/if}">
                                         </div>
                                         <div class="form-group">
                                             <div class="introduce_wrapper">
                                                 <div class="circle"></div>
                                                 <label>个人介绍：</label>
                                                 <textarea name="introduce" id="introduce" class="form-control" rows="8"
-                                                          autofocus="autofocus">{if $rel}{$rel.introduce}{/if}</textarea>
+                                                          autofocus="autofocus">{if isset($rel)}{$rel.introduce}{/if}</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -109,7 +114,7 @@
                                                 <div class="circle"></div>
                                                 <label>我的寄语：</label>
                                                 <textarea name="message" id="message" class="form-control" rows="8"
-                                                          autofocus="autofocus">{if $rel}{$rel.message}{/if}</textarea>
+                                                          autofocus="autofocus">{if isset($rel)}{$rel.message}{/if}</textarea>
                                             </div>
                                         </div>
                                     </div>

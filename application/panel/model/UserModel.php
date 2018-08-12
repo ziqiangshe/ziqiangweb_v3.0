@@ -48,7 +48,7 @@ class UserModel extends Model
     public function get_the_user($userid)
     {
         $where['id'] = ['=', $userid];
-        $field = ['username, realname, introduce, message, sex, class, 
+        $field = ['username, realname, introduce, message, sex, birthday, class, 
         qq, tel, email, session, department, position, role, status'];
         try {
             $info = $this
