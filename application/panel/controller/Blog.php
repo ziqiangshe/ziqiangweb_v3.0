@@ -66,7 +66,11 @@ class Blog extends Base
         $tag = input('get.tag_id');
         // 按创建时间排序
         $order = ['create_time desc'];
-        $where['tag'] = $tag;
+        if ($tag != 0) {
+            $where['tag'] = $tag;
+        } else {
+            $where['tag'] = true;
+        }
 
         $offset = 0;
         $limit = 10;
@@ -87,10 +91,8 @@ class Blog extends Base
         $response['recordsTotal'] = $count;
         $response['recordsFiltered'] = $count;
         $response['data'] = $rel['data'];
-        $response['errmsg'] = $rel['msg'];
-        $response['inf'] = $aoData;
-        $response['where'] = $where;
-        $response['order_type'] = $order;
+        // 由于数据字段为timestamp与datetime会导致序列化失败
+        // 因此把/thinkphp/library/think/Model.php中line509的formatDateTime中$timestamp默认改为true
         echo json_encode($response);
     }
 }
