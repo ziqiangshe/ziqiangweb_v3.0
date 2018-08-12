@@ -123,5 +123,27 @@ class User extends Base
         $this->assign('rel', $rel['data']);
         return $this->fetch('user/mine');
     }
-
+    
+    /**
+     * 更新个人信息
+     * @param get $get
+     * @return \think\response\Json
+     */
+    public function birth()
+    {
+        $user = new UserModel();
+        $datetemp = $user->field('birthday')->select();
+        $nametemp = $user->field('realname')->select();
+        $i = 0;
+        foreach($datetemp as $v){
+            $date[$i] = intval($v['birthday'][5].$v['birthday'][6].$v['birthday'][8].$v['birthday'][9]) ;
+            $name[$i] = $nametemp[$i]['realname'];
+            $i++;
+        }
+        $data = array(
+            'date' => $date,
+            'name' => $name,
+        );
+        return $data;
+    }
 }
