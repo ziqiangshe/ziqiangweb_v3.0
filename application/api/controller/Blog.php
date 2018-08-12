@@ -13,12 +13,12 @@ use think\Session;
 
 class Blog extends Base
 {
+
     /**
      * 添加新博客
-     * @param Request $request
      * @return \think\response\Json
      */
-    public function add_blog(Request $request)
+    public function add_blog()
     {
         $input_data = input('post.');
         $result = $this->validate($input_data, 'Blog.add_blog');
@@ -44,10 +44,9 @@ class Blog extends Base
 
     /**
      * 编辑更新原博客
-     * @param Request $request
      * @return \think\response\Json
      */
-    public function edit_blog(Request $request)
+    public function edit_blog()
     {
         $input_data = input('post.');
         $result = $this->validate($input_data, 'Blog.edit_blog');
@@ -80,10 +79,8 @@ class Blog extends Base
 
     /**
      * 删除指定id的博客
-     * @param Request $request
-     * @return \think\response\Json
      */
-    public function del_blog(Request $request)
+    public function del_blog()
     {
         $blog_id = input('get.id');
         $panel_user = Session::get('panel_user');
