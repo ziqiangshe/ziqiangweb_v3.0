@@ -60,11 +60,11 @@
                         <div class="panel-heading"> 基本设置 </div>
                         <div class="panel-body">
                             <div class="row">
-                                <form action="__PANEL__/blog/edit_blog">
+                                <form action="">
                                     <!--http://ziqiangshe.applinzi.com/tp5/public/index.php/panel/blog/editblog-->
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input name="id" id="blog_id" value="{if $rel}{$rel.id}{/if}" type="hidden">
+                                            <input name="blog_id" id="blog_id" value="{if $rel}{$rel.id}{/if}" type="hidden">
                                         </div>
                                         <div class="form-group">
                                             <label>文章标题</label>
@@ -74,9 +74,9 @@
                                         <div class="form-group">
                                             <label>文章标签</label>
                                             <select class="form-control" name="tag" id="tag">
-                                                <option value="技术" {if condition="$rel.tag eq '技术'" } selected {/if}>技术</option>
-                                                <option value="经验" {if condition="$rel.tag eq '经验'" } selected {/if}>经验</option>
-                                                <option value="杂谈" {if condition="$rel.tag eq '杂谈'" } selected {/if}>杂谈</option>
+                                                <option value="1" {if condition="$rel.tag eq '1'" } selected {/if}>技术</option>
+                                                <option value="2" {if condition="$rel.tag eq '2'" } selected {/if}>经验</option>
+                                                <option value="3" {if condition="$rel.tag eq '3'" } selected {/if}>杂谈</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -108,19 +108,19 @@
 <script>
     $("button").click(function () {
         $.ajax({
-            url: "__PANEL__/api/edit_blog",
+            url: "__API__/blog/edit_blog",
             type: "post",
             dataType: "json",
             data: {
-                id: $("#blog_id").val(),
-                title: $("#title").val(),
-                tag: $("#tag option:selected").val(),
+                id:      $("#blog_id").val(),
+                title:   $("#title").val(),
+                tag:     $("#tag option:selected").val(),
                 summary: $("#summary").val(),
                 content: UM.getEditor('container').getContent(),
             },
             success: function (data) {
                 if (data.status == 0) {
-                    window.location.reload();
+                    window.location.href = "__PANEL__/blog/index";
                     alert(data.message);
                 } else if (data.status == -1) {
                     alert(data.message);

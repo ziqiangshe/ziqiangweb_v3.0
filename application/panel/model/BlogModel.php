@@ -24,7 +24,7 @@ class BlogModel extends Model
         $where = ['b.id' => $blog_id];
         $join = [['user u', 'b.authorid=u.id']];
         $field = ['b.id, b.title, b.authorid, b.summary, u.realname,
-         u.session, u.position, b.tag, b.content, b.created, b.pageview'];
+         u.session, u.department, u.position, b.tag, b.content, b.create_time, b.pageview'];
         try {
             $info = $this->alias('b')
                 ->join($join)
