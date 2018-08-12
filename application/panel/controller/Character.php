@@ -47,17 +47,4 @@ class Character extends Base
         echo json_encode($response);
     }
 
-    /**
-     * 查看自强人物寄语内容
-     * @param Request $request
-     * @return mixed
-     */
-    public function manage_look_word(Request $request)
-    {
-        $character_id = $request->get('id');
-        $user = new UserModel();
-        $rel = $user->where(['id' => $character_id])->find();
-        $this->assign('rel', $rel);
-        return $this->fetch();
-    }
 }
