@@ -2,21 +2,23 @@
     header("Content-Type:text/html;charset=utf-8");
     error_reporting( E_ERROR | E_WARNING );
     date_default_timezone_set("Asia/chongqing");
-//    include "Uploader.class.php";
-    include "SaeUploader.class.php";
+    include "Uploader.class.php";
+//    include "SaeUploader.class.php";                       // SAE配置文件
     //上传配置
     $config = array(
-        "savePath" => "http://ziqiangshe-ziqiangshe.stor.sinaapp.com/" ,             //存储文件夹
-        "maxSize" => 1000 ,                   //允许的文件最大尺寸，单位KB
+//        "savePath" => "http://ziqiangshe-ziqiangshe.stor.sinaapp.com/" ,             //SAE存储文件夹
+        "savePath" => "../../../upload/" ,             //存储文件夹
+        "maxSize" => 4000 ,                   //允许的文件最大尺寸，单位KB
         "allowFiles" => array( ".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp" )  //允许的文件格式
     );
     //上传文件目录
-    $Path = "http://ziqiangshe-ziqiangshe.stor.sinaapp.com/";
+//    $Path = "http://ziqiangshe-ziqiangshe.stor.sinaapp.com/";    // SAE上传路径
+    $Path = "../../../upload/";
 
     //背景保存在临时目录中
     $config[ "savePath" ] = $Path;
-//    $up = new Uploader( "upfile" , $config );
-    $up = new SaeUploader( "upfile" , $config );
+    $up = new Uploader( "upfile" , $config );
+//    $up = new SaeUploader( "upfile" , $config );     // SAE配置
     $type = $_REQUEST['type'];
     $callback=$_GET['callback'];
 
