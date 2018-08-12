@@ -64,14 +64,14 @@ class Blog extends Base
         $input_data = input('post.aoData');
         $aoData = json_decode($input_data);
         $tag = input('get.tag_id');
-        // 按创建时间排序
-        $order = ['create_time desc'];
         if ($tag != 0) {
             $where['tag'] = $tag;
         } else {
             $where['tag'] = true;
         }
-
+        // 按创建时间排序
+        $order = ['create_time desc'];
+        // 默认起始位置及条目数
         $offset = 0;
         $limit = 10;
         foreach ($aoData as $key => $val) {
