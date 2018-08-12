@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `avatar` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '头像url',
   `introduce` text COMMENT '介绍',
   `message` text CHARACTER SET utf8 COMMENT '寄语',
-  `birthday` varchar(32) CHARACTER SET utf8 DEFAULT NULL,
+  `birthday` datetime DEFAULT NULL,
   `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-未知1-男2-女',
   `class` varchar(40) DEFAULT NULL,
   `qq` varchar(20) DEFAULT NULL,

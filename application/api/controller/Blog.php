@@ -13,12 +13,42 @@ use think\Session;
 
 class Blog extends Base
 {
+
     /**
-     * 添加新博客
-     * @param Request $request
+     * 获取指定tag的博客内容
      * @return \think\response\Json
      */
-    public function add_blog(Request $request)
+    public function get_tag_blog()
+    {
+        // 获取tag、页数、条目数条件
+        $tag = input('get.tag');
+        $offset = input('get.offset');
+        $limit = input('get.limit');
+        $where = [];
+        if ($tag != 0) {
+            $where['tag'] = $tag;
+        }
+        if (!isset($offset)) {
+            $offset = 0;
+        }
+        if (!isset($limit)) {
+            $limit = 10;
+        }
+        // 按创建时间排序
+        $order = ['create_time desc'];
+
+        $blog = new BlogModel();
+        $rel = $blog->get_all_blog($where, $order, $offset, $limit);
+        $rel = change_user_info($rel);
+        return apireturn($rel['code'], $rel['msg'], $rel['data']);
+
+    }
+
+    /**
+     * 添加新博客
+     * @return \think\response\Json
+     */
+    public function add_blog()
     {
         $input_data = input('post.');
         $result = $this->validate($input_data, 'Blog.add_blog');
@@ -44,10 +74,9 @@ class Blog extends Base
 
     /**
      * 编辑更新原博客
-     * @param Request $request
      * @return \think\response\Json
      */
-    public function edit_blog(Request $request)
+    public function edit_blog()
     {
         $input_data = input('post.');
         $result = $this->validate($input_data, 'Blog.edit_blog');
@@ -58,7 +87,7 @@ class Blog extends Base
         $panel_user = Session::get('panel_user', 'ziqiang');
         $author_id = $panel_user['id'];
         $update_time = date("Y-m-d H:i:s", time());
-        $blog_id = $input_data['blog_id'];
+        $blog_id = $input_data['id'];
 
         $blog = new BlogModel();
         // 检查权限-MARK--这里最好也放在Model里面
@@ -80,10 +109,8 @@ class Blog extends Base
 
     /**
      * 删除指定id的博客
-     * @param Request $request
-     * @return \think\response\Json
      */
-    public function del_blog(Request $request)
+    public function del_blog()
     {
         $blog_id = input('get.id');
         $panel_user = Session::get('panel_user');
@@ -98,6 +125,5 @@ class Blog extends Base
         $rel = $blog->del_blog($blog_id);
         MessageBox($rel['msg'], -1);
     }
-
 
 }

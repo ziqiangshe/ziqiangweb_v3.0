@@ -506,7 +506,7 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
      * @param bool  $timestamp 是否进行时间戳转换
      * @return mixed
      */
-    protected function formatDateTime($time, $format, $timestamp = false)
+    protected function formatDateTime($time, $format, $timestamp = true)
     {
         if (false !== strpos($format, '\\')) {
             $time = new $format($time);

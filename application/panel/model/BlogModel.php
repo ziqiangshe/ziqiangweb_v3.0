@@ -24,7 +24,7 @@ class BlogModel extends Model
         $where = ['b.id' => $blog_id];
         $join = [['user u', 'b.authorid=u.id']];
         $field = ['b.id, b.title, b.authorid, b.summary, u.realname,
-         u.session, u.position, b.tag, b.content, b.created, b.pageview'];
+         u.session, u.department, u.position, b.tag, b.content, b.create_time, b.pageview'];
         try {
             $info = $this->alias('b')
                 ->join($join)
@@ -32,12 +32,12 @@ class BlogModel extends Model
                 ->where($where)
                 ->find();
             if ($info === false) {
-                return ['code' => -1, 'msg' => $this->getError(), 'data' => $info];
+                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
             } else {
-                return ['code' => 0, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => '获取成功', 'data' => $info];
             }
         } catch (PDOException $e) {
-            return ['code' => -1, 'msg' => $e->getMessage(), 'data' => ''];
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
 
@@ -63,12 +63,12 @@ class BlogModel extends Model
                 ->limit($offset, $limit)
                 ->select();
             if ($info === false) {
-                return ['code' => -1, 'msg' => $this->getError(), 'data' => $info];
+                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
             } else {
-                return ['code' => 0, 'msg' => 'Success', 'data' => $info];
+                return ['code' => CODE_SUCCESS, 'msg' => '获取成功', 'data' => $info];
             }
         } catch (PDOException $e) {
-            return ['code' => -1, 'msg' => $e->getMessage(), 'data' => ''];
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
 
