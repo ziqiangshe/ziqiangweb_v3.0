@@ -14,6 +14,7 @@ define("CIVILIAN_NAME", "庶民");
 return [
     //模板参数替换
     'view_replace_str'       => array(
+        '__BLOG__'   => '/ziqiangweb_v3.0/act/ziqiangweb-blog/blog-normal/blog/blog-normal.html',
         '__API__'    => '/ziqiangweb_v3.0/public/index.php/api',
         '__PANEL__'  => '/ziqiangweb_v3.0/public/index.php/panel',
         '__CSS__'    => '/ziqiangweb_v3.0/public/static/css',
