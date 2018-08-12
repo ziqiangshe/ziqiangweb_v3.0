@@ -15,6 +15,37 @@ class Blog extends Base
 {
 
     /**
+     * 获取指定tag的博客内容
+     * @return \think\response\Json
+     */
+    public function get_tag_blog()
+    {
+        // 获取tag、页数、条目数条件
+        $tag = input('get.tag');
+        $offset = input('get.offset');
+        $limit = input('get.limit');
+        if ($tag != 0) {
+            $where['tag'] = $tag;
+        } else {
+            $where['tag'] = true;
+        }
+        if (!isset($offset)) {
+            $offset = 0;
+        }
+        if (!isset($limit)) {
+            $limit = 10;
+        }
+        // 按创建时间排序
+        $order = ['create_time desc'];
+
+        $blog = new BlogModel();
+        $rel = $blog->get_all_blog($where, $order, $offset, $limit);
+        $rel = change_user_info($rel);
+        return apireturn($rel['code'], $rel['msg'], $rel['data']);
+
+    }
+
+    /**
      * 添加新博客
      * @return \think\response\Json
      */
@@ -95,6 +126,5 @@ class Blog extends Base
         $rel = $blog->del_blog($blog_id);
         MessageBox($rel['msg'], -1);
     }
-
 
 }
