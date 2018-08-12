@@ -24,10 +24,9 @@ class Blog extends Base
         $tag = input('get.tag');
         $offset = input('get.offset');
         $limit = input('get.limit');
+        $where = [];
         if ($tag != 0) {
             $where['tag'] = $tag;
-        } else {
-            $where['tag'] = true;
         }
         if (!isset($offset)) {
             $offset = 0;
@@ -88,7 +87,7 @@ class Blog extends Base
         $panel_user = Session::get('panel_user', 'ziqiang');
         $author_id = $panel_user['id'];
         $update_time = date("Y-m-d H:i:s", time());
-        $blog_id = $input_data['blog_id'];
+        $blog_id = $input_data['id'];
 
         $blog = new BlogModel();
         // 检查权限-MARK--这里最好也放在Model里面
