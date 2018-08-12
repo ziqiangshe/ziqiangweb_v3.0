@@ -43,20 +43,6 @@ class Blog extends Base
     }
 
     /**
-     * 预览博客界面
-     * @param Request $request
-     * @return mixed
-     */
-    public function look(Request $request)
-    {
-        $blog_id = input('get.id');
-        $blog = new BlogModel();
-        $rel = $blog->get_the_blog($blog_id);
-        $this->assign('rel', $rel['data']);
-        return $this->fetch('blog/look');
-    }
-
-    /**
      * 根据tag_id|order_type获取博客内容
      */
     public function get_blog()
