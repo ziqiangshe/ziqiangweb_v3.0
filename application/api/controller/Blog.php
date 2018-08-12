@@ -41,7 +41,24 @@ class Blog extends Base
         $rel = $blog->get_all_blog($where, $order, $offset, $limit);
         $rel = change_user_info($rel);
         return apireturn($rel['code'], $rel['msg'], $rel['data']);
+    }
 
+    /**
+     * 获取最多浏览的博客
+     * @return \think\response\Json
+     */
+    public function get_page_view_blog()
+    {
+        // 获取前五浏览量的博客
+        $where = [];
+        $offset = 0;
+        $limit = 5;
+        // 按创建时间排序
+        $order = ['pageview desc'];
+        $blog = new BlogModel();
+        $rel = $blog->get_all_blog($where, $order, $offset, $limit);
+        $rel = change_user_info($rel);
+        return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 
     /**
