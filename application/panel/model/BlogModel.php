@@ -24,7 +24,7 @@ class BlogModel extends Model
         $where = ['b.id' => $blog_id];
         $join = [['user u', 'b.authorid=u.id']];
         $field = ['b.id, b.title, b.authorid, b.summary, u.realname,
-         u.session, u.department, u.position, b.tag, b.content, b.create_time, b.pageview'];
+         u.session, u.department, u.position, b.tagid, b.content, b.create_time, b.pageview'];
         try {
             $info = $this->alias('b')
                 ->join($join)
@@ -53,7 +53,7 @@ class BlogModel extends Model
     {
         $join = [['user u', 'b.authorid=u.id']];
         $field = ['b.id, b.title, b.authorid, b.summary, u.sex, u.realname, u.department,
-         u.position, u.role, b.tag, b.content, b.create_time, b.pageview'];
+         u.position, u.role, b.tagid, b.content, b.create_time, b.pageview'];
         try {
             $info = $this->alias('b')
                 ->join($join)

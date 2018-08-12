@@ -52,7 +52,7 @@ class Blog extends Base
         $tag = input('get.tag_id');
         $where = [];
         if ($tag != 0) {
-            $where['tag'] = $tag;
+            $where['tagid'] = $tag;
         }
         // 按创建时间排序
         $order = ['create_time desc'];

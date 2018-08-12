@@ -26,7 +26,7 @@ class Blog extends Base
         $limit = input('get.limit');
         $where = [];
         if ($tag != 0) {
-            $where['tag'] = $tag;
+            $where['tagid'] = $tag;
         }
         if (!isset($offset)) {
             $offset = 0;
@@ -79,7 +79,7 @@ class Blog extends Base
         $blog = new BlogModel();
         $data = array(
             'title'       => $input_data['title'],
-            'tag'         => $input_data['tag'],
+            'tagid'         => $input_data['tag'],
             'summary'     => $input_data['summary'],
             'content'     => $input_data['content'],
             'authorid'    => $author_id,
@@ -114,7 +114,7 @@ class Blog extends Base
         }
         $data = array(
             'title'       => $input_data['title'],
-            'tag'         => $input_data['tag'],
+            'tagid'         => $input_data['tag'],
             'summary'     => $input_data['summary'],
             'content'     => $input_data['content'],
             'authorid'    => $old_author_id,

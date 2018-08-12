@@ -39,8 +39,8 @@ function change_user_info(array $rel) {
             $rel['data']['position'] = $rel['data']['department'] . $rel['data']['position'];
         }
 
-        if (isset($rel['data']['tag'])) {
-            switch ($rel['data']['tag']) {
+        if (isset($rel['data']['tagid'])) {
+            switch ($rel['data']['tagid']) {
                 case 1: $tag_name = "技术";break;
                 case 2: $tag_name = "经验";break;
                 case 3: $tag_name = "杂谈";break;
@@ -72,8 +72,8 @@ function change_user_info(array $rel) {
                 $rel['data'][$key]['position'] = $rel['data'][$key]['department'] . $rel['data'][$key]['position'];
             }
 
-            if (isset($rel['data'][$key]['tag'])) {
-                switch ($rel['data'][$key]['tag']) {
+            if (isset($rel['data'][$key]['tagid'])) {
+                switch ($rel['data'][$key]['tagid']) {
                     case 1: $tag_name = "技术";break;
                     case 2: $tag_name = "经验";break;
                     case 3: $tag_name = "杂谈";break;
