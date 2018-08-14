@@ -71,6 +71,14 @@ class User extends Base
     }
 
     /**
+     * 渲染生日日历界面
+     * @return mixed
+     */
+    public function calendar()
+    {
+        return $this->fetch('user/calendar');
+    }
+    /**
      * 获取所有自强人信息
      * @param Request $request
      */
@@ -125,7 +133,7 @@ class User extends Base
     }
     
     /**
-     * 更新个人信息
+     * 获取生日信息
      * @param get $get
      * @return \think\response\Json
      */

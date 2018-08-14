@@ -151,7 +151,7 @@
         });
         $(".btn-group > button").click(function () {
 //            id = $(this).data("id");
-            location.assign("&ses=" + $(this).data("id"));
+            location.assign("__PANEL__/user/ziqiang&ses=" + $(this).data("id"));
         });
         $(".btn-group > button[data-id={$ses}]").addClass("btn-primary");
     });

@@ -86,27 +86,27 @@ class Base extends Controller
             'child' => array(
                 array(
                     'c' => 'sign',
-                    'a' => 'index?id=1',
+                    'a' => 'index&id=1',
                     'title' => '服务队'
                 ),
                 array(
                     'c' => 'sign',
-                    'a' => 'index?id=2',
+                    'a' => 'index&id=2',
                     'title' => '外联部'
                 ),
                 array(
                     'c' => 'sign',
-                    'a' => 'index?id=3',
+                    'a' => 'index&id=3',
                     'title' => '宣传部'
                 ),
                 array(
                     'c' => 'sign',
-                    'a' => 'index?id=4',
+                    'a' => 'index&id=4',
                     'title' => '办公室'
                 ),
                 array(
                     'c' => 'sign',
-                    'a' => 'index?id=5',
+                    'a' => 'index&id=5',
                     'title' => '策划部'
                 ),
             )
@@ -139,6 +139,11 @@ class Base extends Controller
                     'c' => 'user',
                     'a' => 'ziqiang',
                     'title' => '用户列表'
+                ),
+                array(
+                    'c' => 'user',
+                    'a' => 'calendar',
+                    'title' => '生日日历'
                 ),
             )
         ),
