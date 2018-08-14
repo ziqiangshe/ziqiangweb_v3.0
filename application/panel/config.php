@@ -15,8 +15,8 @@ return [
     //模板参数替换
     'view_replace_str'       => array(
         '__BLOG__'   => '/ziqiangweb_v3.0/act/ziqiangweb-blog/blog-normal/blog/blog-normal.html',
-        '__API__'    => '/ziqiangweb_v3.0/public/index.php/api',
-        '__PANEL__'  => '/ziqiangweb_v3.0/public/index.php/panel',
+        '__API__'    => '/ziqiangweb_v3.0/public/index.php?s=/api',
+        '__PANEL__'  => '/ziqiangweb_v3.0/public/index.php?s=/panel',
         '__CSS__'    => '/ziqiangweb_v3.0/public/static/css',
         '__FONT__'   => '/ziqiangweb_v3.0/public/static/fonts',
         '__JS__'     => '/ziqiangweb_v3.0/public/static/js',

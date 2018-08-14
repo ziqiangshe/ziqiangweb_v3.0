@@ -18,7 +18,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     {foreach $value.child as $key=>$val}
-                    <li><a href="../{$val['c']}/{$val['a']}">{$val.title}</a></li>
+                    <li><a href="index.php?s=/panel/{$val['c']}/{$val['a']}">{$val.title}</a></li>
                     {/foreach}
                 </ul>
             </li>

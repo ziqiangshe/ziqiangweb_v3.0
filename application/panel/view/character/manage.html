@@ -125,9 +125,9 @@
             }, {
                 "mData": "id",
                 "mRender": function (data, type, full) {
-                    return "<a href='__PANEL__/user/look_user?id="          + data + "' target='_self'> 查看 </a> | " +
-                           "<a href='__API__/character/on_character?id="    + data + "' target='_self'> 上架 </a> | " +
-                           "<a href='__API__/character/down_character?id="  + data + "' target='_self'> 下架 </a>";
+                    return "<a href='__PANEL__/user/look_user&id="          + data + "' target='_self'> 查看 </a> | " +
+                           "<a href='__API__/character/on_character&id="    + data + "' target='_self'> 上架 </a> | " +
+                           "<a href='__API__/character/down_character&id="  + data + "' target='_self'> 下架 </a>";
                 }
             }],
             "fnServerData": function (sSource, aoData, fnCallback) {

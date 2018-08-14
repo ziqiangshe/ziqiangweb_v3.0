@@ -6,7 +6,7 @@ use app\index\model\SignModel;
 
 class Sign extends Controller
 {
-    public function contract()
+    public function sign()
     {
         return $this->fetch();
     }
@@ -44,6 +44,40 @@ class Sign extends Controller
             }
             $rel = $item->addsign($data);
             return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+        }
+    }
+    public function index()
+    {
+        $id = input('get.id');
+        $item = new SignModel();
+        switch($id){
+            case 1:
+                $where = 'dept1|dept2 = 服务队';
+                $rel = $item->getsign($where);
+                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                break;
+            case 2:
+                $where = 'dept1|dept2 = 外联部';
+                $rel = $item->getsign($where);
+                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                break;
+            case 3:
+                $where = 'dept1|dept2 = 宣传部';
+                $rel = $item->getsign($where);
+                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                break;
+            case 4:
+                $where = 'dept1|dept2 = 办公室';
+                $rel = $item->getsign($where);
+                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                break;
+            case 5:
+                $where = 'dept1|dept2 = 策划部';
+                $rel = $item->getsign($where);
+                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                break;
+            default:
+                break;
         }
     }
 }

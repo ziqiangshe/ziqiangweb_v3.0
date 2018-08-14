@@ -149,9 +149,9 @@ class Base extends Controller
      */
     protected function _initialize()
     {
-        if (!Session::has('panel_user', 'ziqiang')) {
-            $this->redirect('login/index');
-        }
+        // if (!Session::has('panel_user', 'ziqiang')) {
+        //     $this->redirect('https://ziqiangweb.com/ziqiangweb_v3.0/public/index.php?s=/panel/login/index.html');
+        // }
         $realname = empty(Session::get('panel_user.realname', 'ziqiang'))
             ?'匿名':Session::get('panel_user.realname', 'ziqiang');
         $this->assign('realname', $realname);
