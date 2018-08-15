@@ -110,7 +110,7 @@
                 "bServerSide": true,
                 "bDestroy": true,
                 "bSortCellsTop": true,
-                "sAjaxSource": '__PANEL__/blog/get_blog?tag_id=' + {$tag_id},
+                "sAjaxSource": '__PANEL__/blog/get_blog&tag_id=' + {$tag_id},
                 "aoColumns": [{
                     "mData": "id",
                 }, {
@@ -153,7 +153,7 @@
             });
             $(".btn-group > button").click(function () {
                 //            id = $(this).data("id");
-                location.assign("?tag_id=" + $(this).data("id"));
+                location.assign("__PANEL__/blog/index&tag_id=" + $(this).data("id"));
             });
 
             $(".btn-group > button[data-id={$tag_id}]").addClass("btn-primary");

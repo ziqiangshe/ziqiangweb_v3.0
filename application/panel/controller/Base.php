@@ -16,7 +16,7 @@ class Base extends Controller
     // 后台菜单栏
     public $menu = array(
         array(
-            'c' => 'home',
+            'c' => 'index',
             'a' => 'index',
             'title' => '控制台',
             'icon' => 'dashboard',
@@ -140,12 +140,14 @@ class Base extends Controller
                     'a' => 'ziqiang',
                     'title' => '用户列表'
                 ),
-                array(
-                    'c' => 'user',
-                    'a' => 'calendar',
-                    'title' => '生日日历'
-                ),
             )
+        ),
+        array(
+            'c' => 'user',
+            'a' => 'calendar',
+            'title' => '生日日历',
+            'icon' => '',
+            'child' => array()
         ),
     );
 
@@ -154,9 +156,9 @@ class Base extends Controller
      */
     protected function _initialize()
     {
-        // if (!Session::has('panel_user', 'ziqiang')) {
-        //     $this->redirect('https://ziqiangweb.com/ziqiangweb_v3.0/public/index.php?s=/panel/login/index.html');
-        // }
+        if (!Session::has('panel_user', 'ziqiang')) {
+            $this->redirect('https://ziqiangweb.com/ziqiangweb_v3.0/public/index.php?s=/panel/login/index.html');
+        }
         $realname = empty(Session::get('panel_user.realname', 'ziqiang'))
             ?'匿名':Session::get('panel_user.realname', 'ziqiang');
         $this->assign('realname', $realname);
