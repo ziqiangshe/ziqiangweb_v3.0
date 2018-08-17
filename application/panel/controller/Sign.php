@@ -1,14 +1,16 @@
 <?php
-namespace app\index\controller;
+namespace app\panel\controller;
 use think\Controller;
 use think\Request;
-use app\index\model\SignModel;
+use app\panel\model\SignModel;
 
-class Sign extends Controller
+class Sign extends Base
 {
-    public function sign()
+    public function index()
     {
-        return $this->fetch();
+        $id = input('get.id');
+        $this->assign('id', $id);
+        return $this->fetch('sign/index');
     }
 
     public function addsign()
@@ -43,38 +45,58 @@ class Sign extends Controller
                 return apiReturn(-1, "不要频繁提交", '', 200);
             }
             $rel = $item->addsign($data);
-            return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+            return apireturn($rel['code'], $rel['msg'], $rel['data'], 200);
         }
     }
-    public function index()
+    public function look_sign()
     {
         $id = input('get.id');
         $item = new SignModel();
         switch($id){
             case 1:
-                $where = 'dept1|dept2 = 服务队';
-                $rel = $item->getsign($where);
-                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                $where['dept1|dept2'] = ['like', '%服务队%'];
+                $rel = $item->getsign($where,'','');
+                $count = count($rel['data']);
+                $response['recordsTotal'] = $count;
+                $response['recordsFiltered'] = $count;
+                $response['data'] = $rel['data'];
+                echo json_encode($response);
                 break;
             case 2:
-                $where = 'dept1|dept2 = 外联部';
-                $rel = $item->getsign($where);
-                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                $where['dept1|dept2'] = ['like', '%外联部%'];
+                $rel = $item->getsign($where,'','');
+                $count = count($rel['data']);
+                $response['recordsTotal'] = $count;
+                $response['recordsFiltered'] = $count;
+                $response['data'] = $rel['data'];
+                echo json_encode($response);
                 break;
             case 3:
-                $where = 'dept1|dept2 = 宣传部';
-                $rel = $item->getsign($where);
-                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                $where['dept1|dept2'] = ['like', '%宣传部%'];
+                $rel = $item->getsign($where,'','');
+                $count = count($rel['data']);
+                $response['recordsTotal'] = $count;
+                $response['recordsFiltered'] = $count;
+                $response['data'] = $rel['data'];
+                echo json_encode($response);
                 break;
             case 4:
-                $where = 'dept1|dept2 = 办公室';
-                $rel = $item->getsign($where);
-                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                $where['dept1|dept2'] = ['like', '%办公室%'];
+                $rel = $item->getsign($where,'','');
+                $count = count($rel['data']);
+                $response['recordsTotal'] = $count;
+                $response['recordsFiltered'] = $count;
+                $response['data'] = $rel['data'];
+                echo json_encode($response);
                 break;
             case 5:
-                $where = 'dept1|dept2 = 策划部';
-                $rel = $item->getsign($where);
-                return apiReturn($rel['code'], $rel['msg'], $rel['data'], 200);
+                $where['dept1|dept2'] = ['like', '%策划部%'];
+                $rel = $item->getsign($where,'','');
+                $count = count($rel['data']);
+                $response['recordsTotal'] = $count;
+                $response['recordsFiltered'] = $count;
+                $response['data'] = $rel['data'];
+                echo json_encode($response);
                 break;
             default:
                 break;
