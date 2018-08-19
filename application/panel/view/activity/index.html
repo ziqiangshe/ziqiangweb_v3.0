@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>控制台 - 报名信息</title>
+    <title>控制台 - 活动内容</title>
     <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
     <link href="__CSS__/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="__CSS__/sb-admin-2.css" rel="stylesheet">
@@ -29,13 +29,13 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">报名信息</h1>
+                    <h1 class="page-header">活动内容</h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading"> 报名信息 </div>
+                        <div class="panel-heading"> 活动内容 </div>
                         <div class="panel-body">
                             <!--<div style="text-align:right;"> <button type="button" class="btn btn-success" style="margin-bottom:5px;" onclick="location.href='add.html'" >添加内容</button></div>-->
                             <div class="dataTable_wrapper">
@@ -43,12 +43,9 @@
                                     <thead>
                                         <tr>
                                             <th>编号</th>
-                                            <th>姓名</th>
-                                            <th>性别</th>
-                                            <th>班级</th>
-                                            <th>qq</th>
-                                            <th>电话</th>
-                                            <th>提交时间</th>
+                                            <th>标题</th>
+                                            <th>活动</th>
+                                            <th>创建时间</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
@@ -71,7 +68,7 @@
     <script src="__JS__/sb-admin-2.js"></script>
     <script>
         $(document).ready(function () {
-                    var id = 1;
+            //        var id = 0;
             $('#dataTable').dataTable({
                 "oLanguage": {
                     "sProcessing": "Loading...",
@@ -104,28 +101,31 @@
                 "bServerSide": true,
                 "bDestroy": true,
                 "bSortCellsTop": true,
-                "sAjaxSource": '__PANEL__/sign/look_sign&id='+{$id},
+                "sAjaxSource": '__PANEL__/activity/get',
                 "aoColumns": [{
                     "mData": "id",
                 }, {
                     "mData": "name",
                 }, {
-                    "mData": "sex",
+                    "mData": "tag",
                 }, {
-                    "mData": "class",
+                    "mData": "pageview",
                 }, {
-                    "mData": "qq",
+                    "mData": "realname",
                 }, {
-                    "mData": "tel",
+                    "mData": "position",
                 }, {
                     "mData": "create_time",
                 }, {
                     "mData": "id",
                     "mRender": function (data, type, full) {
-                        return "<a href='__PANEL__/sign/look&id=" + data +
-                            "' target='_self'>查看</a>  " 
-                            
-                    }//需要修改
+                        return "<a href='__PANEL__/blog/edit&id=" + data +
+                            "' target='_self'>编辑</a> | " +
+                            "<a href='__BLOG__" +
+                            "' target='_self'>查看</a> | " +
+                            "<a href='__API__/blog/delblog&id=" + data +
+                            "' target='_self'>删除</a>";
+                    }
                 }],
                 "fnServerData": function (sSource, aoData, fnCallback) {
                     $.ajax({
