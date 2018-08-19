@@ -1,20 +1,20 @@
 <?php
-/**
- * 通用化API接口数据输出
- * @param $status
- * @param $message
- * @param array $data
- * @param int $httpCode
- * @return \think\response\Json
- */
-function apireturn($status, $message, $data=[], $httpCode=200)
-{
-    return json([
-        'status'  => $status,
-        'message' => $message,
-        'data'    => $data,
-    ], $httpCode);
-}
+// /**
+//  * 通用化API接口数据输出
+//  * @param $status
+//  * @param $message
+//  * @param array $data
+//  * @param int $httpCode
+//  * @return \think\response\Json
+//  */
+// function apireturn($status, $message, $data=[], $httpCode=200)
+// {
+//     return json([
+//         'status'  => $status,
+//         'message' => $message,
+//         'data'    => $data,
+//     ], $httpCode);
+// }
 
 /**
  * 返回一个弹窗信息（解决dataTable返回问题）

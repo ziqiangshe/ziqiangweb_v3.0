@@ -51,55 +51,73 @@ class Sign extends Base
     public function look_sign()
     {
         $id = input('get.id');
-        $item = new SignModel();
+        
         switch($id){
             case 1:
                 $where['dept1|dept2'] = ['like', '%服务队%'];
-                $rel = $item->getsign($where,'','');
-                $count = count($rel['data']);
-                $response['recordsTotal'] = $count;
-                $response['recordsFiltered'] = $count;
-                $response['data'] = $rel['data'];
-                echo json_encode($response);
+                $this->get($where);
                 break;
             case 2:
                 $where['dept1|dept2'] = ['like', '%外联部%'];
-                $rel = $item->getsign($where,'','');
-                $count = count($rel['data']);
-                $response['recordsTotal'] = $count;
-                $response['recordsFiltered'] = $count;
-                $response['data'] = $rel['data'];
-                echo json_encode($response);
+                $this->get($where);
                 break;
             case 3:
                 $where['dept1|dept2'] = ['like', '%宣传部%'];
-                $rel = $item->getsign($where,'','');
-                $count = count($rel['data']);
-                $response['recordsTotal'] = $count;
-                $response['recordsFiltered'] = $count;
-                $response['data'] = $rel['data'];
-                echo json_encode($response);
+                $this->get($where);
                 break;
             case 4:
                 $where['dept1|dept2'] = ['like', '%办公室%'];
-                $rel = $item->getsign($where,'','');
-                $count = count($rel['data']);
-                $response['recordsTotal'] = $count;
-                $response['recordsFiltered'] = $count;
-                $response['data'] = $rel['data'];
-                echo json_encode($response);
+                $this->get($where);
                 break;
             case 5:
                 $where['dept1|dept2'] = ['like', '%策划部%'];
-                $rel = $item->getsign($where,'','');
-                $count = count($rel['data']);
-                $response['recordsTotal'] = $count;
-                $response['recordsFiltered'] = $count;
-                $response['data'] = $rel['data'];
-                echo json_encode($response);
+                $this->get($where);
+                break;
+            case 10:
+                $where['dept1|dept2'] = ['like', '%旧书圆新梦%'];
+                $this->get($where);
+                break;
+            case 11:
+                $where['dept1|dept2'] = ['like', '%义务家教%'];
+                $this->get($where);
+                break;
+            case 12:
+                $where['dept1|dept2'] = ['like', '%义务卖报%'];
+                $this->get($where);
+                break;
+            case 13:
+                $where['dept1|dept2'] = ['like', '%网页大赛%'];
+                $this->get($where);
+                break;
+            case 14:
+                $where['dept1|dept2'] = ['like', '%演讲比赛%'];
+                $this->get($where);
+                break;
+            case 15:
+                $where['dept1|dept2'] = ['like', '%义务维修%'];
+                $this->get($where);
                 break;
             default:
                 break;
         }
+    }
+    public function look()
+    {
+        $id = input('get.id');
+        $sign = new SignModel();
+        $rel = $sign->getthesign($id);
+        $rel = change_user_info($rel);
+        $this->assign('rel', $rel['data']);
+        return $this->fetch('sign/look');
+    }
+    private function get($where)
+    {
+        $item = new SignModel();
+        $rel = $item->getsign($where,'','');
+        $count = count($rel['data']);
+        $response['recordsTotal'] = $count;
+        $response['recordsFiltered'] = $count;
+        $response['data'] = $rel['data'];
+        echo json_encode($response);
     }
 }

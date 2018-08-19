@@ -8,14 +8,24 @@
 namespace app\panel\controller;
 
 use app\panel\model\ActivityModel;
-
+use think\Request;
+use think\Session;
 class Activity extends Base
 {
+    public function index()
+    {
+        return $this->fetch('activity/index');
+    }
+
+    public function add()
+    {
+        return $this->fetch('activity/add');
+    }
     /**
      * 活动添加函数
      * @return \json
      */
-    public function add()
+    public function add_activity()
     {
         $data = input('post.');
 

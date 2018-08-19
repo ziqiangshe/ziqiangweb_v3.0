@@ -18,7 +18,7 @@
 function change_user_info(array $rel) {
     if (!is_array($rel['data'])) {
         if (isset($rel['data']['sex'])) {
-            if ($rel['data']['sex'] == 1) {
+            if ($rel['data']['sex'] == 1 || $rel['data']['sex'] == '男') {
                 $rel['data']['sex'] = '男';
             } else {
                 $rel['data']['sex'] = '女';
@@ -51,7 +51,7 @@ function change_user_info(array $rel) {
     } else {
         foreach ($rel['data'] as $key => $val) {
             if (isset($rel['data'][$key]['sex'])) {
-                if ($rel['data'][$key]['sex'] == 1) {
+                if ($rel['data'][$key]['sex'] == 1 || $rel['data'][$key]['sex'] == '男') {
                     $rel['data'][$key]['sex'] = '男';
                 } else {
                     $rel['data'][$key]['sex'] = '女';
@@ -84,4 +84,20 @@ function change_user_info(array $rel) {
         }
     }
     return $rel;
+}
+/**
+ * 通用化API接口数据输出
+ * @param $status
+ * @param $message
+ * @param array $data
+ * @param int $httpCode
+ * @return \think\response\Json
+ */
+function apireturn($status, $message, $data=[], $httpCode=200)
+{
+    return json([
+        'status'  => $status,
+        'message' => $message,
+        'data'    => $data,
+    ], $httpCode);
 }

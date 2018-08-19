@@ -41,40 +41,58 @@ class Base extends Controller
             )
         ),
         array(
-            'c' => 'activity',
+            'c' => 'sign',
             'a' => 'index',
             'title' => '活动入口',
             'icon' => '',
             'child' => array(
                 array(
-                    'c' => 'activity',
-                    'a' => 'books',
+                    'c' => 'sign',
+                    'a' => 'index&id=10',
                     'title' => '旧书圆新梦'
                 ),
                 array(
-                    'c' => 'activity',
-                    'a' => 'teacher',
+                    'c' => 'sign',
+                    'a' => 'index&id=11',
                     'title' => '义务家教'
                 ),
                 array(
-                    'c' => 'activity',
-                    'a' => 'newspaper',
+                    'c' => 'sign',
+                    'a' => 'index&id=12',
                     'title' => '义务卖报'
                 ),
                 array(
-                    'c' => 'activity',
-                    'a' => 'web_contest',
+                    'c' => 'sign',
+                    'a' => 'index&id=13',
                     'title' => '网页大赛'
                 ),
                 array(
-                    'c' => 'activity',
-                    'a' => 'speech_contest',
+                    'c' => 'sign',
+                    'a' => 'index&id=14',
                     'title' => '演讲比赛'
                 ),
                 array(
-                    'c' => 'activity',
-                    'a' => 'repair',
+                    'c' => 'sign',
+                    'a' => 'index&id=15',
                     'title' => '义务维修'
+                ),
+            )
+        ),
+        array(
+            'c' => 'activity',
+            'a' => 'index',
+            'title' => '活动内容',
+            'icon' => '',
+            'child' => array(
+                array(
+                    'c' => 'activity',
+                    'a' => 'add',
+                    'title' => '添加活动'
+                ),
+                array(
+                    'c' => 'activity',
+                    'a' => 'index',
+                    'title' => '活动列表'
                 ),
             )
         ),
