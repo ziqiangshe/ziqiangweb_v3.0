@@ -80,7 +80,7 @@ class Blog extends Base
         $blog = new BlogModel();
         $data = array(
             'title'       => $input_data['title'],
-            'tagid'         => $input_data['tag'],
+            'tagid'       => $input_data['tag'],
             'summary'     => $input_data['summary'],
             'content'     => $input_data['content'],
             'authorid'    => $author_id,
