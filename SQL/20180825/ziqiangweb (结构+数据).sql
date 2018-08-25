@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2018-08-25 05:42:20
+-- Generation Time: 2018-08-25 10:24:57
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -34,7 +34,14 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `activity`
+--
+
+INSERT INTO `activity` (`id`, `name`, `image`, `introduction`, `create_time`, `update_time`) VALUES
+(1, '义务卖报', '', '', '2018-08-25 15:48:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -48,14 +55,24 @@ CREATE TABLE IF NOT EXISTS `activity_sign` (
   `cardno` int(20) NOT NULL COMMENT '卡号（部分同学是长卡号）',
   `name` varchar(30) NOT NULL,
   `sex` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1-男 2-女',
+  `session` int(11) NOT NULL COMMENT '届数',
+  `major` varchar(100) NOT NULL COMMENT '所在学院',
   `class` varchar(20) NOT NULL DEFAULT '',
   `dorm` varchar(30) NOT NULL COMMENT '宿舍',
   `tel` varchar(30) NOT NULL DEFAULT '',
   `qq` varchar(30) NOT NULL DEFAULT '',
   `content` text NOT NULL COMMENT '报名提交内容',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动报名表' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='活动报名表' AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `activity_sign`
+--
+
+INSERT INTO `activity_sign` (`id`, `activity_id`, `cardno`, `name`, `sex`, `session`, `major`, `class`, `dorm`, `tel`, `qq`, `content`, `status`, `create_time`) VALUES
+(1, 1, 248567, '谢泽丰', 1, 15, '计算机', 'zy1502', 'c-549', '13125177868', '616973936', '', 2, '2018-08-25 15:15:44');
 
 -- --------------------------------------------------------
 

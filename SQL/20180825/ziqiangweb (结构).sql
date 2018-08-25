@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2018-08-25 05:41:37
+-- Generation Time: 2018-08-25 10:25:18
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -50,14 +50,17 @@ CREATE TABLE IF NOT EXISTS `activity_sign` (
   `cardno` int(20) NOT NULL COMMENT '卡号（部分同学是长卡号）',
   `name` varchar(30) NOT NULL,
   `sex` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1-男 2-女',
+  `session` int(11) NOT NULL COMMENT '届数',
+  `major` varchar(100) NOT NULL COMMENT '所在学院',
   `class` varchar(20) NOT NULL DEFAULT '',
   `dorm` varchar(30) NOT NULL COMMENT '宿舍',
   `tel` varchar(30) NOT NULL DEFAULT '',
   `qq` varchar(30) NOT NULL DEFAULT '',
   `content` text NOT NULL COMMENT '报名提交内容',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动报名表' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='活动报名表' AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
