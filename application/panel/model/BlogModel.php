@@ -51,12 +51,14 @@ class BlogModel extends Model
      */
     public function get_all_blog($where, $order, $offset, $limit)
     {
-        $join = [['user u', 'b.authorid=u.id']];
+        $join_user = [['user u', 'b.authorid=u.id']];
+        $join_tag = [['blog_tag t', 'b.tagid = t.id']];
         $field = ['b.id, b.title, b.authorid, b.summary, u.sex, u.realname, u.department,
-         u.position, u.role, b.tagid, b.content, b.create_time, b.pageview'];
+         u.position, u.role, t.type, b.tagid, b.content, b.create_time, b.pageview'];
         try {
             $info = $this->alias('b')
-                ->join($join)
+                ->join($join_user)
+                ->join($join_tag)
                 ->field($field)
                 ->where($where)
                 ->order($order)
@@ -71,5 +73,23 @@ class BlogModel extends Model
             return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
+
+//    public function change_blog_tag(array $rel)
+//    {
+//    }
+//
+//    public function get_blog_tag()
+//    {
+//        try {
+//            $info = $this->where(true)->select();
+//            if ($info === false) {
+//                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
+//            } else {
+//                return ['code' => CODE_SUCCESS, 'msg' => '获取成功', 'data' => $info];
+//            }
+//        } catch (PDOException $e) {
+//            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
+//        }
+//    }
 
 }

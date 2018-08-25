@@ -40,15 +40,15 @@ function change_user_info(array $rel)
             $rel['data']['position'] = $rel['data']['department'] . $rel['data']['position'];
         }
 
-        if (isset($rel['data']['tagid'])) {
-            switch ($rel['data']['tagid']) {
-                case 1: $tag_name = "技术";break;
-                case 2: $tag_name = "经验";break;
-                case 3: $tag_name = "杂谈";break;
-                default: $tag_name = "未分类";break;
-            }
-            $rel['data']['tag'] = $tag_name;
-        }
+//        if (isset($rel['data']['tagid'])) {
+//            switch ($rel['data']['tagid']) {
+//                case 1: $tag_name = "技术";break;
+//                case 2: $tag_name = "经验";break;
+//                case 3: $tag_name = "杂谈";break;
+//                default: $tag_name = "未分类";break;
+//            }
+//            $rel['data']['tag'] = $tag_name;
+//        }
 
         if (isset($rel['data']['status'])) {
             if ($rel['data']['status'] == 1) {
@@ -81,15 +81,15 @@ function change_user_info(array $rel)
                 $rel['data'][$key]['position'] = $rel['data'][$key]['department'] . $rel['data'][$key]['position'];
             }
 
-            if (isset($rel['data'][$key]['tagid'])) {
-                switch ($rel['data'][$key]['tagid']) {
-                    case 1: $tag_name = "技术";break;
-                    case 2: $tag_name = "经验";break;
-                    case 3: $tag_name = "杂谈";break;
-                    default: $tag_name = "未分类";break;
-                }
-                $rel['data'][$key]['tag'] = $tag_name;
-            }
+//            if (isset($rel['data'][$key]['tagid'])) {
+//                switch ($rel['data'][$key]['tagid']) {
+//                    case 1: $tag_name = "技术";break;
+//                    case 2: $tag_name = "经验";break;
+//                    case 3: $tag_name = "杂谈";break;
+//                    default: $tag_name = "未分类";break;
+//                }
+//                $rel['data'][$key]['tag'] = $tag_name;
+//            }
 
             // 0-下架 1-上架
             if (isset($rel['data'][$key]['status'])){
