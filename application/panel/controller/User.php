@@ -100,7 +100,7 @@ class User extends Base
             if ($val->name == 'iDisplayLength')
                 $limit = $val->value;
             if ($val->name == 'sSearch' && $val->value != "")
-                $where['title|content'] = ['like', '%' . $val->value . '%'];
+                $where['realname'] = ['like', '%' . $val->value . '%'];
         }
         $user = new UserModel();
         $rel = $user->get_all_user($where, $offset, $limit);
