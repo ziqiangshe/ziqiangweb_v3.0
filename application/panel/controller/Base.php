@@ -41,9 +41,27 @@ class Base extends Controller
             )
         ),
         array(
+            'c' => 'activity',
+            'a' => 'index',
+            'title' => '活动内容',
+            'icon' => '',
+            'child' => array(
+                array(
+                    'c' => 'activity',
+                    'a' => 'add',
+                    'title' => '添加活动'
+                ),
+                array(
+                    'c' => 'activity',
+                    'a' => 'index',
+                    'title' => '活动列表'
+                ),
+            )
+        ),
+        array(
             'c' => 'sign',
             'a' => 'index',
-            'title' => '活动入口',
+            'title' => '活动报名',
             'icon' => '',
             'child' => array(
                 array(
@@ -75,24 +93,6 @@ class Base extends Controller
                     'c' => 'sign',
                     'a' => 'index&id=15',
                     'title' => '义务维修'
-                ),
-            )
-        ),
-        array(
-            'c' => 'activity',
-            'a' => 'index',
-            'title' => '活动内容',
-            'icon' => '',
-            'child' => array(
-                array(
-                    'c' => 'activity',
-                    'a' => 'add',
-                    'title' => '添加活动'
-                ),
-                array(
-                    'c' => 'activity',
-                    'a' => 'index',
-                    'title' => '活动列表'
                 ),
             )
         ),
