@@ -114,7 +114,7 @@
             },  {
                 "mData": "id",
                 "mRender": function (data, type, full) {
-                    return "<a href='__PANEL__/&id=" + data + "' target='_self'> 查看 </a> | " +
+                    return "<a href='__API__/index/todo&tag_id=" + data + "' target='_self'> 查看 </a> | " +
                         "<a href='__API__/blog/change_show_value&is_show=0&tag_id="   + data + "' target='_self'> 展示 </a> | " +
                         "<a href='__API__/blog/change_show_value&is_show=1&tag_id="   + data + "' target='_self'> 隐藏 </a> | " +
                         "<a href='__API__/blog/change_order_value&tag_id="  + data + "' target='_self'> 增加权重 </a>";

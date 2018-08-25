@@ -9,4 +9,9 @@ class Index
     {
         echo "Hello World!";
     }
+
+    public function todo()
+    {
+        MessageBox("功能待添加", -1);
+    }
 }
