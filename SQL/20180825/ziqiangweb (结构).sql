@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2018-08-25 10:25:18
+-- Generation Time: 2018-08-25 11:38:08
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -90,10 +90,13 @@ CREATE TABLE IF NOT EXISTS `blog` (
 CREATE TABLE IF NOT EXISTS `blog_tag` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `type` char(10) CHARACTER SET utf8 NOT NULL COMMENT '博客类型具体名称',
+  `description` text NOT NULL COMMENT '栏目描述',
+  `is_show` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-显示 1-隐藏',
+  `order` int(11) NOT NULL DEFAULT '0' COMMENT '权重',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 

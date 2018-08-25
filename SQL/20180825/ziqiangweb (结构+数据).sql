@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2018-08-25 10:41:32
+-- Generation Time: 2018-08-25 11:38:00
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -119,6 +119,9 @@ INSERT INTO `blog` (`id`, `title`, `pageview`, `authorid`, `tagid`, `summary`, `
 CREATE TABLE IF NOT EXISTS `blog_tag` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `type` char(10) CHARACTER SET utf8 NOT NULL COMMENT '博客类型具体名称',
+  `description` text NOT NULL COMMENT '栏目描述',
+  `is_show` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-显示 1-隐藏',
+  `order` int(11) NOT NULL DEFAULT '0' COMMENT '权重',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -128,10 +131,10 @@ CREATE TABLE IF NOT EXISTS `blog_tag` (
 -- 转存表中的数据 `blog_tag`
 --
 
-INSERT INTO `blog_tag` (`id`, `type`, `create_time`, `update_time`) VALUES
-(1, '技术', '2018-08-25 16:39:31', NULL),
-(2, '经验', '2018-08-25 16:39:57', NULL),
-(3, '杂谈', '2018-08-25 16:40:01', NULL);
+INSERT INTO `blog_tag` (`id`, `type`, `description`, `is_show`, `order`, `create_time`, `update_time`) VALUES
+(1, '技术', '', 0, 2, '2018-08-25 16:39:31', '2018-08-25 17:36:30'),
+(2, '经验', '', 0, 2, '2018-08-25 16:39:57', '2018-08-25 17:36:27'),
+(3, '杂谈', '', 0, 0, '2018-08-25 16:40:01', NULL);
 
 -- --------------------------------------------------------
 
