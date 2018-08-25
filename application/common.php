@@ -48,6 +48,14 @@ function change_user_info(array $rel) {
             }
             $rel['data']['tag'] = $tag_name;
         }
+
+        if (isset($rel['data']['status'])) {
+            if ($rel['data']['status'] == 1) {
+                $rel['data']['status'] = '已上架';
+            } else {
+                $rel['data']['status'] = '未上架';
+            }
+        }
     } else {
         foreach ($rel['data'] as $key => $val) {
             if (isset($rel['data'][$key]['sex'])) {
@@ -80,6 +88,15 @@ function change_user_info(array $rel) {
                     default: $tag_name = "未分类";break;
                 }
                 $rel['data'][$key]['tag'] = $tag_name;
+            }
+
+            // 0-下架 1-上架
+            if (isset($rel['data'][$key]['status'])){
+                if ($rel['data'][$key]['status'] == 1) {
+                    $rel['data'][$key]['status'] = '已上架';
+                } else {
+                    $rel['data'][$key]['status'] = '未上架';
+                }
             }
         }
     }
