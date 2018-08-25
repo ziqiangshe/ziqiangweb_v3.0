@@ -29,18 +29,23 @@ class Character extends Base
      */
     public function get_message()
     {
-        $user = new UserModel();
+        $input_data = input('post.aoData');
+        $aoData = json_decode($input_data);
+        $offset = 0;
+        $limit = 10;
         $where = [];
-        $rel['data'] = $user->where($where)->select();
-        $count = count($user->where($where)->select());
-        // 0-下架 1-上架
-        foreach ($rel['data'] as $key => $val) {
-            if ($rel['data'][$key]['status'] == 1) {
-                $rel['data'][$key]['status'] = '已上架';
-            } else {
-                $rel['data'][$key]['status'] = '未上架';
-            }
+        foreach ($aoData as $key => $val) {
+            if ($val->name == 'iDisplayStart')
+                $offset = $val->value;
+            if ($val->name == 'iDisplayLength')
+                $limit = $val->value;
+            if ($val->name == 'sSearch' && $val->value != "")
+                $where['realname'] = ['like', '%' . $val->value . '%'];
         }
+        $user = new UserModel();
+        $rel = $user->get_all_user($where, $offset, $limit);
+        $rel = change_user_info($rel);
+        $count = count($user->where($where)->select());
         $response['recordsTotal'] = $count;
         $response['recordsFiltered'] = $count;
         $response['data'] = $rel['data'];
