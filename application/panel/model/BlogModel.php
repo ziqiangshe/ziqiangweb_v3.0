@@ -51,6 +51,7 @@ class BlogModel extends Model
      */
     public function get_all_blog($where, $order, $offset, $limit)
     {
+        $where['is_show'] = 0;
         $join_user = [['user u', 'b.authorid=u.id']];
         $join_tag = [['blog_tag t', 'b.tagid = t.id']];
         $field = ['b.id, b.title, b.authorid, b.summary, u.sex, u.realname, u.department,

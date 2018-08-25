@@ -23,12 +23,15 @@ class BlogModel extends Model
      */
     public function get_all_blog($where, $order, $offset, $limit)
     {
-        $join = [['user u', 'b.authorid=u.id']];
+        $where['is_show'] = 0;
+        $join_user = [['user u', 'b.authorid=u.id']];
+        $join_tag = [['blog_tag t', 'b.tagid = t.id']];
         $field = ['b.id, b.title, b.authorid, b.summary, u.session, u.sex, u.realname, u.department,
-         u.position, u.role, b.tagid, b.content, b.create_time, b.pageview'];
+         u.position, u.role, t.type, b.tagid, b.content, b.create_time, b.pageview'];
         try {
             $info = $this->alias('b')
-                ->join($join)
+                ->join($join_user)
+                ->join($join_tag)
                 ->field($field)
                 ->where($where)
                 ->order($order)
