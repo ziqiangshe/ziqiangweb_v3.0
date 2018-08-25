@@ -34,6 +34,7 @@ class Sign extends Base
             'create_time' => $created,
             'update_time' => $created
         );
+        $finish = true;
         if($finish){
             return apiReturn(-1, "报名已经结束", '', 200);
         }
@@ -119,5 +120,39 @@ class Sign extends Base
         $response['recordsFiltered'] = $count;
         $response['data'] = $rel['data'];
         echo json_encode($response);
+    }
+
+    /****************************活动报名*********************************/
+    public function activity_sign() {
+        $input_data = input('post.aoData');
+        $aoData = json_decode($input_data);
+        $activity_id = input('get.activity_id');
+        $offset = 0;
+        $limit = 10;
+        if ($activity_id == 0) {
+            $where = [];
+        } else {
+            $where['activity_id'] = ['=', $activity_id];
+        }
+        foreach ($aoData as $key => $val) {
+            if ($val->name == 'iDisplayStart')
+                $offset = $val->value;
+            if ($val->name == 'iDisplayLength')
+                $limit = $val->value;
+            if ($val->name == 'sSearch' && $val->value != "")
+                $where['name'] = ['like', '%' . $val->value . '%'];
+        }
+        $user = new SignModel();
+        $rel = $user->get_all_activity_sign($where, $offset, $limit);
+        $rel = change_user_info($rel);
+        $count = count($user->where($where)->select());
+        $response['recordsTotal'] = $count;
+        $response['recordsFiltered'] = $count;
+        $response['data'] = $rel['data'];
+        echo json_encode($response);
+    }
+
+    public function activity_look() {
+
     }
 }

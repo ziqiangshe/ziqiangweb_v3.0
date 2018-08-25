@@ -2,8 +2,11 @@
 //配置文件
 define("VALIDATE_PASS", true);
 define("VALIDATE_ERROR", false);
+
 define("CODE_SUCCESS", 0);
 define("CODE_ERROR", -1);
+define("CODE_PARAM_ERROR", -2);
+
 define("SUPER_ADMIN", 2);
 define("SUPER_ADMIN_NAME", "大狗官");
 define("GENERAL_ADMIN", 1);

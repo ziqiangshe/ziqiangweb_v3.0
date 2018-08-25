@@ -2,14 +2,26 @@
 //配置文件
 define("VALIDATE_PASS", true);
 define("VALIDATE_ERROR", false);
+
 define("CODE_SUCCESS", 0);
 define("CODE_ERROR", -1);
+define("CODE_PARAM_ERROR", -2);
+
 define("SUPER_ADMIN", 2);
 define("SUPER_ADMIN_NAME", "大狗官");
 define("GENERAL_ADMIN", 1);
 define("GENERAL_ADMIN_NAME", "狗官");
 define("CIVILIAN", 0);
 define("CIVILIAN_NAME", "庶民");
+
+define("MOVE_AVATAR", 'upload/avatar/');
+define("GET_AVATAR", 'http://localhost/ziqiangweb_v3.0/public/upload/avatar/');
+
+define("MOVE_ACTIVITY", 'upload/activity/');
+define("GET_ACTIVITY", 'http://localhost/ziqiangweb_v3.0/public/upload/activity/');
+
+define("MOVE_PHOTO", 'upload/photo/');
+define("GET_PHOTO", 'http://localhost/ziqiangweb_v3.0/public/upload/photo/');
 
 return [
     //模板参数替换

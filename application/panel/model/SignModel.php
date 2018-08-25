@@ -81,4 +81,26 @@ class SignModel extends Model
             return ['code' => -1, 'msg' => $e->getMessage(), 'data' => ''];
         }
     }
+
+    /**
+     * 查询报名信息
+     * @param $where
+     * @param $offset
+     * @param $limit
+     * @return array
+     */
+    public function get_all_activity_sign($where, $offset, $limit) {
+        try {
+            $info = $this->where($where)
+                ->limit($offset, $limit)
+                ->select();
+            if($info === false){
+                return ['code' => CODE_ERROR,'msg' => '返回值异常','data' => $this->getError()];
+            } else {
+                return ['code' => CODE_SUCCESS, 'msg' => '获取成功', 'data' => $info];
+            }
+        } catch(PDOException $e){
+            return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
+        }
+    }
 }
