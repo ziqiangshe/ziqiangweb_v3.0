@@ -174,7 +174,7 @@ class JWT
     }
 
     /**
-     * Sign a string with a given key and algorithm.
+     * activitysign a string with a given key and algorithm.
      *
      * @param string            $msg    The message to sign
      * @param string|resource   $key    The secret key

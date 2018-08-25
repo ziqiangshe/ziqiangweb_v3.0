@@ -41,66 +41,85 @@
                                 <div class="form-group">
                                     <div class="name_wrapper">
                                         <div class="circle"></div>
+                                        <label>报名活动：</label>
+                                        <strong>{if isset($activity_name)}{$activity_name}{/if}</strong>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="name_wrapper">
+                                        <div class="circle"></div>
+                                        <label>当前状态：</label>
+                                        {if isset($rel)}{$rel.status}{/if}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="name_wrapper">
+                                        <div class="circle"></div>
                                         <label>姓名：</label>
-                                        {if $rel}{$rel.name}{/if}
+                                        {if isset($rel)}{$rel.name}{/if}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="name_wrapper">
+                                        <div class="circle"></div>
+                                        <label>卡号：</label>
+                                        {if isset($rel)}{$rel.cardno}{/if}
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="sex_wrapper">
                                         <div class="circle"></div>
                                         <label>性别：</label>
-                                        {if $rel}{$rel.sex}{/if}
+                                        {if isset($rel)}{$rel.sex}{/if}
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="grade_wrapper">
                                         <div class="circle"></div>
-                                        <label>第一志愿：</label>
-                                        {if $rel}{$rel.dept1}{/if}
+                                        <label>届数：</label>
+                                        {if isset($rel)}{$rel.session}{/if}
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="grade_wrapper">
                                         <div class="circle"></div>
-                                        <label>第二志愿：</label>
-                                        {if $rel}{$rel.dept2}{/if}
+                                        <label>专业：</label>
+                                        {if isset($rel)}{$rel.major}{/if}
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="class_wrapper">
                                         <div class="circle"></div>
                                         <label>班级：</label>
-                                        {if $rel}{$rel.class}{/if}
+                                        {if isset($rel)}{$rel.class}{/if}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="qq_wrapper">
+                                    <div class="phone_wrapper">
                                         <div class="circle"></div>
-                                        <label>QQ：</label>
-                                        {if $rel}{$rel.qq}{/if}
+                                        <label>宿舍：</label>
+                                        {if isset($rel)}{$rel.dorm}{/if}
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="phone_wrapper">
                                         <div class="circle"></div>
                                         <label>电话：</label>
-                                        {if $rel}{$rel.tel}{/if}
+                                        {if isset($rel)}{$rel.tel}{/if}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="dorm_wrapper">
+                                    <div class="qq_wrapper">
                                         <div class="circle"></div>
-                                        <label>宿舍：</label>
-                                        {if $rel}{$rel.dorm}{/if}
+                                        <label>QQ：</label>
+                                        {if isset($rel)}{$rel.qq}{/if}
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <div class="introduce_wrapper">
                                         <div class="circle"></div>
-                                        <label>简介：</label>
-                                        {if $rel}{$rel.content}{/if}
+                                        <label>内容：</label>
+                                        {if isset($rel)}{$rel.content}{/if}
                                     </div>
                                 </div>
                             </div>
@@ -109,13 +128,11 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
-<script src="__JS__/jquery-1.11.0.js"></script>
-<script src="__JS__/bootstrap.min.js"></script>
-<script src="__JS__/plugins/metisMenu/metisMenu.min.js"></script>
-<script src="__JS__/sb-admin-2.js"></script>
+        <script src="__JS__/jquery-1.11.0.js"></script>
+        <script src="__JS__/bootstrap.min.js"></script>
+        <script src="__JS__/plugins/metisMenu/metisMenu.min.js"></script>
+        <script src="__JS__/sb-admin-2.js"></script>
 </body>
 </html>

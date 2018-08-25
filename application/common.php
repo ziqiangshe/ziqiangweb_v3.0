@@ -15,7 +15,8 @@
  * @param array $rel
  * @return array
  */
-function change_user_info(array $rel) {
+function change_user_info(array $rel)
+{
     if (!is_array($rel['data'])) {
         if (isset($rel['data']['sex'])) {
             if ($rel['data']['sex'] == 1 || $rel['data']['sex'] == '男') {
@@ -96,6 +97,59 @@ function change_user_info(array $rel) {
                     $rel['data'][$key]['status'] = '已上架';
                 } else {
                     $rel['data'][$key]['status'] = '未上架';
+                }
+            }
+        }
+    }
+    return $rel;
+}
+
+/**
+ * 活动报名信息格式化
+ * @param array $rel
+ * @return array
+ */
+function change_activity_sign_info(array $rel) {
+    if (!is_array($rel['data'])) {
+
+        if (isset($rel['data']['sex'])) {
+            if ($rel['data']['sex'] == 1 || $rel['data']['sex'] == '男') {
+                $rel['data']['sex'] = '男';
+            } else {
+                $rel['data']['sex'] = '女';
+            }
+        }
+
+        if (isset($rel['data']['status'])) {
+            if ($rel['data']['status'] == 0) {
+                $rel['data']['status'] = '待处理';
+            } elseif ($rel['data']['status'] == 1) {
+                $rel['data']['status'] = '通过';
+            } elseif ($rel['data']['status'] == 2) {
+                $rel['data']['status'] = '拒绝';
+            } else {
+                $rel['data']['status'] = '未知状态';
+            }
+        }
+    } else {
+        foreach ($rel['data'] as $key => $val) {
+            if (isset($rel['data'][$key]['sex'])) {
+                if ($rel['data'][$key]['sex'] == 1 || $rel['data'][$key]['sex'] == '男') {
+                    $rel['data'][$key]['sex'] = '男';
+                } else {
+                    $rel['data'][$key]['sex'] = '女';
+                }
+            }
+
+            if (isset($rel['data'][$key]['status'])){
+                if ($rel['data'][$key]['status'] == 0) {
+                    $rel['data'][$key]['status'] = '待处理';
+                } elseif ($rel['data'][$key]['status'] == 1) {
+                    $rel['data'][$key]['status'] = '通过';
+                } elseif ($rel['data'][$key]['status'] == 2) {
+                    $rel['data'][$key]['status'] = '拒绝';
+                } else {
+                    $rel['data'][$key]['status'] = '未知状态';
                 }
             }
         }

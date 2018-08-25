@@ -10,7 +10,7 @@ namespace app\common\validate;
 
 use think\Validate;
 
-class Sign extends Validate
+class Activitysign extends Validate
 {
     // 提交规则，|号之间不能加多余符号，包括空格
     protected $rule = [

@@ -12,7 +12,7 @@ use app\api\model\UserModel;
 use think\Request;
 use think\Session;
 
-class Sign extends Base
+class activitysign extends Base
 {
     /**
      * 提交报名信息
@@ -21,7 +21,7 @@ class Sign extends Base
     public function create_activity_sign()
     {
         $input_data = input('post.');
-        $result = $this->validate($input_data, 'Sign.create_activity_sign');
+        $result = $this->validate($input_data, 'activitysign.create_activity_sign');
         if ($result !== VALIDATE_PASS) {
             // 验证失败 输出错误信息
             return apireturn(CODE_PARAM_ERROR, $result, '');
@@ -66,14 +66,13 @@ class Sign extends Base
 
     /**
      * 编辑活动报名信息（状态）
-     * @return \think\response\Json
      */
     public function edit_activity_sign() {
-        $input_data = input('post.');
-        $result = $this->validate($input_data, 'Sign.edit_activity_sign');
+        $input_data = input('get.');
+        $result = $this->validate($input_data, 'activitysign.edit_activity_sign');
         if ($result !== VALIDATE_PASS) {
             // 验证失败 输出错误信息
-            return apireturn(CODE_PARAM_ERROR, $result, '');
+            MessageBox($result, -1);return;
         }
         $id = $input_data['id'];
         $data = array(
@@ -81,11 +80,11 @@ class Sign extends Base
         );
         // 检查权限
         $panel_user = Session::get('panel_user', 'ziqiang');
-        if ($panel_user['role'] < 2) {
-            return apireturn(CODE_ERROR, '权限不足，操作失败', '');
+        if ($panel_user['role'] < 1) {
+            MessageBox("权限不足，操作失败", -1);return;
         }
         $activity_sign = new ActivitySignModel();
         $rel = $activity_sign->update_activity_sign($id, $data);
-        return apireturn($rel['code'], $rel['msg'], $rel['data']);
+        MessageBox($rel['msg'], -1);return;
     }
 }

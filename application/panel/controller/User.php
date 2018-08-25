@@ -90,7 +90,6 @@ class User extends Base
     }
     /**
      * 获取所有自强人信息
-     * @param Request $request
      */
     public function get_all_user()
     {

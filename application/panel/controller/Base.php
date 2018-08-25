@@ -65,33 +65,33 @@ class Base extends Controller
             'icon' => '',
             'child' => array(
                 array(
-                    'c' => 'sign',
-                    'a' => 'index&id=10',
+                    'c' => 'activitySign',
+                    'a' => 'index&activity_id=1',
                     'title' => '旧书圆新梦'
                 ),
                 array(
-                    'c' => 'sign',
-                    'a' => 'index&id=11',
+                    'c' => 'activitySign',
+                    'a' => 'index&activity_id=2',
                     'title' => '义务家教'
                 ),
                 array(
-                    'c' => 'sign',
-                    'a' => 'index&id=12',
+                    'c' => 'activitySign',
+                    'a' => 'index&activity_id=3',
                     'title' => '义务卖报'
                 ),
                 array(
-                    'c' => 'sign',
-                    'a' => 'index&id=13',
+                    'c' => 'activitySign',
+                    'a' => 'index&activity_id=4',
                     'title' => '网页大赛'
                 ),
                 array(
-                    'c' => 'sign',
-                    'a' => 'index&id=14',
+                    'c' => 'activitySign',
+                    'a' => 'index&activity_id=4',
                     'title' => '演讲比赛'
                 ),
                 array(
-                    'c' => 'sign',
-                    'a' => 'index&id=15',
+                    'c' => 'activitySign',
+                    'a' => 'index&activity_id=5',
                     'title' => '义务维修'
                 ),
             )

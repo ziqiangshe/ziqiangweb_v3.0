@@ -24,7 +24,7 @@ class Character extends Base
         $user = new CharacterModel();
         $panel_user = Session::get('panel_user', 'ziqiang');
         if ($panel_user['role'] < 1) {
-            MessageBox('权限不足，操作失败', -1);
+            MessageBox('权限不足，操作失败', -1);return;
         }
         $rel = $user->on_character($id);
         MessageBox($rel['msg'], -1);
@@ -41,7 +41,7 @@ class Character extends Base
         $user = new CharacterModel();
         $panel_user = Session::get('panel_user', 'ziqiang');
         if ($panel_user['role'] < 1) {
-            MessageBox('权限不足，操作失败', -1);
+            MessageBox('权限不足，操作失败', -1);return;
         }
         $rel = $user->down_character($id);
         MessageBox($rel['msg'], -1);

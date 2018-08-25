@@ -106,7 +106,7 @@ class User extends Base
         // 检查权限
         $panel_user = Session::get('panel_user', 'ziqiang');
         if ($panel_user['role'] < 1) {
-            MessageBox('权限不足，操作失败', -1);
+            MessageBox('权限不足，操作失败', -1);return;
         }
         $user = new UserModel();
         $rel = $user->del_user($user_id);
