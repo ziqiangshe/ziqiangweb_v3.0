@@ -155,6 +155,11 @@ class Base extends Controller
                 ),
                 array(
                     'c' => 'user',
+                    'a' => 'upload_avatar',
+                    'title' => '头像上传'
+                ),
+                array(
+                    'c' => 'user',
                     'a' => 'ziqiang',
                     'title' => '用户列表'
                 ),

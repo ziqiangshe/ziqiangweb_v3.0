@@ -17,6 +17,16 @@ class User extends Base
 {
     /****************************用户管理*********************************/
 
+    public function upload_avatar()
+    {
+        $panel_user = Session::get('panel_user', 'ziqiang');
+        $user_id = $panel_user['id'];
+        $user = new UserModel();
+        $rel = $user->field("avatar")->where(['id' => $user_id])->find();
+        $this->assign('rel', $rel);
+        return $this->fetch('user/upload_avatar');
+    }
+
     /**
      * 获取届数并渲染用户界面
      * @return mixed

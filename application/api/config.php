@@ -11,6 +11,9 @@ define("GENERAL_ADMIN_NAME", "狗官");
 define("CIVILIAN", 0);
 define("CIVILIAN_NAME", "庶民");
 
+define("MOVE_AVATAR", 'upload/avatar/');
+define("GET_AVATAR", 'http://localhost/ziqiangweb_v3.0/public/upload/avatar/');
+
 return [
     //模板参数替换
     'view_replace_str'       => array(
