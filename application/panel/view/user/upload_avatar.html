@@ -5,8 +5,8 @@
     <title>上传头像</title>
 </head>
 <body>
-<h1>当前头像url</h1>
-{if $rel}{$rel.avatar}{/if}
+<h1>当前头像</h1>
+<img src="{if $rel}{$rel.avatar}{/if}" height="50" width="50">
 <h1>上传头像</h1>
 <form method="post" enctype="multipart/form-data" class="form" action="__API__/upload/upload_avatar">
     选择文件：<input type="file" class="file" name="avatar"><br/>

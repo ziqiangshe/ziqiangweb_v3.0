@@ -14,6 +14,12 @@ define("CIVILIAN_NAME", "庶民");
 define("MOVE_AVATAR", 'upload/avatar/');
 define("GET_AVATAR", 'http://localhost/ziqiangweb_v3.0/public/upload/avatar/');
 
+define("MOVE_ACTIVITY", 'upload/activity/');
+define("GET_ACTIVITY", 'http://localhost/ziqiangweb_v3.0/public/upload/activity/');
+
+define("MOVE_PHOTO", 'upload/photo/');
+define("GET_PHOTO", 'http://localhost/ziqiangweb_v3.0/public/upload/photo/');
+
 return [
     //模板参数替换
     'view_replace_str'       => array(
