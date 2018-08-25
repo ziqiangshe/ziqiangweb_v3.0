@@ -87,11 +87,10 @@
             type: "post",
             dataType: "json",
             data: {
-                type:   $("#username").val(),
-                decription:   $("#password").val(),
-                realname:     $("#realname").val(),
-                is_show:      $("#sex option:selected").val(),
-                order:        $("#session option:selected").val()
+                type:         $("#type").val(),
+                decription:   $("#decription").val(),
+                is_show:      $("#is_show option:selected").val(),
+                order:        $("#order").val()
             },
             success: function (data) {
                 if (data.status == 0) {

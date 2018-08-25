@@ -53,4 +53,23 @@ class BlogtagModel extends Model
             return ['code' => CODE_ERROR,'msg' => '操作数据库异常','data' => $e->getMessage()];
         }
     }
+
+    /**
+     * 新建新的标签
+     * @param $data
+     * @return array
+     */
+    public function create_blog_tag($data)
+    {
+        try {
+            $info = $this->strict(false)->insertGetId($data);
+            if ($info === false) {
+                return ['code' => CODE_ERROR, 'msg' => '返回值异常', 'data' => $this->getError()];
+            } else {
+                return ['code' => CODE_SUCCESS, 'msg' => '添加成功', 'data' => $info];
+            }
+        } catch (PDOException $e) {
+            return ['code' => CODE_ERROR, 'msg' => '操作数据库异常', 'data' => $e->getMessage()];
+        }
+    }
 }

@@ -184,8 +184,39 @@ class Blog extends Base
         MessageBox($rel['msg'], -1);
     }
 
+    /**
+     * 创建新的博客标签
+     * @return \think\response\Json
+     */
     public function create_blog_tag()
     {
-        
+        $input_data = input('post.');
+        $result = $this->validate($input_data, 'Blogtag.create_blog_tag');
+        if ($result !== VALIDATE_PASS) {
+            // 验证失败 输出错误信息
+            return apireturn(CODE_ERROR, $result, '');
+        }
+
+        // 检查权限
+        $panel_user = Session::get('panel_user', 'ziqiang');
+        if ($panel_user['role'] < 1) {
+            return apireturn(-1, '权限不足，操作失败', '');
+        }
+
+        $type        = $input_data['type'];
+        $is_show     = $input_data['is_show'];
+        $order       = $input_data['order'];
+        $description = empty($input_data['description'])?"":$input_data['description'];
+
+        $data = array(
+            'type'        => $type,
+            'is_show'     =>$is_show,
+            'order'       => $order,
+            'description' => $description,
+        );
+
+        $blog_tag = new BlogtagModel();
+        $rel = $blog_tag->create_blog_tag($data);
+        return apireturn($rel['code'], $rel['msg'], $rel['data']);
     }
 }

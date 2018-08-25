@@ -32,7 +32,7 @@ class Blogtag extends Validate
 
     // 场景验证
     protected $scene = [
-        'add_blog_tag'      =>  ['type', 'is_show', 'order'],
+        'create_blog_tag'      =>  ['type', 'is_show', 'order'],
     ];
 
 }
