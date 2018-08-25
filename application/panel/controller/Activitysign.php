@@ -80,7 +80,4 @@ class Activitysign extends Base
     }
 
 
-    public function activity_look() {
-
-    }
 }

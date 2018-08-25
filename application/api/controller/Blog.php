@@ -8,6 +8,7 @@
 namespace app\api\controller;
 
 use app\api\model\BlogModel;
+use app\api\model\BlogtagModel;
 use think\Request;
 use think\Session;
 
@@ -143,4 +144,43 @@ class Blog extends Base
         MessageBox($rel['msg'], -1);
     }
 
+    /****************************博客标签*********************************/
+
+    /**
+     * 更新展示字段
+     */
+    public function change_show_value()
+    {
+        $tag_id = input('get.tag_id');
+        $is_show = input('get.is_show');
+
+        // 检查权限
+        $panel_user = Session::get('panel_user', 'ziqiang');
+        if ($panel_user['role'] < 1) {
+            MessageBox("权限不足，操作失败", -1);return;
+        }
+
+        $blog_tag = new BlogtagModel();
+        $rel = $blog_tag->change_show_value($tag_id, $is_show);
+        MessageBox($rel['msg'], -1);
+    }
+
+    /**
+     * 增加权重
+     */
+    public function change_order_value()
+    {
+        $tag_id = input('get.tag_id');
+        $inc = 1;
+
+        // 检查权限
+        $panel_user = Session::get('panel_user', 'ziqiang');
+        if ($panel_user['role'] < 1) {
+            MessageBox("权限不足，操作失败", -1);return;
+        }
+
+        $blog_tag = new BlogtagModel();
+        $rel = $blog_tag->change_order_value($tag_id, $inc);
+        MessageBox($rel['msg'], -1);
+    }
 }

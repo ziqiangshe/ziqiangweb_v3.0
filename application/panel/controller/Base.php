@@ -30,6 +30,11 @@ class Base extends Controller
             'child' => array(
                 array(
                     'c' => 'blog',
+                    'a' => 'blog_tag',
+                    'title' => '博客标签'
+                ),
+                array(
+                    'c' => 'blog',
                     'a' => 'add',
                     'title' => '添加博客'
                 ),
