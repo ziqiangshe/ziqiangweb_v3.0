@@ -183,4 +183,9 @@ class Blog extends Base
         $rel = $blog_tag->change_order_value($tag_id, $inc);
         MessageBox($rel['msg'], -1);
     }
+
+    public function create_blog_tag()
+    {
+        
+    }
 }
