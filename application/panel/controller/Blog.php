@@ -90,6 +90,11 @@ class Blog extends Base
         return $this->fetch('blog/blog_tag');
     }
 
+    public function add_tag()
+    {
+        return $this->fetch('blog/add_tag');
+    }
+
     /**
      * 获取所有博客标签
      */
