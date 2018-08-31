@@ -76,31 +76,23 @@ p{
 	display:inline-block;
 	margin: 10px;
 	color: #000;
-	background:#fff;
-	background: rgba(255,255,255, 0.5);
-	-webkit-border-radius: 10px;
-            border-radius: 10px;
-}
-#menu li.active{
-	background:#666;
-	background: rgba(0,0,0, 0.5);
-	color: #fff;
 }
 #menu li a{
 	text-decoration:none;
-	color: #000;
+	color: #fff;
 }
 #menu li.active a:hover{
-	color: #000;
-}
-#menu li:hover{
-	background: rgba(255,255,255, 0.8);
+	color: #fff;
 }
 #menu li a,
 #menu li.active a{
 	padding: 9px 18px;
 	display:block;
 }
+#menu li.active a{
+	font-weight:bold;
+}
+
 #menu li.active a{
 	color: #fff;
 }

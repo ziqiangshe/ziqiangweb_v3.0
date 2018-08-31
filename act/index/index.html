@@ -10,101 +10,405 @@
 	<script type="text/javascript" src="../static/js/fullpage.js"></script>
 	<style>
 
-	/* Style for our header texts
-	* --------------------------------------- */
+	body {
+		font-family:FZLanTingHei-EL-GBK,"Open Sans","Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,"WenQuanYi Micro Hei",Dengxian,Arial,SimSun,sans-serif;
+		color:#fff;
+	}
+	html{
+		font-size:100%;
+	}
+	#menu {
+		width:800px;
+		position: fixed;
+		float:right;
+		right: 20px;
+		z-index: 70;
+		-webkit-font-smoothing: antialiased;
+		-moz-font-smoothing: antialiased;
+		letter-spacing: 1px;
+		font-size: 1.1em;
+		box-sizing: border-box;
+	}
+	#menu li a{
+		display: inline-block;
+		margin: 10px 0;
+		position: relative;
+	}
+	#menu li.active a:after {
+		content: '';
+		margin: 0 1.1em 0 1.1em;
+		height: 2px;
+		background: #fff;
+		display: block;
+		position: absolute;
+		bottom: -6px;
+		left: 0;
+		right: 0;
+		display: block;
+	}
+	#slide1 h1,#slide7 h1{
+		font-size:5em;
+	}
+	#slide1 p,#slide7 p{
+		font-size:2em;
+	}
+	#slide1 h1:after ,#slide7 h1:after {
+		content: '';
+		margin: 10px 20% 0 20%;
+		height: 2px;
+		background: #fff;
+		display: block;
+		position: relative;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: block;
+	}
+	
 	h1{
 		font-size: 5em;
-		font-family: arial,helvetica;
 		color: #fff;
 		margin:0;
 		padding:0;
 	}
-
-	/* Centered texts in each section
-	* --------------------------------------- */
+	#fp-nav ul li a span, .fp-slidesNav ul li a span{
+		background: #fff;
+	}
 	.section{
 		text-align:center;
 	}
 
-
-	/* Backgrounds will cover all the section
-	* --------------------------------------- */
 	.section{
 		background-size: cover;
 	}
 	.slide{
 		background-size: cover;
 	}
-
-	/* Defining each section background and styles
-	* --------------------------------------- */
-	#section0{
-		background-image: url(../static/images/bg1.jpg);
+	#myVideo{
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		top:0;
+		right:0;
+		width: 100%;
+		height: 100%;
+		background-size: 100% 100%;
+ 		background-color: black; /* in case the video doesn't fit the whole page*/
+  		background-image: /* our video */;
+  		background-position: center center;
+  		background-size: contain;
+   		object-fit: cover; /*cover video background */
+   		z-index:3;
 	}
-	#section0 h1{
+
+	#section0{
+		overflow: hidden;
+	}
+	#section0 .layer{
+		top: 40%;
+		transform: translateY(-50%);
+		position: absolute;
+		z-index: 4;
+		width: 100%;
+		-webkit-transform: translate3d(0,0,0);
+		-ms-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0);
+	}
+	.instro h1{
+		font-size:4em;
+	}
+	.instro p{
+		padding:20px 20%;
+		font-size:1.5em;
+	}
+	
+	#section1 .instro{
 		top: 50%;
 		transform: translateY(-50%);
 		position: relative;
 	}
 	#section2{
-		background-image: url(../static/images/bg3.jpg);
-		padding: 6% 0 0 0;
+		background:#0798ec;
+	}
+	#section2 .instro{
+		top: 50%;
+		transform: translateY(-50%);
+		position: relative;
 	}
 	#section3{
-		background-image: url(../static/images/bg4.jpg);
-		padding: 6% 0 0 0;
+		background:#fc6c7c;
+	}
+	#section3 .instro{
+		top: 50%;
+		transform: translateY(-50%);
+		position: relative;
 	}
 	#section3 h1{
-		color: #000;
+		font-size:5em;
 	}
-
-
-	/*Adding background for the slides
-	* --------------------------------------- */
+	#section3 h1:after{
+		content: '';
+		margin: 10px 20% 0 20%;
+		height: 2px;
+		background: #fff;
+		display: block;
+		position: relative;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: block;
+	}
+	
+	.instro-left,.instro-right{
+		top: 30%;
+		transform: translateY(-50%);
+		position: relative;
+	}
+	.instro-left img{
+		width:400px;
+		float:left;
+		margin:30px 0 0 15%;
+	}
+	.instro-right img{
+		width:400px;
+		float:right;
+		margin:30px 15% 0 0;
+	}
+	.instro-left h1,.instro-right h1{
+		font-size:4em;
+	}
+	.instro-left p{
+		width:400px;
+		float:right;
+		font-size:1.25em;
+		margin:30px 15% 0 0;
+		text-align:center;
+	}
+	.instro-right p{
+		width:400px;
+		float:left;
+		font-size:1.25em;
+		margin:30px 0 0 15%;
+		text-align:center;
+	}
 	#slide1{
-		background-image: url(../static/images/bg2.jpg);
-		padding: 6% 0 0 0;
+		background:#ff5f45;
 	}
 	#slide2{
-		background-image: url(../static/images/bg5.jpg);
-		padding: 6% 0 0 0;
+		background:#173549;
 	}
-
-
-	/* Bottom menu
-	* --------------------------------------- */
-	#infoMenu li a {
-		color: #fff;
+	#slide3{
+		background:#2177b1;
+	}
+	#slide4{
+		background:#2fd069;
+	}
+	#slide5{
+		background:#fec401;
+	}
+	#slide6{
+		background:#bf44dc;
+	}
+	#slide7{
+		background:#0798ec;
+	}
+	#slide8{
+		background:#169fa0;
+	}
+	#slide9{
+		background:#bd83b3bf;
+	}
+	#slide10{
+		background:#07ec84bd;
+	}
+	#slide11{
+		background:#f55608;
+	}
+	#slide12{
+		background:#ec8707;
+	}
+	#slide13{
+		background:#f50301;
+	}
+	#register {
+	width:200px;
+	margin:40px auto;
+    border: 3px solid #fff;
+    border-radius: 8px;
+    position: relative;
+    padding: 15px 15px;
+    font-size:2em;
+    color: #fff;
+}
+	#register:hover{
+		border: 3px solid #fff;
+		background-color:#fff;
+		color: #000;
+	}
+	.footer {
+		width: 100%;
+		margin: 0 auto 0 auto;
+		position: absolute;
+		bottom:0em;
+		color:#fff;
+	}
+	.footer a{
+		font-size:0.5em;
+		color:#fff;
+	}
+	.footer:before{
+		content: '';
+		height: 1px;
+		background: #fff;
+		display: block;
+		position: relative;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: block;
 	}
 	</style>
 
 </head>
 <body>
-<div id="fullpage">
 <ul id="menu">
-        <li data-menuanchor="page1" class="active"><a href="#page1">主页</a></li>
+        <li data-menuanchor="page1" class="active"><a href="#page1">自强主页</a></li>
         <li data-menuanchor="page2"><a href="#page2">部门介绍</a></li>
         <li data-menuanchor="page3"><a href="#page3">活动介绍</a></li>
-		<li data-menuanchor="page3"><a href="#page3">联系我们</a></li>
-    </ul>
-	<div class="section active" id="section0"><h1>自强社主页</h1></div>
-	<div class="section" id="section1">
-		<div class="slide" id="slide1"><h1>我们的团队</h1></div>
-		<div class="slide" id="slide2"><h1>义工服务队</h1></div>
-		<div class="slide" id="slide3"><h1>办公室</h1></div>
-		<div class="slide" id="slide4"><h1>宣传部</h1></div>
-		<div class="slide" id="slide5"><h1>策划部</h1></div>
-		<div class="slide" id="slide6"><h1>外联部</h1></div>
+		<li data-menuanchor="page4"><a href="#page4">加入我们</a></li>
+ </ul>
+<div id="fullpage">
+	<div class="section active" id="section0">
+	<video id="myVideo" loop muted data-autoplay>
+			<source src="../static/images/flowers.mp4" type="video/mp4">
+			<source src="../static/images/flowers.webm" type="video/webm">
+	</video>
+	<div class="layer">
+		<h1>欢迎来到武汉理工大学<br>计算机学院自强社</h1>
 	</div>
-	<div class="section" id="section2"><h1>活动介绍<br/></h1></div>
-	<div class="section" id="section3"><h1>联系我们<br/></h1></div>
-	<div class="section" id="section4"><h1>彩蛋页面<br/></h1></div>
+	</div>
+	<div class="section" id="section1">
+		<div class="slide active" id="slide1">
+		<div class="instro">
+		<h1>我们的团队</h1>
+		<p>一代代前行，沐浴自强社光</p>
+		</div>
+		</div>
+		<div class="slide" id="slide2">
+		<div class="instro">
+		<h1>义工服务队</h1>
+		<p>义工的小队，技术的殿堂! ! !这里有学长带你们<a href="http://www.whutacm.cn/" style="color: #00a0e9 !important;">体验acm的乐趣</a>，有义务维修电脑的成就感，有网页制作的团结互助，当然自强社的活动也少不了我们的参与，我们是一个积极向上的小团体。</p>
+		</div>
+		</div>
+		<div class="slide" id="slide3">
+		<div class="instro">
+		<h1>办公室</h1>
+			<p>我们是自强君的小秘书，我们是将情报的收集、消息的传达、活动奖品的购买、同时与各个部门的联系和系列社团活动及例会内容的记录集一身的神秘小组织。我们在社团活动中起着非常重要的作用哦。</p>
+		</div>
+		</div>
+		<div class="slide" id="slide4">
+		<div class="instro">
+		<h1>宣传部</h1>
+			<p>顾名思义，负责社团内的宣传活动。主要是负责海报宣传单和视频的制作，以及官Q微信公众号的推送.（也就是说自强君就是我们）另外，部内也有500G的百度云资源，当然了，是宣传资料~</p>
+		</div>
+		</div>
+		<div class="slide" id="slide5">
+		<div class="instro">
+		<h1>策划部</h1>
+			<p>策划部就是一个为各种活动提供精确计划的部门，需要有对活动经费的预算能力以及有应对各种突发事件的对策.总的来说，需要一个清晰的头脑和灵活的应变能力。小伙伴们有没有兴趣来考验一下自己咩~</p>
+		</div>
+		</div>
+		<div class="slide" id="slide6">
+		<div class="instro">
+		<h1>外联部</h1>
+			<p>我们外联部就是跟外界联络的一个部门.平时的主要任务就是借教室、联络老师啥的，加上蜜汁拉赞助.希望各种帅锅美铝正太萌妹属性的学弟学妹们，能来我们外联部，我们在这儿等着你
+~</p>
+		</div>
+		</div>
+	</div>
+	<div class="section" id="section2">
+		<div class="slide active" id="slide7">
+		<div class="instro">
+		<h1>我们的活动</h1>
+		<p>百花齐放，公益也慰问</p>
+		</div>
+		</div>
+		<div class="slide" id="slide8">
+		<div class="instro-left">
+		<h1>旧书圆新梦</h1>
+		<img src="../static/images/activity_picture/activity1.jpg">
+            <p>借助自强社这一平台，为大三大四即将毕业的学子们提供一个处理书籍的途径，同时
+			也帮助他们奉献一份爱心给自己专业的学弟学妹们，尽自己所能，帮助部分贫困学子减轻
+            家庭负担，为初入大学的他们献上一份爱心，让他们感受到我们学校的暖意。<br><br></p>
+		</div>
+		</div>
+		<div class="slide" id="slide9">
+		<div class="instro-right">
+		<h1>自强杯演讲比赛</h1>
+		<img src="../static/images/activity_picture/activity2.jpg">
+            <p>自强杯演讲比赛为华中七校自强社联合举办，为理工学子提供一个展示自我的平台，让他们迈出自信的第一步，同时让他们将“自信自强”的精神带给身边的学生。通过举办以“自强、感恩、责任”为主题的主题演讲来唤醒当代大学生关于自强感恩精神的思考，更好的发扬和传承自强精神。</p>
+		</div>
+		</div>
+		<div class="slide" id="slide10">
+		<div class="instro-left">
+		<h1>义务家教</h1>
+		<img src="../static/images/activity_picture/activity3.jpg">
+			<p>
+			现在越来越多的家庭倾向于请家教为孩子辅导功课，但仍有部分家庭因为经济原因
+			无力负担家教这笔支出。在这种现状下，武汉理工大学自强社积极贯彻“资助育人，自强自
+			立，回报社会”的社团宗旨，引导大学生走进那些需要的家庭，帮助贫困学子，为理工大学
+			学子提供一个锻炼自身和奉献爱心的平台。</p>
+		</div>
+		</div>
+		<div class="slide" id="slide11">
+		<div class="instro-right">
+		 <h1>义务卖报</h1>
+		 <img src="../static/images/activity_picture/activity4.jpg">
+            <p>自强社每年都会组织志愿者，发起义务卖报的活动，志愿者们通过卖报所得收入捐给武汉
+               高校家境有困难学生，既可以锻炼学生的能力，也可以增强学生们的公益心。<br><br><br></p>
+		</div>
+		</div>
+		<div class="slide" id="slide12">
+		<div class="instro-left">
+		<h1>班级网页设计大赛</h1>
+		<img src="../static/images/activity_picture/activity5.jpg">
+			<p>班级主页大赛面向计算机科学与技术学院大一与大二年级同学，通过结合自强讲堂活动,邀
+               请各位技术大大们来举办讲座，为同学介绍科普HTML5、CSS、JavaScript等相关知识，同
+               时通过各班级内部组队的参赛形式，将所学知识运用到班级网页作品之中，提高自身能力，
+               展现班级风采。<br><br></p>
+		</div>
+		</div>
+		<div class="slide" id="slide13">
+		<div class="instro-right">
+		<h1>义务维修</h1>
+		<img src="../static/images/activity_picture/activity6.jpg">
+            <p> 义工服务队的特色活动，进入社区进行义务维修，主要维修的为电脑以及手机，维修方式以摆点和上门两种方式为主。以我们所能去帮助那些需要帮助的人们，发挥计算机专业的专业特色。不但可以服务社会，而且能够提高自己的能力。<br><br></p>
+		</div>
+		</div>
+	</div>
+	<div class="section" id="section3">
+	<div class="instro">
+	<h1>加入我们吧<br/></h1>
+	<div id="register">Join us!</div>
+	</div>
+	<div class="footer" style="height:58px;">
+		<p class="copyright">
+			<a href="#" style="margin-left:80px;margin-right:80px;">QQ空间</a> 
+			<a href="#" style="margin-left:80px;margin-right:80px;">新浪微博</a> 
+			<a href="#"><img style="height:40px;margin-top:10px;margin-bottom:-15px" src="../static/images/zqs_icon.png"></a> 
+			<a href="#" style="margin-left:80px;margin-right:80px;">微信公众号</a> 
+			<a href="#" style="margin-left:80px;margin-right:80px;">友情链接</a>
+		</p>
+	</div>
+	</div>
 </div>
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
         verticalCentered: false,
 		navigation:true,
 		navigationPostion:'right',
+		anchors: ['page1', 'page2', 'page3', 'page4'],
+        menu: '#menu',
     });
 </script>
 
