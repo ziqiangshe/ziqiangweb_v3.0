@@ -10,6 +10,7 @@ namespace app\panel\controller;
 use app\panel\model\ActivityModel;
 use think\Request;
 use think\Session;
+
 class Activity extends Base
 {
     public function index()
@@ -28,13 +29,14 @@ class Activity extends Base
     public function add_activity()
     {
         $data = input('post.');
-
         // validate
-        $validate = validate('AdminUser');
-        if (!$validate->check($data)) {
-            return apireturn(0, "提交的数据不合法", "");
+        //$validate = validate('AdminUser');
+        // if (!$validate->check($data)) {
+        //     return apireturn(0, "提交的数据不合法", "");
+        // }
+        if(empty($data)){
+            halt($data);
         }
-
         $data = array(
             'name'          => $data['name'],
             'image'         => $data['image'],
@@ -64,6 +66,18 @@ class Activity extends Base
         }
     }
 
+    public function upload()
+    {
+        $image = request()->file('file');
+        
+        if(empty($image)){
+            halt(1);
+        }
+        $name = input('post.name');
+        $info = $image->move(ROOT_PATH . 'public' . DS . 'upload','activity'. DS . $name);
+        $url = $info->getSaveName();
+        return apireturn(config('code.SUCCESS'), "添加成功", $url);
+    }
     /**
      * 获取活动详情
      * @return \json
