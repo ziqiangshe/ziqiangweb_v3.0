@@ -61,6 +61,7 @@ class Activitysign extends Base
         } else {
             $where['activity_id'] = ['=', $activity_id];
         }
+        //var_dump($input_data);
         foreach ($aoData as $key => $val) {
             if ($val->name == 'iDisplayStart')
                 $offset = $val->value;
