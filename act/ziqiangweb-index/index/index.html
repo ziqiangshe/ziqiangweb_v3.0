@@ -506,16 +506,16 @@
 			<input type="text" id="name" placeholder="请输入姓名" align="center">
 			<select id="sex">
 				<option value="">请选择性别</option>
-				<option value="1">男</option>
-				<option value="0">女</option>
+				<option value="男">男</option>
+				<option value="女">女</option>
 			</select><br>
 			<select id="dept1">
 				<!-- <option value="">第一志愿</option> -->
-				<option value="1">服务队</option>
-				<option value="2">外联部</option>
-				<option value="3">宣传部</option>
-				<option value="4">办公室</option>
-				<option value="5">策划部</option>
+				<option value="服务队">服务队</option>
+				<option value="外联部">外联部</option>
+				<option value="宣传部">宣传部</option>
+				<option value="办公室">办公室</option>
+				<option value="策划部">策划部</option>
 				<!-- 活动暂未开始 -->
 				<!-- <option value="10" disabled="">旧书圆新梦 //活动暂未开始</option>
                 <option value="11" disabled="">义务家教</option>
@@ -526,11 +526,11 @@
 			</select>
 			<select id="dept2">
 				<!-- <option value="">第二志愿</option> -->
-				<option value="1">服务队</option>
-				<option value="2">外联部</option>
-				<option value="3">宣传部</option>
-				<option value="4">办公室</option>
-				<option value="5">策划部</option>
+				<option value="服务队">服务队</option>
+				<option value="外联部">外联部</option>
+				<option value="宣传部">宣传部</option>
+				<option value="办公室">办公室</option>
+				<option value="策划部">策划部</option>
 				<!-- 活动暂未开始 -->
 				<!-- <option value="10" disabled="">旧书圆新梦</option>
                 <option value="11" disabled="">义务家教</option>
@@ -666,7 +666,8 @@
                 'tel' : infoTel,
                 'dorm' : infoDorm,
                 'content' : infoContent,
-            };
+			};
+			console.log(a);
             $.ajax({
                 url:"__API__/Sign/addsign",
                 type: "post",
@@ -682,8 +683,7 @@
             },
             })
         }
-    }
-
+	}
     //彩蛋
     console.log("放在console里的彩蛋你看到了吗？");
 </script>
