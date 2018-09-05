@@ -23,6 +23,7 @@ return [
     'view_replace_str'       => array(
         '__PANEL__'=>'/ziqiangweb_v3.0/public/index.php/panel',
         '__CSS__'=>'/ziqiangweb_v3.0/public/static/css',
+        '__API__'    => '/ziqiangweb_v3.0/public/index.php?s=/api',
         '__FONT__'=>'/ziqiangweb_v3.0/public/static/fonts',
         '__JS__'=>'/ziqiangweb_v3.0/public/static/js',
         '__IMG__' => '/ziqiangweb_v3.0/public/static/images',
