@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>测试你大学有没有女（男）朋友</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<style>
+
+	body {
+		font-family:FZLanTingHei-EL-GBK,"Open Sans","Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,"WenQuanYi Micro Hei",Dengxian,Arial,SimSun,sans-serif;
+        color:#fff;
+        
+	}
+	html{
+		font-size:100%;
+    }
+    .hhh{
+        font-size: 100px;
+        position: absolute;
+    }
+    .test{
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0px;
+        left:0px;
+    }
+    /* 弹窗 (background) */
+	.modal {
+		display: none; /* 默认隐藏 */
+		position: fixed; /* 固定定位 */
+		z-index: 1; /* 设置在顶层 */
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0,0,0);
+		background-color: rgba(0,0,0,0.4);
+	}
+
+	/* 弹窗内容 */
+	.modal-content {
+		background-color: #fefefe;
+		margin: 5% auto;
+		padding: 15px;
+		border: 1px solid #888;
+		width: 24%;
+		height: 30%;
+		/* display: table-cell;*/
+		text-align: center;
+		vertical-align: middle;
+		overflow: auto;
+		top: 30%;
+	}
+
+	/* 关闭按钮 */
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+	.close:hover,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.modal-content >button {
+		/*display:block;*/
+		margin: 12px 0 10px 0;
+		border: 1px solid #c0c0c0;
+		border-radius: 5px;
+		position: absolute;
+		/*bottom: 10%;*/
+		/*left: 50%;*/
+		transform: translateX(-50%);
+		padding: 13px 30px;
+		font-size: 23px;
+		font-weight: 200;
+		color: #000000;
+		width: 20%;
+	}
+
+	.modal-content >button:hover {
+		animation: button-onfocus 0.1s ease-in-out forwards;
+	}
+
+	.modal-content >p {
+		color: #000000;
+		margin: 5px 0 5px 0;
+	}
+
+	.modal-content >input,textarea,select{
+		color: #000000;
+		font-size: 17px;
+		/*display:block;*/
+		margin: 12px 0 10px 0;
+		background-color: transparent;
+		border: 1px solid #c0c0c0;
+		border-radius: 5px;
+		width: 90%;
+		/*height: 38px;*/
+	}
+
+	.modal-content  >select{
+		/*font-size: 17px;*/
+		/*display:block;*/
+		margin: 12px 0 10px 0;
+		background-color: transparent;
+		border: 1px solid #c0c0c0;
+		color: #000000;
+		/*border-radius: 3px;*/
+		/*width: 380px;*/
+		/*height: 42px;*/
+		width: 90%;
+	}
+</style>
+</head>
+<body background= 'test.jpg';>
+    <div class = "test">
+        <div id="hhh" class = "hhh">
+        在这里
+        </div>
+    </div>
+    
+    <div id="myModal" class="modal">
+
+        <!-- 弹窗内容 -->
+        <div class="modal-content">
+                <span class="close">&times;</span>
+            <p align="center">测试你大学有没有女（男）朋友</p>
+                <input type="text" id="name" placeholder="请输入姓名" align="center">
+                <select id="sex">
+                    <option value="">请选择性别</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select><br>
+                <input type="button" id="btn" value="提交" onclick="checkuser()">
+        </div>
+    </div>
+<script type="text/javascript">
+    // 获取弹窗
+    var hhh = 0;
+    var modal = document.getElementById('myModal');
+
+    // 打开弹窗的按钮对象
+    var btn = document.getElementById("hhh");
+
+    // 获取 <span> 元素，用于关闭弹窗
+    var span = document.querySelector('.close');
+    
+    // 点击按钮打开弹窗
+    btn.onclick = function() {
+        if(hhh == 0){
+            hhh++;
+            btn.style.top= Math.ceil(80 * Math.random()) + "%";
+            btn.style.left= Math.ceil(80 * Math.random()) + "%";
+            btn.style.fontSize = 70 + "px";
+            alert("你再找找我");
+        }
+        else if(hhh == 1){
+            hhh++;
+            btn.style.top= Math.ceil(80 * Math.random()) + "%";
+            btn.style.left= Math.ceil(80 * Math.random()) + "%";
+            btn.style.fontSize = 50 + "px";
+            alert("我又跑走了");
+        }
+        else{
+            modal.style.display = "block";
+        }
+    }
+
+    // 点击 <span> (x), 关闭弹窗
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // 在用户点击其他地方时，关闭弹窗
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    function checkuser(){
+        var infoName = document.getElementById("name").value;
+        var infoSex = document.getElementById("sex").value;
+        if(!infoName){
+            alert("姓名不能为空");
+             return false;
+        }
+
+        if(infoSex == ''){
+            alert("请选择性别");
+            return false;
+        }
+        else {
+            var a = {
+                'name' : infoName,
+                'sex' : infoSex,
+			};
+			console.log(a);
+            $.ajax({
+                url:"test.php",
+                type: "post",
+                dataType:"json",
+                data: a,
+                success:function(data) {
+                    console.log(data);
+                    if(data.status == 0){
+                        console.log(data);
+                        alert(data.ans);
+                        location.href="https://ziqiangweb.com/ziqiangweb_v3.0/public/index.php?s=";
+                    }
+                    else{
+                        alert(data.message);
+                    }
+            },
+            error:function(data){
+                console.log(data);
+                alert(data);
+            }
+            })
+        }
+	}
+</script>
+
+</body>
+</html>
