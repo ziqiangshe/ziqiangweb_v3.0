@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace app\api\controller;
 
 use app\api\model\SignModel;
@@ -7,7 +7,10 @@ use think\Request;
 
 class Sign extends Base
 {
-
+    public function index()
+    {
+        $this->fetch('api/Sign');
+    }
     public function addsign()
     {
         $info = input('post.');
@@ -28,9 +31,9 @@ class Sign extends Base
             'create_time' => $created,
             'update_time' => $created
         );
-        $finish = false;
+        $finish = true;
         if($finish){
-            return apiReturn(-1, "报名已经结束", '', 200);
+            return apiReturn(-1, "报名还没开始", '', 200);
         }
         else{
             $item = new SignModel();
